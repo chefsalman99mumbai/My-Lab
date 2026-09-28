@@ -1,0 +1,295 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(()=>{
+/* ============================================================
+   BOOT — capability detection & tier assignment
+   ============================================================ */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+gsap.registerPlugin(ScrollTrigger);
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const cores=navigator.hardwareConcurrency||4;
+const mem=navigator.deviceMemory||4;
+const dpr=devicePixelRatio||1;
+const isTouch=matchMedia('(hover:none)').matches;
+const isSmall=innerWidth<820;
+const tier=(()=>{
+  if(reduce) return 'C';
+  if(cores>=8 && mem>=8 && dpr<=2 && !isSmall) return 'A';
+  if(cores>=6 && mem>=4) return 'B';
+  return 'C';
+})();
+document.documentElement.dataset.tier=tier;
+const A=tier==='A',B=tier==='B',C=tier==='C';
+const liveTier=A?1:(B?0.65:0.35);
+const MAXDPR=A?2:(B?1.5:1);
+
+/* Smooth scroll only on A-tier; native on B/C */
+let lenis=null;
+if(window.Lenis&&A&&!reduce){
+  const l=lenis=new Lenis({lerp:.085});
+  l.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(t=>l.raf(t*1000));
+  gsap.ticker.lagSmoothing(0);
+  \[ ('a[href^="#"]').forEach(a=>a.onclick=e=>{
+    e.preventDefault();
+    const t=a.getAttribute('href');
+    l.scrollTo(t==='#top'?0:t);
+  });
+}
+
+/* ============================================================
+   DOM — cursor glow (A-tier only)
+   ============================================================ */
+const gx=gsap.quickTo('.glow','x',{duration:.7}),gy=gsap.quickTo('.glow','y',{duration:.7});
+const mouse={x:0,y:0},sm={x:0,y:0};
+if(A){
+  addEventListener('pointermove',e=>{
+    gx(e.clientX);gy(e.clientY);
+    mouse.x=e.clientX/innerWidth*2-1;
+    mouse.y=e.clientY/innerHeight*2-1;
+  });
+}
+const wm=$('#wm');
+wm.innerHTML=[...wm.textContent].map(c=>`<span>${c===' '?'&nbsp;':c}</span>`).join('');
+const hud=$('#hud'),pn= \]('.pn'),ctr=[0,.12,.28,.40,.55,.66,.77,.92];
+let P=0,vis=true;
+const sbh=$('#sbh');
+ScrollTrigger.create({
+  trigger:'#journey',start:'top top',end:'bottom bottom',
+  onUpdate:s=>{P=s.progress;if(sbh)sbh.style.height=(P*100)+'%'}
+});
+ScrollTrigger.create({
+  trigger:'#journey',start:'top bottom',end:'bottom 30%',
+  onToggle:s=>{vis=s.isActive;hud.classList.toggle('on',vis)}
+});
+hud.classList.add('on');
+
+function panels(p){
+  pn.forEach((el,i)=>{
+    const w=i?.055:.05;
+    const o=Math.max(0,Math.min(1,(1-Math.abs(p-ctr[i])/w)*1.6));
+    el.style.opacity=o;
+    el.style.transform=(i?'':'translateY(-50%) ')+`translateY(${(1-o)*24*(p<ctr[i]?1:-1)}px)`;
+  });
+}
+
+/* ============================================================
+   Scroll-triggered reveals
+   ============================================================ */
+$$('.rv').forEach(el=>gsap.from(el,{
+  y:40,opacity:0,duration:1.2,ease:'power3.out',
+  scrollTrigger:{trigger:el,start:'top 88%'}
+}));
+const tk=$('#track');
+gsap.to(tk,{
+  x:()=>-(tk.scrollWidth-innerWidth),
+  ease:'none',
+  scrollTrigger:{
+    trigger:'#process',start:'top top',
+    end:()=>'+='+(tk.scrollWidth-innerWidth),
+    pin:true,scrub:.8,invalidateOnRefresh:true
+  }
+});
+
+/* ============================================================
+   FORM
+   ============================================================ */
+const form=\( ('#form'),ok= \)('#ok');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=$('#n').value.trim(),
+        em=$('#e').value.trim(),
+        p=$('#p').value,
+        m=$('#m').value.trim();
+  if(!n||!em){
+    ok.textContent='Please fill in your name and email.';
+    return;
+  }
+  ok.textContent='Thank you. We will be in touch shortly.';
+  form.reset();
+  setTimeout(()=>ok.textContent='',4200);
+});
+
+/* ============================================================
+   THREE.JS — journey scene (canvas #gl)
+   ============================================================ */
+const canvas=$('#gl');
+if(!canvas||C||reduce){
+  document.body.classList.add('nogl');
+}else{
+  const renderer=new THREE.WebGLRenderer({
+    canvas,antialias:A,alpha:true,powerPreference:A?'high-performance':'default'
+  });
+  renderer.setPixelRatio(Math.min(dpr,MAXDPR));
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setClearColor(0x000000,0);
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,0.1,200);
+  camera.position.set(0,1.6,8);
+
+  // Soft ambient + key light
+  scene.add(new THREE.AmbientLight(0xffe8c8,0.45));
+  const key=new THREE.DirectionalLight(0xffd9a0,1.1);
+  key.position.set(4,8,6);
+  scene.add(key);
+  const rim=new THREE.DirectionalLight(0xff9d6b,0.55);
+  rim.position.set(-6,3,-4);
+  scene.add(rim);
+
+  // Simple architectural geometry that evolves with scroll
+  const mats={
+    brass:new THREE.MeshStandardMaterial({color:0xb8975a,roughness:0.35,metalness:0.85}),
+    stone:new THREE.MeshStandardMaterial({color:0x3a2f28,roughness:0.8,metalness:0.05}),
+    glass:new THREE.MeshPhysicalMaterial({
+      color:0xffeccc,transmission:0.92,roughness:0.05,metalness:0,
+      thickness:0.6,transparent:true,opacity:0.85
+    }),
+    dark:new THREE.MeshStandardMaterial({color:0x1a1410,roughness:0.7})
+  };
+
+  // Floor plane
+  const floor=new THREE.Mesh(
+    new THREE.PlaneGeometry(40,40),
+    mats.dark
+  );
+  floor.rotation.x=-Math.PI/2;
+  floor.position.y=-0.02;
+  scene.add(floor);
+
+  // Central “lobby” volume that transforms into rooms
+  const lobby=new THREE.Group();
+  scene.add(lobby);
+
+  // Columns
+  for(let i=0;i<4;i++){
+    const col=new THREE.Mesh(
+      new THREE.CylinderGeometry(0.18,0.22,3.2,16),
+      mats.brass
+    );
+    const a=i*Math.PI/2+Math.PI/4;
+    col.position.set(Math.cos(a)*2.8,1.6,Math.sin(a)*2.8);
+    lobby.add(col);
+  }
+
+  // Floor platform
+  const platform=new THREE.Mesh(
+    new THREE.BoxGeometry(7,0.12,7),
+    mats.stone
+  );
+  platform.position.y=0.06;
+  lobby.add(platform);
+
+  // Glass “walls”
+  const glassGeo=new THREE.PlaneGeometry(6.4,2.8);
+  for(let i=0;i<4;i++){
+    const g=new THREE.Mesh(glassGeo,mats.glass);
+    const a=i*Math.PI/2;
+    g.position.set(Math.cos(a)*3.2,1.5,Math.sin(a)*3.2);
+    g.rotation.y=a+Math.PI/2;
+    lobby.add(g);
+  }
+
+  // Floating accent pieces that appear later in the journey
+  const accents=[];
+  for(let i=0;i<6;i++){
+    const m=new THREE.Mesh(
+      new THREE.BoxGeometry(0.6+Math.random()*0.8,0.08,0.4+Math.random()*0.5),
+      mats.brass
+    );
+    m.position.set((Math.random()-0.5)*8,0.4+Math.random()*2,(Math.random()-0.5)*8);
+    m.visible=false;
+    scene.add(m);
+    accents.push(m);
+  }
+
+  // Particles (subtle dust / light motes)
+  const pCount=A?180:90;
+  const pGeo=new THREE.BufferGeometry();
+  const pPos=new Float32Array(pCount*3);
+  for(let i=0;i<pCount;i++){
+    pPos[i*3]=(Math.random()-0.5)*18;
+    pPos[i*3+1]=Math.random()*6;
+    pPos[i*3+2]=(Math.random()-0.5)*18;
+  }
+  pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+  const particles=new THREE.Points(
+    pGeo,
+    new THREE.PointsMaterial({
+      color:0xffd08a,size:0.035,transparent:true,opacity:0.55,depthWrite:false
+    })
+  );
+  scene.add(particles);
+
+  // Resize
+  addEventListener('resize',()=>{
+    camera.aspect=innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio,MAXDPR));
+  });
+
+  // Animation loop driven by scroll progress P
+  let raf=0;
+  function frame(){
+    raf=requestAnimationFrame(frame);
+    if(!vis){renderer.render(scene,camera);return;}
+
+    // Smooth mouse look
+    sm.x+=(mouse.x-sm.x)*0.04;
+    sm.y+=(mouse.y-sm.y)*0.04;
+
+    // Camera path through the journey
+    const t=P;
+    camera.position.x=Math.sin(t*Math.PI*1.6)*3.2+sm.x*0.6;
+    camera.position.y=1.4+Math.sin(t*Math.PI)*0.9+sm.y*0.3;
+    camera.position.z=7.5-t*11;
+    camera.lookAt(
+      Math.sin(t*2.1)*0.8,
+      1.2+Math.sin(t*3)*0.3,
+      camera.position.z-4
+    );
+
+    // Lobby rotation & scale
+    lobby.rotation.y=t*0.7;
+    lobby.scale.setScalar(1+t*0.15);
+
+    // Reveal accents
+    accents.forEach((m,i)=>{
+      const reveal=0.35+i*0.08;
+      m.visible=t>reveal;
+      if(m.visible){
+        m.rotation.y=t*1.4+i;
+        m.position.y=0.5+Math.sin(t*4+i)*0.15;
+      }
+    });
+
+    // Particles drift
+    particles.rotation.y=t*0.3;
+    const pos=particles.geometry.attributes.position.array;
+    for(let i=0;i<pCount;i++){
+      pos[i*3+1]+=0.002*(0.5+Math.sin(i+t*2)*0.5);
+      if(pos[i*3+1]>7)pos[i*3+1]=0;
+    }
+    particles.geometry.attributes.position.needsUpdate=true;
+
+    // Update HUD panels
+    panels(t);
+
+    renderer.render(scene,camera);
+  }
+  frame();
+}
+
+/* ============================================================
+   FINAL INIT
+   ============================================================ */
+// Ensure ScrollTrigger recalculates after fonts/images
+addEventListener('load',()=>ScrollTrigger.refresh());
+})();
+</script>
+</body>
+</html>
