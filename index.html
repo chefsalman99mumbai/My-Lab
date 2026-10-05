@@ -1,40 +1,66 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
 
 <title>Hotel Bostan — Restaurant & Café</title>
 
 <meta
-  name="description"
-  content="Hotel Bostan — an intimate restaurant and café experience shaped by food, coffee and slow European evenings."
+    name="description"
+    content="Hotel Bostan — restaurant, café and hospitality."
 >
+
+<!-- =========================================================
+     FONTS
+========================================================= -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
-  rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
 >
 
+<!-- =========================================================
+     GSAP
+========================================================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
 
 <style>
 
+/* =========================================================
+   ROOT
+========================================================= */
+
 :root{
+
     --cream:#f3eee5;
-    --warm:#e7dccb;
+    --cream-light:#faf7f0;
+
     --ink:#151513;
-    --muted:#716c63;
-    --espresso:#241a14;
+    --espresso:#211812;
+
+    --brown:#4d3829;
+    --muted:#746d63;
+
     --gold:#b79a68;
+
     --line:rgba(21,21,19,.15);
-    --white:#fffdf9;
+
+    --white:#fffdf8;
+
 }
+
 
 *{
     margin:0;
@@ -42,842 +68,1568 @@
     box-sizing:border-box;
 }
 
+
 html{
-    scroll-behavior:auto;
     background:var(--cream);
+    scroll-behavior:auto;
 }
 
+
 body{
+
     margin:0;
+
     background:var(--cream);
+
     color:var(--ink);
+
     font-family:"DM Sans",sans-serif;
+
     overflow-x:hidden;
+
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+
 }
+
+
+body.no-scroll{
+    overflow:hidden;
+}
+
 
 a{
     color:inherit;
     text-decoration:none;
 }
 
-button{
+
+button,
+input,
+select{
     font:inherit;
 }
+
 
 /* =========================================================
    LOADER
 ========================================================= */
 
 .loader{
+
     position:fixed;
+
     inset:0;
+
     z-index:9999;
-    background:var(--espresso);
-    color:var(--cream);
+
     display:flex;
+
     align-items:center;
     justify-content:center;
-    pointer-events:none;
+
+    background:var(--espresso);
+
+    color:var(--cream);
+
 }
+
 
 .loader-inner{
+
+    width:100%;
+
     text-align:center;
+
     overflow:hidden;
+
 }
+
 
 .loader-small{
-    font-size:10px;
-    letter-spacing:.28em;
-    text-transform:uppercase;
-    opacity:.55;
+
     margin-bottom:18px;
+
+    font-size:9px;
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+    opacity:.55;
+
 }
+
 
 .loader-title{
+
     font-family:"Cormorant Garamond",serif;
-    font-size:clamp(52px,9vw,120px);
-    line-height:.8;
+
+    font-size:clamp(65px,10vw,145px);
+
+    line-height:.7;
+
     font-weight:400;
+
+    letter-spacing:-.05em;
+
     overflow:hidden;
+
 }
 
+
 .loader-title span{
+
     display:block;
+
     transform:translateY(110%);
+
 }
+
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
 .nav{
+
     position:fixed;
+
     top:0;
     left:0;
+
     width:100%;
-    z-index:100;
+
+    z-index:500;
+
     padding:25px 4vw;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     color:white;
-    mix-blend-mode:normal;
+
     transition:
         background .5s ease,
         color .5s ease,
-        padding .5s ease;
+        padding .5s ease,
+        backdrop-filter .5s ease;
+
 }
+
 
 .nav.scrolled{
-    background:rgba(243,238,229,.94);
-    color:var(--ink);
-    backdrop-filter:blur(15px);
+
     padding-top:17px;
     padding-bottom:17px;
+
+    background:rgba(243,238,229,.93);
+
+    color:var(--ink);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
 }
+
 
 .brand{
+
     display:flex;
+
     align-items:center;
-    gap:13px;
+
+    gap:12px;
+
 }
+
 
 .brand-mark{
-    width:31px;
-    height:31px;
+
+    width:32px;
+    height:32px;
+
     border:1px solid currentColor;
+
     border-radius:50%;
+
     display:grid;
+
     place-items:center;
+
     font-family:"Cormorant Garamond",serif;
-    font-size:17px;
+
+    font-size:18px;
+
 }
+
 
 .brand-name{
-    font-size:12px;
+
+    font-size:11px;
+
     font-weight:500;
+
     letter-spacing:.24em;
+
     text-transform:uppercase;
+
 }
+
 
 .nav-links{
+
     display:flex;
-    gap:34px;
+
     align-items:center;
+
+    gap:34px;
+
 }
+
 
 .nav-links a{
+
     position:relative;
-    font-size:10px;
-    letter-spacing:.17em;
+
+    font-size:9px;
+
+    letter-spacing:.2em;
+
     text-transform:uppercase;
+
 }
+
 
 .nav-links a::after{
+
     content:"";
+
     position:absolute;
+
     left:0;
     bottom:-7px;
+
     width:0;
+
     height:1px;
+
     background:currentColor;
-    transition:.4s ease;
+
+    transition:width .35s ease;
+
 }
+
 
 .nav-links a:hover::after{
+
     width:100%;
+
 }
+
 
 .nav-book{
-    border:1px solid currentColor;
+
     padding:11px 18px;
+
+    border:1px solid currentColor;
+
+    font-size:9px;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
 }
+
 
 .menu-toggle{
+
     display:none;
+
     border:0;
+
     background:none;
+
     color:inherit;
+
     cursor:pointer;
+
 }
+
 
 .menu-toggle span{
+
     display:block;
-    width:24px;
+
+    width:25px;
+
     height:1px;
-    background:currentColor;
+
     margin:5px 0;
+
+    background:currentColor;
+
 }
 
+
 /* =========================================================
-   HERO / SCROLL FILM
+   HERO SCROLL AREA
 ========================================================= */
 
 .hero-scroll{
+
     position:relative;
-    height:500vh;
+
+    height:550vh;
+
+    background:#171411;
+
 }
+
 
 .hero-sticky{
+
     position:sticky;
-    top:0;
-    height:100vh;
-    overflow:hidden;
-    background:#191714;
-}
 
-.hero-video{
-    position:absolute;
-    inset:0;
+    top:0;
+
     width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center center;
-    transform:scale(1.015);
-    filter:saturate(.82) contrast(1.04);
-}
 
-.hero-video-overlay{
-    position:absolute;
-    inset:0;
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0,0,0,.67) 0%,
-            rgba(0,0,0,.31) 40%,
-            rgba(0,0,0,.04) 75%,
-            rgba(0,0,0,.2) 100%
-        );
-}
+    height:100vh;
 
-.hero-vignette{
-    position:absolute;
-    inset:0;
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            transparent 20%,
-            rgba(0,0,0,.3) 100%
-        );
-    pointer-events:none;
-}
+    height:100svh;
 
-.hero-content{
-    position:absolute;
-    inset:0;
-    z-index:5;
-    display:flex;
-    align-items:center;
-    padding:0 8vw;
-    color:white;
-}
-
-.hero-copy{
-    max-width:800px;
-}
-
-.hero-eyebrow{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    font-size:10px;
-    letter-spacing:.3em;
-    text-transform:uppercase;
-    margin-bottom:28px;
-    opacity:.8;
-}
-
-.hero-eyebrow::before{
-    content:"";
-    width:38px;
-    height:1px;
-    background:currentColor;
-}
-
-.hero-title{
-    font-family:"Cormorant Garamond",serif;
-    font-size:clamp(78px,12vw,190px);
-    font-weight:400;
-    line-height:.72;
-    letter-spacing:-.045em;
-    max-width:750px;
-}
-
-.hero-title .line{
-    display:block;
     overflow:hidden;
+
+    background:#171411;
+
 }
 
-.hero-title .word{
-    display:inline-block;
-}
-
-.hero-title .accent{
-    font-style:italic;
-    padding-left:.13em;
-}
-
-.hero-description{
-    margin-top:38px;
-    max-width:420px;
-    font-size:12px;
-    line-height:1.8;
-    letter-spacing:.04em;
-    color:rgba(255,255,255,.78);
-}
-
-.hero-actions{
-    display:flex;
-    gap:13px;
-    margin-top:31px;
-}
-
-.hero-button{
-    padding:14px 22px;
-    border:1px solid rgba(255,255,255,.7);
-    font-size:9px;
-    text-transform:uppercase;
-    letter-spacing:.2em;
-    transition:.35s ease;
-}
-
-.hero-button.primary{
-    background:var(--cream);
-    border-color:var(--cream);
-    color:var(--ink);
-}
-
-.hero-button:hover{
-    background:white;
-    color:var(--ink);
-}
-
-.hero-progress{
-    position:absolute;
-    right:4vw;
-    top:50%;
-    transform:translateY(-50%);
-    z-index:10;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:13px;
-}
-
-.hero-progress-line{
-    height:90px;
-    width:1px;
-    background:rgba(255,255,255,.3);
-    position:relative;
-}
-
-.hero-progress-fill{
-    position:absolute;
-    left:0;
-    top:0;
-    width:1px;
-    height:0%;
-    background:white;
-}
-
-.hero-progress-label{
-    font-size:8px;
-    letter-spacing:.2em;
-    writing-mode:vertical-rl;
-    text-transform:uppercase;
-    opacity:.65;
-}
-
-.scroll-hint{
-    position:absolute;
-    bottom:31px;
-    left:50%;
-    transform:translateX(-50%);
-    color:white;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:12px;
-    z-index:10;
-}
-
-.scroll-hint span{
-    font-size:8px;
-    text-transform:uppercase;
-    letter-spacing:.3em;
-    opacity:.75;
-}
-
-.scroll-arrow{
-    width:1px;
-    height:38px;
-    background:linear-gradient(to bottom,transparent,white);
-}
 
 /* =========================================================
-   INTRO
+   HERO VIDEO
 ========================================================= */
 
-.intro{
-    min-height:100vh;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    background:var(--cream);
-}
+.hero-video{
 
-.intro-left{
-    padding:13vw 7vw;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.section-kicker{
-    font-size:9px;
-    letter-spacing:.28em;
-    text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:26px;
-}
-
-.intro-title{
-    font-family:"Cormorant Garamond",serif;
-    font-weight:400;
-    font-size:clamp(55px,7vw,105px);
-    line-height:.88;
-    letter-spacing:-.035em;
-    max-width:650px;
-}
-
-.intro-title em{
-    font-style:italic;
-}
-
-.intro-text{
-    max-width:420px;
-    margin-top:38px;
-    color:#625d55;
-    font-size:13px;
-    line-height:1.9;
-}
-
-.intro-right{
-    min-height:100vh;
-    background:
-        radial-gradient(circle at 30% 25%,rgba(183,154,104,.22),transparent 35%),
-        linear-gradient(145deg,#d8c8b2,#f4eee5 55%,#cbbba7);
-    position:relative;
-    overflow:hidden;
-}
-
-.intro-card{
     position:absolute;
-    left:14%;
-    right:14%;
-    top:18%;
-    bottom:18%;
-    border:1px solid rgba(21,21,19,.22);
-    padding:35px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-}
 
-.intro-card-top{
-    display:flex;
-    justify-content:space-between;
-    font-size:9px;
-    letter-spacing:.2em;
-    text-transform:uppercase;
-}
+    inset:0;
 
-.intro-card-center{
-    text-align:center;
-}
+    width:100%;
+    height:100%;
 
-.intro-card-center strong{
     display:block;
+
+    object-fit:cover;
+
+    object-position:center center;
+
+    background:#171411;
+
+    transform:scale(1.015);
+
+    filter:
+        saturate(.82)
+        contrast(1.06)
+        brightness(.91);
+
+}
+
+
+/*
+    Important:
+
+    The video is NOT autoplayed.
+
+    GSAP controls currentTime.
+*/
+
+
+/* =========================================================
+   HERO OVERLAYS
+========================================================= */
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.68) 0%,
+            rgba(0,0,0,.42) 32%,
+            rgba(0,0,0,.12) 70%,
+            rgba(0,0,0,.27) 100%
+        );
+
+}
+
+
+.hero-vignette{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:3;
+
+    pointer-events:none;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 45%,
+            transparent 25%,
+            rgba(0,0,0,.35) 100%
+        );
+
+}
+
+
+/* =========================================================
+   HERO TYPOGRAPHY
+========================================================= */
+
+.hero-content{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:10;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 8vw;
+
+    color:white;
+
+    pointer-events:none;
+
+}
+
+
+.hero-copy{
+
+    max-width:850px;
+
+}
+
+
+.hero-eyebrow{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:27px;
+
+    font-size:9px;
+
+    letter-spacing:.32em;
+
+    text-transform:uppercase;
+
+    opacity:.82;
+
+}
+
+
+.hero-eyebrow::before{
+
+    content:"";
+
+    width:42px;
+
+    height:1px;
+
+    background:currentColor;
+
+}
+
+
+.hero-title{
+
     font-family:"Cormorant Garamond",serif;
-    font-size:clamp(70px,8vw,125px);
+
+    font-size:clamp(90px,13vw,205px);
+
     font-weight:400;
-    line-height:.8;
+
+    line-height:.68;
+
+    letter-spacing:-.055em;
+
 }
 
-.intro-card-center span{
+
+.hero-title-line{
+
     display:block;
-    margin-top:20px;
-    font-size:9px;
-    letter-spacing:.25em;
-    text-transform:uppercase;
+
+    overflow:hidden;
+
 }
 
-.intro-card-bottom{
-    display:flex;
-    justify-content:space-between;
-    font-size:9px;
-    color:#6b655d;
+
+.hero-title-word{
+
+    display:inline-block;
+
+    transform:translateY(110%);
+
 }
+
+
+.hero-title em{
+
+    font-style:italic;
+
+}
+
+
+.hero-description{
+
+    max-width:410px;
+
+    margin-top:40px;
+
+    font-size:12px;
+
+    line-height:1.9;
+
+    letter-spacing:.025em;
+
+    color:rgba(255,255,255,.78);
+
+}
+
+
+.hero-actions{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:30px;
+
+}
+
+
+.hero-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:140px;
+
+    padding:14px 20px;
+
+    border:1px solid rgba(255,255,255,.75);
+
+    font-size:8px;
+
+    letter-spacing:.23em;
+
+    text-transform:uppercase;
+
+    pointer-events:auto;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        border-color .3s ease;
+
+}
+
+
+.hero-button.primary{
+
+    background:var(--cream);
+
+    border-color:var(--cream);
+
+    color:var(--ink);
+
+}
+
+
+.hero-button:hover{
+
+    background:white;
+
+    color:var(--ink);
+
+    border-color:white;
+
+}
+
+
+/* =========================================================
+   HERO PROGRESS
+========================================================= */
+
+.hero-progress{
+
+    position:absolute;
+
+    right:4vw;
+
+    top:50%;
+
+    z-index:20;
+
+    transform:translateY(-50%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:13px;
+
+    color:white;
+
+}
+
+
+.hero-progress-label{
+
+    font-size:7px;
+
+    letter-spacing:.22em;
+
+    text-transform:uppercase;
+
+    writing-mode:vertical-rl;
+
+    opacity:.6;
+
+}
+
+
+.hero-progress-line{
+
+    position:relative;
+
+    width:1px;
+
+    height:105px;
+
+    background:rgba(255,255,255,.28);
+
+}
+
+
+.hero-progress-fill{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:1px;
+
+    height:0;
+
+    background:white;
+
+}
+
+
+/* =========================================================
+   SCROLL HINT
+========================================================= */
+
+.scroll-hint{
+
+    position:absolute;
+
+    bottom:30px;
+
+    left:50%;
+
+    z-index:20;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:white;
+
+}
+
+
+.scroll-hint span{
+
+    font-size:7px;
+
+    letter-spacing:.3em;
+
+    text-transform:uppercase;
+
+    opacity:.72;
+
+}
+
+
+.scroll-arrow{
+
+    width:1px;
+
+    height:40px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            white
+        );
+
+}
+
+
+/* =========================================================
+   STORY
+========================================================= */
+
+.story{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    min-height:100vh;
+
+    background:var(--cream);
+
+}
+
+
+.story-copy{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:12vw 7vw;
+
+}
+
+
+.kicker{
+
+    margin-bottom:26px;
+
+    font-size:8px;
+
+    letter-spacing:.3em;
+
+    text-transform:uppercase;
+
+    color:var(--muted);
+
+}
+
+
+.story-title{
+
+    max-width:700px;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:clamp(65px,8vw,120px);
+
+    font-weight:400;
+
+    line-height:.82;
+
+    letter-spacing:-.045em;
+
+}
+
+
+.story-title em{
+
+    font-style:italic;
+
+}
+
+
+.story-text{
+
+    max-width:430px;
+
+    margin-top:38px;
+
+    font-size:12px;
+
+    line-height:1.95;
+
+    color:#696259;
+
+}
+
+
+.story-visual{
+
+    position:relative;
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(183,154,104,.3),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #d1c0a9,
+            #f6f0e7 55%,
+            #b9a58c
+        );
+
+}
+
+
+.story-frame{
+
+    position:absolute;
+
+    inset:16% 14%;
+
+    border:1px solid rgba(21,21,19,.25);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    padding:30px;
+
+}
+
+
+.story-frame-top,
+.story-frame-bottom{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:8px;
+
+    letter-spacing:.2em;
+
+    text-transform:uppercase;
+
+}
+
+
+.story-frame-center{
+
+    text-align:center;
+
+}
+
+
+.story-frame-center strong{
+
+    display:block;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:clamp(100px,12vw,190px);
+
+    line-height:.7;
+
+    font-weight:400;
+
+}
+
+
+.story-frame-center span{
+
+    display:block;
+
+    margin-top:25px;
+
+    font-size:8px;
+
+    letter-spacing:.27em;
+
+    text-transform:uppercase;
+
+}
+
 
 /* =========================================================
    EXPERIENCE
 ========================================================= */
 
 .experience{
-    background:var(--espresso);
-    color:var(--cream);
+
     padding:13vw 7vw;
+
+    background:var(--espresso);
+
+    color:var(--cream);
+
 }
 
-.experience-head{
+
+.experience-header{
+
     display:flex;
-    justify-content:space-between;
+
     align-items:flex-end;
-    gap:50px;
+
+    justify-content:space-between;
+
+    gap:60px;
+
     margin-bottom:100px;
+
 }
+
 
 .experience-title{
+
     font-family:"Cormorant Garamond",serif;
-    font-size:clamp(60px,9vw,140px);
-    line-height:.78;
+
+    font-size:clamp(75px,10vw,155px);
+
     font-weight:400;
-    letter-spacing:-.045em;
+
+    line-height:.72;
+
+    letter-spacing:-.05em;
+
 }
+
 
 .experience-intro{
-    max-width:320px;
-    font-size:12px;
-    line-height:1.8;
-    color:rgba(243,238,229,.6);
+
+    max-width:330px;
+
+    font-size:11px;
+
+    line-height:1.9;
+
+    color:rgba(243,238,229,.57);
+
 }
+
 
 .experience-grid{
+
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
+
     border-top:1px solid rgba(243,238,229,.18);
+
 }
+
 
 .experience-item{
-    padding:50px 35px 30px 0;
+
     min-height:350px;
+
+    padding:45px 35px 35px 0;
+
     border-right:1px solid rgba(243,238,229,.18);
+
 }
 
-.experience-item:not(:first-child){
+
+.experience-item + .experience-item{
+
     padding-left:35px;
+
 }
+
 
 .experience-item:last-child{
+
     border-right:0;
+
 }
+
 
 .experience-number{
+
     font-family:"Cormorant Garamond",serif;
-    font-size:20px;
+
+    font-size:21px;
+
     color:var(--gold);
+
 }
+
 
 .experience-item h3{
-    margin-top:70px;
+
+    margin-top:80px;
+
     font-family:"Cormorant Garamond",serif;
-    font-size:42px;
+
+    font-size:45px;
+
     font-weight:400;
+
 }
 
+
 .experience-item p{
-    margin-top:20px;
-    color:rgba(243,238,229,.55);
-    font-size:12px;
-    line-height:1.8;
+
     max-width:290px;
+
+    margin-top:18px;
+
+    font-size:11px;
+
+    line-height:1.9;
+
+    color:rgba(243,238,229,.55);
+
 }
+
 
 /* =========================================================
    MENU
 ========================================================= */
 
-.menu-section{
+.menu{
+
     padding:13vw 7vw;
+
     background:#eee6da;
+
 }
 
-.menu-heading{
+
+.menu-header{
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
-    gap:50px;
+
+    gap:60px;
+
     margin-bottom:90px;
+
 }
+
 
 .menu-title{
+
     font-family:"Cormorant Garamond",serif;
+
+    font-size:clamp(75px,10vw,155px);
+
     font-weight:400;
-    font-size:clamp(70px,10vw,150px);
-    line-height:.72;
-    letter-spacing:-.045em;
+
+    line-height:.7;
+
+    letter-spacing:-.05em;
+
 }
 
-.menu-intro{
+
+.menu-description{
+
     align-self:end;
-    max-width:380px;
-    font-size:12px;
+
+    max-width:400px;
+
+    font-size:11px;
+
     line-height:1.9;
-    color:#6b645b;
+
+    color:#6e675e;
+
 }
+
 
 .menu-category{
+
+    padding-top:22px;
+
     border-top:1px solid var(--line);
-    padding:23px 0 0;
+
 }
+
 
 .menu-category + .menu-category{
-    margin-top:60px;
+
+    margin-top:65px;
+
 }
 
-.category-name{
-    font-size:9px;
+
+.menu-category-name{
+
+    margin-bottom:28px;
+
+    font-size:8px;
+
     letter-spacing:.3em;
+
     text-transform:uppercase;
+
     color:var(--muted);
-    margin-bottom:35px;
+
 }
+
 
 .menu-item{
+
     display:grid;
+
     grid-template-columns:1fr auto;
+
     gap:30px;
-    padding:17px 0;
+
+    padding:18px 0;
+
     border-bottom:1px solid rgba(21,21,19,.1);
+
 }
 
-.menu-item-main{
+
+.menu-item-info{
+
     display:flex;
+
     flex-direction:column;
-    gap:6px;
+
+    gap:5px;
+
 }
+
 
 .menu-item-name{
+
     font-family:"Cormorant Garamond",serif;
+
     font-size:28px;
+
 }
+
 
 .menu-item-description{
-    font-size:10px;
-    line-height:1.6;
-    color:#777067;
-    max-width:550px;
+
+    font-size:9px;
+
+    line-height:1.7;
+
+    color:#777066;
+
 }
 
+
 .menu-price{
+
     font-family:"Cormorant Garamond",serif;
-    font-size:23px;
+
+    font-size:22px;
+
 }
+
 
 /* =========================================================
    QUOTE
 ========================================================= */
 
 .quote{
+
     min-height:85vh;
-    background:
-        linear-gradient(rgba(25,20,16,.58),rgba(25,20,16,.78)),
-        radial-gradient(circle at center,#705b48,#241a14 60%);
-    color:var(--cream);
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
-    text-align:center;
+
     padding:10vw;
+
+    text-align:center;
+
+    color:var(--cream);
+
+    background:
+
+        linear-gradient(
+            rgba(25,18,13,.65),
+            rgba(25,18,13,.84)
+        ),
+
+        radial-gradient(
+            circle at center,
+            #745c47,
+            #241913 65%
+        );
+
 }
+
 
 .quote-inner{
-    max-width:1000px;
+
+    max-width:1100px;
+
 }
+
 
 .quote-mark{
+
     font-family:"Cormorant Garamond",serif;
-    font-size:90px;
+
+    font-size:95px;
+
     line-height:.3;
+
     color:var(--gold);
+
 }
+
 
 .quote-text{
+
     font-family:"Cormorant Garamond",serif;
+
+    font-size:clamp(50px,7.5vw,115px);
+
     font-weight:300;
-    font-size:clamp(45px,7vw,105px);
-    line-height:.9;
-    letter-spacing:-.035em;
+
+    line-height:.86;
+
+    letter-spacing:-.045em;
+
 }
+
 
 .quote-text em{
+
     font-style:italic;
+
 }
 
-.quote-small{
+
+.quote-caption{
+
     margin-top:45px;
-    font-size:9px;
+
+    font-size:8px;
+
     letter-spacing:.3em;
+
     text-transform:uppercase;
-    opacity:.6;
+
+    opacity:.55;
+
 }
+
 
 /* =========================================================
    RESERVATION
 ========================================================= */
 
 .reservation{
-    background:var(--cream);
+
     padding:13vw 7vw;
+
+    background:var(--cream);
+
 }
+
 
 .reservation-grid{
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:10vw;
+
 }
+
 
 .reservation-title{
+
     font-family:"Cormorant Garamond",serif;
-    font-size:clamp(65px,8vw,120px);
+
+    font-size:clamp(70px,8vw,125px);
+
     font-weight:400;
-    line-height:.78;
-    letter-spacing:-.04em;
+
+    line-height:.75;
+
+    letter-spacing:-.045em;
+
 }
+
 
 .reservation-copy{
+
+    max-width:400px;
+
     margin-top:35px;
-    font-size:12px;
-    line-height:1.8;
-    color:#70695f;
-    max-width:390px;
+
+    font-size:11px;
+
+    line-height:1.9;
+
+    color:#6e675e;
+
 }
+
 
 .reservation-form{
+
     border-top:1px solid var(--line);
+
 }
+
 
 .form-row{
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
-    gap:20px;
+
+    gap:22px;
+
 }
+
 
 .field{
+
     padding:20px 0;
+
     border-bottom:1px solid var(--line);
+
 }
 
+
 .field label{
+
     display:block;
-    font-size:8px;
-    letter-spacing:.2em;
-    text-transform:uppercase;
-    color:#81796e;
+
     margin-bottom:9px;
+
+    font-size:7px;
+
+    letter-spacing:.25em;
+
+    text-transform:uppercase;
+
+    color:#827a70;
+
 }
+
 
 .field input,
 .field select{
+
     width:100%;
+
+    padding:0;
+
     border:0;
+
     outline:0;
+
     background:transparent;
+
     color:var(--ink);
-    font-family:"DM Sans",sans-serif;
-    font-size:13px;
+
+    font-size:12px;
+
 }
+
+
+.field select{
+
+    cursor:pointer;
+
+}
+
 
 .reserve-button{
+
     width:100%;
+
     margin-top:30px;
-    border:1px solid var(--ink);
-    background:var(--ink);
-    color:var(--cream);
+
     padding:17px;
+
+    border:1px solid var(--ink);
+
+    background:var(--ink);
+
+    color:var(--cream);
+
     cursor:pointer;
-    font-size:9px;
+
+    font-size:8px;
+
     letter-spacing:.25em;
+
     text-transform:uppercase;
-    transition:.3s ease;
+
+    transition:.35s ease;
+
 }
 
+
 .reserve-button:hover{
+
     background:transparent;
+
     color:var(--ink);
+
 }
+
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
 .footer{
+
+    padding:75px 7vw 30px;
+
     background:#151513;
+
     color:var(--cream);
-    padding:70px 7vw 30px;
+
 }
 
-.footer-top{
+
+.footer-grid{
+
     display:grid;
-    grid-template-columns:1.4fr 1fr 1fr 1fr;
+
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+
     gap:50px;
+
     padding-bottom:80px;
+
 }
 
-.footer-brand{
+
+.footer-logo{
+
     font-family:"Cormorant Garamond",serif;
-    font-size:clamp(55px,7vw,105px);
+
+    font-size:clamp(65px,8vw,125px);
+
     font-weight:400;
-    line-height:.72;
+
+    line-height:.7;
+
+    letter-spacing:-.05em;
+
 }
 
-.footer-column-title{
-    font-size:8px;
-    text-transform:uppercase;
-    letter-spacing:.25em;
-    color:rgba(243,238,229,.45);
+
+.footer-heading{
+
     margin-bottom:22px;
+
+    font-size:7px;
+
+    letter-spacing:.28em;
+
+    text-transform:uppercase;
+
+    color:rgba(243,238,229,.42);
+
 }
+
 
 .footer-column p,
 .footer-column a{
+
     display:block;
-    font-size:11px;
+
+    font-size:10px;
+
     line-height:2;
-    color:rgba(243,238,229,.7);
+
+    color:rgba(243,238,229,.67);
+
 }
+
 
 .footer-column a:hover{
+
     color:white;
+
 }
+
 
 .footer-bottom{
-    border-top:1px solid rgba(243,238,229,.14);
-    padding-top:25px;
+
     display:flex;
+
+    align-items:center;
+
     justify-content:space-between;
-    font-size:8px;
-    letter-spacing:.16em;
+
+    gap:20px;
+
+    padding-top:25px;
+
+    border-top:1px solid rgba(243,238,229,.14);
+
+    font-size:7px;
+
+    letter-spacing:.18em;
+
     text-transform:uppercase;
-    color:rgba(243,238,229,.4);
+
+    color:rgba(243,238,229,.38);
+
 }
 
-/* =========================================================
-   REVEAL ANIMATIONS
-========================================================= */
-
-.reveal{
-    opacity:0;
-    transform:translateY(55px);
-}
-
-.line-mask{
-    overflow:hidden;
-}
-
-.reveal-line{
-    display:block;
-    transform:translateY(110%);
-}
 
 /* =========================================================
    RESPONSIVE
@@ -886,301 +1638,648 @@ button{
 @media(max-width:900px){
 
     .nav{
-        padding:19px 5vw;
+
+        padding:18px 6vw;
+
     }
 
-    .nav-links{
+
+    .nav-links,
+    .nav-book{
+
         display:none;
+
     }
+
 
     .menu-toggle{
+
         display:block;
+
     }
+
+
+    .hero-scroll{
+
+        height:500vh;
+
+    }
+
 
     .hero-content{
-        padding:0 7vw;
+
         align-items:flex-end;
-        padding-bottom:15vh;
+
+        padding:
+
+            0
+            7vw
+            14vh;
+
     }
+
 
     .hero-video{
+
         object-position:center center;
+
+        transform:scale(1.01);
+
     }
 
-    .hero-video-overlay{
+
+    .hero-overlay{
+
         background:
+
             linear-gradient(
                 180deg,
-                rgba(0,0,0,.15),
-                rgba(0,0,0,.1) 35%,
-                rgba(0,0,0,.76) 100%
+                rgba(0,0,0,.08) 0%,
+                rgba(0,0,0,.12) 35%,
+                rgba(0,0,0,.82) 100%
             );
+
     }
+
 
     .hero-title{
-        font-size:clamp(70px,20vw,125px);
+
+        font-size:22vw;
+
+        line-height:.7;
+
     }
+
 
     .hero-description{
-        font-size:11px;
-        max-width:330px;
+
+        max-width:315px;
+
         margin-top:25px;
+
+        font-size:10px;
+
     }
+
 
     .hero-actions{
-        margin-top:23px;
+
+        margin-top:22px;
+
     }
+
+
+    .hero-button{
+
+        min-width:auto;
+
+        padding:12px 15px;
+
+    }
+
 
     .hero-progress{
-        right:6vw;
+
+        right:5vw;
+
     }
 
-    .intro{
+
+    .story{
+
         grid-template-columns:1fr;
+
     }
 
-    .intro-left{
+
+    .story-copy{
+
         min-height:80vh;
+
         padding:22vw 8vw;
+
     }
 
-    .intro-right{
+
+    .story-visual{
+
         min-height:75vh;
+
     }
 
-    .intro-card{
-        left:9%;
-        right:9%;
-        top:10%;
-        bottom:10%;
+
+    .story-frame{
+
+        inset:10% 9%;
+
     }
+
 
     .experience{
+
         padding:22vw 8vw;
+
     }
 
-    .experience-head{
+
+    .experience-header{
+
         display:block;
+
         margin-bottom:70px;
+
     }
+
 
     .experience-intro{
+
         margin-top:35px;
+
     }
+
 
     .experience-grid{
+
         grid-template-columns:1fr;
+
     }
+
 
     .experience-item,
-    .experience-item:not(:first-child){
-        padding:35px 0;
+    .experience-item + .experience-item{
+
         min-height:auto;
+
+        padding:35px 0;
+
         border-right:0;
+
         border-bottom:1px solid rgba(243,238,229,.18);
+
     }
+
 
     .experience-item h3{
-        margin-top:35px;
+
+        margin-top:38px;
+
     }
 
-    .menu-section{
+
+    .menu{
+
         padding:22vw 8vw;
+
     }
 
-    .menu-heading{
+
+    .menu-header{
+
         grid-template-columns:1fr;
+
         margin-bottom:65px;
+
     }
 
-    .menu-intro{
-        align-self:auto;
-    }
 
     .reservation{
+
         padding:22vw 8vw;
+
     }
+
 
     .reservation-grid{
+
         grid-template-columns:1fr;
+
         gap:80px;
+
     }
+
 
     .footer{
+
         padding:65px 8vw 25px;
+
     }
 
-    .footer-top{
+
+    .footer-grid{
+
         grid-template-columns:1fr 1fr;
+
         gap:55px 30px;
+
     }
 
-    .footer-brand{
+
+    .footer-logo{
+
         grid-column:1/-1;
-        margin-bottom:20px;
-    }
 
-    .footer-bottom{
-        display:block;
-    }
-
-    .footer-bottom span{
-        display:block;
-        margin-bottom:8px;
     }
 
 }
 
+
 @media(max-width:520px){
 
     .hero-title{
+
         font-size:23vw;
+
     }
+
 
     .hero-description{
-        max-width:285px;
+
+        max-width:275px;
+
     }
+
+
+    .hero-actions{
+
+        gap:8px;
+
+    }
+
 
     .hero-button{
-        padding:12px 15px;
+
+        font-size:7px;
+
+        padding:11px 13px;
+
     }
+
 
     .scroll-hint{
-        bottom:20px;
+
+        bottom:19px;
+
     }
 
-    .intro-card{
-        padding:22px;
+
+    .story-frame{
+
+        padding:20px;
+
     }
 
-    .intro-card-center strong{
-        font-size:75px;
+
+    .story-frame-center strong{
+
+        font-size:95px;
+
     }
+
 
     .form-row{
+
         grid-template-columns:1fr;
+
         gap:0;
+
     }
 
-    .footer-top{
+
+    .footer-grid{
+
         grid-template-columns:1fr;
+
+    }
+
+
+    .footer-logo{
+
+        grid-column:auto;
+
+        margin-bottom:15px;
+
+    }
+
+
+    .footer-bottom{
+
+        display:block;
+
+    }
+
+
+    .footer-bottom div{
+
+        margin-bottom:9px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+
+        scroll-behavior:auto;
+
     }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<!-- ======================================================
-     LOADER
-====================================================== -->
 
-<div class="loader">
+<!-- =========================================================
+     LOADER
+========================================================= -->
+
+<div class="loader" id="loader">
+
     <div class="loader-inner">
-        <div class="loader-small">A table awaits</div>
+
+        <div class="loader-small">
+            A table awaits
+        </div>
+
         <div class="loader-title">
+
             <span>HOTEL</span>
             <span>BOSTAN</span>
+
         </div>
+
     </div>
+
 </div>
 
 
-<!-- ======================================================
-     NAV
-====================================================== -->
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
 
 <header class="nav" id="nav">
 
     <a href="#top" class="brand">
-        <span class="brand-mark">B</span>
-        <span class="brand-name">Hotel Bostan</span>
+
+        <span class="brand-mark">
+            B
+        </span>
+
+        <span class="brand-name">
+            Hotel Bostan
+        </span>
+
     </a>
 
+
     <nav class="nav-links">
-        <a href="#story">Story</a>
-        <a href="#experience">Experience</a>
-        <a href="#menu">Menu</a>
-        <a href="#reservation">Reservations</a>
+
+        <a href="#story">
+            Story
+        </a>
+
+        <a href="#experience">
+            Experience
+        </a>
+
+        <a href="#menu">
+            Menu
+        </a>
+
+        <a href="#reservation">
+            Reservations
+        </a>
+
     </nav>
 
-    <a href="#reservation" class="nav-book">
+
+    <a
+        href="#reservation"
+        class="nav-book"
+    >
         Book a table
     </a>
 
-    <button class="menu-toggle" aria-label="Menu">
+
+    <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open navigation"
+    >
+
         <span></span>
         <span></span>
+
     </button>
 
 </header>
 
 
-<!-- ======================================================
-     CINEMATIC HERO
-====================================================== -->
+<!-- =========================================================
+     MOBILE NAV
+========================================================= -->
+
+<div id="mobileMenu" style="
+    position:fixed;
+    inset:0;
+    z-index:450;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    padding:10vw;
+    background:#f3eee5;
+    color:#151513;
+">
+
+    <a
+        href="#story"
+        style="
+            font-family:'Cormorant Garamond',serif;
+            font-size:65px;
+            line-height:.9;
+            margin-bottom:18px;
+        "
+    >
+        Story
+    </a>
+
+    <a
+        href="#experience"
+        style="
+            font-family:'Cormorant Garamond',serif;
+            font-size:65px;
+            line-height:.9;
+            margin-bottom:18px;
+        "
+    >
+        Experience
+    </a>
+
+    <a
+        href="#menu"
+        style="
+            font-family:'Cormorant Garamond',serif;
+            font-size:65px;
+            line-height:.9;
+            margin-bottom:18px;
+        "
+    >
+        Menu
+    </a>
+
+    <a
+        href="#reservation"
+        style="
+            font-family:'Cormorant Garamond',serif;
+            font-size:65px;
+            line-height:.9;
+        "
+    >
+        Reserve
+    </a>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
 
 <main id="top">
 
-<section class="hero-scroll" id="hero">
+
+<!-- =========================================================
+     CINEMATIC HERO
+========================================================= -->
+
+<section
+    class="hero-scroll"
+    id="hero"
+>
 
     <div class="hero-sticky">
+
+
+        <!--
+            IMPORTANT:
+
+            Keep hero(2).mp4 in the same folder as this HTML.
+
+            GSAP controls currentTime.
+            The video itself never autoplayed.
+        -->
 
         <video
             id="heroVideo"
             class="hero-video"
-            src="hero.mp4"
-          
+            src="./hero(2).mp4"
             muted
             playsinline
+            webkit-playsinline
             preload="auto"
+            disablepictureinpicture
+            controlslist="nodownload noplaybackrate"
         ></video>
 
-        <div class="hero-video-overlay"></div>
+
+        <div class="hero-overlay"></div>
+
         <div class="hero-vignette"></div>
+
+
+        <!-- HERO COPY -->
 
         <div class="hero-content">
 
-            <div class="hero-copy">
+            <div
+                class="hero-copy"
+                id="heroCopy"
+            >
 
-                <div class="hero-eyebrow hero-element">
+                <div
+                    class="hero-eyebrow"
+                    id="heroEyebrow"
+                >
                     Restaurant · Café · Hotel Bostan
                 </div>
 
-                <h1 class="hero-title hero-element">
 
-                    <span class="line">
-                        <span class="word">Eat</span>
+                <h1 class="hero-title">
+
+                    <span class="hero-title-line">
+
+                        <span
+                            class="hero-title-word"
+                            id="heroWordOne"
+                        >
+                            Eat
+                        </span>
+
                     </span>
 
-                    <span class="line">
-                        <span class="word accent">slow.</span>
+
+                    <span class="hero-title-line">
+
+                        <span
+                            class="hero-title-word"
+                            id="heroWordTwo"
+                        >
+                            <em>slow.</em>
+                        </span>
+
                     </span>
 
                 </h1>
 
-                <p class="hero-description hero-element">
-                    A place for long lunches, warm coffee,
-                    late dinners and the simple pleasure of
-                    staying a little longer.
+
+                <p
+                    class="hero-description"
+                    id="heroDescription"
+                >
+                    Long lunches. Warm coffee.
+                    Late dinners. A place where
+                    there is no reason to hurry.
                 </p>
 
-                <div class="hero-actions hero-element">
-                    <a href="#reservation" class="hero-button primary">
+
+                <div
+                    class="hero-actions"
+                    id="heroActions"
+                >
+
+                    <a
+                        href="#reservation"
+                        class="hero-button primary"
+                    >
                         Reserve a table
                     </a>
 
-                    <a href="#menu" class="hero-button">
+
+                    <a
+                        href="#menu"
+                        class="hero-button"
+                    >
                         Explore menu
                     </a>
+
                 </div>
 
             </div>
 
         </div>
 
+
+        <!-- PROGRESS -->
 
         <div class="hero-progress">
 
@@ -1189,10 +2288,12 @@ button{
             </span>
 
             <div class="hero-progress-line">
+
                 <div
                     class="hero-progress-fill"
                     id="heroProgress"
                 ></div>
+
             </div>
 
             <span class="hero-progress-label">
@@ -1202,65 +2303,112 @@ button{
         </div>
 
 
+        <!-- SCROLL HINT -->
+
         <div class="scroll-hint">
-            <span>Scroll to enter</span>
+
+            <span>
+                Scroll to enter
+            </span>
+
             <div class="scroll-arrow"></div>
+
         </div>
+
 
     </div>
 
 </section>
 
 
-<!-- ======================================================
+<!-- =========================================================
      STORY
-====================================================== -->
+========================================================= -->
 
-<section class="intro" id="story">
+<section
+    class="story"
+    id="story"
+>
 
-    <div class="intro-left">
 
-        <div class="section-kicker reveal">
+    <div class="story-copy">
+
+        <div class="kicker reveal">
             The Hotel Bostan story
         </div>
 
-        <h2 class="intro-title reveal">
+
+        <h2 class="story-title reveal">
+
             Good food.
             <br>
+
             <em>Good company.</em>
             <br>
+
             No hurry.
+
         </h2>
 
-        <p class="intro-text reveal">
-            Hotel Bostan is built around an uncomplicated idea:
-            food tastes better when there is time around it.
-            Our kitchen follows the rhythm of the day — coffee
-            in the morning, generous plates at lunch, intimate
-            dinners and something sweet whenever the evening
-            asks for it.
+
+        <p class="story-text reveal">
+
+            Hotel Bostan is built around an uncomplicated
+            idea: food tastes better when there is time
+            around it.
+
+            <br><br>
+
+            Our kitchen follows the rhythm of the day —
+            coffee in the morning, generous plates at lunch,
+            intimate dinners and something sweet whenever
+            the evening asks for it.
+
         </p>
 
     </div>
 
 
-    <div class="intro-right">
+    <div class="story-visual">
 
-        <div class="intro-card">
+        <div class="story-frame">
 
-            <div class="intro-card-top">
-                <span>HB / 01</span>
-                <span>Since 2026</span>
+            <div class="story-frame-top">
+
+                <span>
+                    HB / 01
+                </span>
+
+                <span>
+                    Hospitality
+                </span>
+
             </div>
 
-            <div class="intro-card-center">
-                <strong>H</strong>
-                <span>Hospitality · Food · Coffee</span>
+
+            <div class="story-frame-center">
+
+                <strong>
+                    H
+                </strong>
+
+                <span>
+                    Food · Coffee · Conversation
+                </span>
+
             </div>
 
-            <div class="intro-card-bottom">
-                <span>Kitchen open daily</span>
-                <span>Stay awhile</span>
+
+            <div class="story-frame-bottom">
+
+                <span>
+                    Kitchen open daily
+                </span>
+
+                <span>
+                    Stay awhile
+                </span>
+
             </div>
 
         </div>
@@ -1270,23 +2418,36 @@ button{
 </section>
 
 
-<!-- ======================================================
+<!-- =========================================================
      EXPERIENCE
-====================================================== -->
+========================================================= -->
 
-<section class="experience" id="experience">
+<section
+    class="experience"
+    id="experience"
+>
 
-    <div class="experience-head">
+    <div class="experience-header">
 
         <h2 class="experience-title reveal">
-            The<br>
+
+            The
+            <br>
             experience.
+
         </h2>
 
+
         <p class="experience-intro reveal">
-            Come for one thing. Stay for another.
-            Hotel Bostan moves naturally from morning
-            coffee to evening plates.
+
+            Come for one thing.
+            Stay for another.
+
+            <br><br>
+
+            Hotel Bostan moves naturally from
+            morning coffee to evening plates.
+
         </p>
 
     </div>
@@ -1294,76 +2455,110 @@ button{
 
     <div class="experience-grid">
 
-        <article class="experience-item reveal">
-            <span class="experience-number">01</span>
 
-            <h3>Morning</h3>
+        <article class="experience-item">
+
+            <span class="experience-number">
+                01
+            </span>
+
+            <h3>
+                Morning
+            </h3>
 
             <p>
                 Fresh coffee, quiet tables and a slower
                 beginning to the day.
             </p>
+
         </article>
 
 
-        <article class="experience-item reveal">
-            <span class="experience-number">02</span>
+        <article class="experience-item">
 
-            <h3>Afternoon</h3>
+            <span class="experience-number">
+                02
+            </span>
+
+            <h3>
+                Afternoon
+            </h3>
 
             <p>
                 Seasonal plates, cold drinks and lunches
                 that don't need to be rushed.
             </p>
+
         </article>
 
 
-        <article class="experience-item reveal">
-            <span class="experience-number">03</span>
+        <article class="experience-item">
 
-            <h3>Evening</h3>
+            <span class="experience-number">
+                03
+            </span>
+
+            <h3>
+                Evening
+            </h3>
 
             <p>
                 Low lights, good wine, warm plates and
                 conversations that run past dinner.
             </p>
+
         </article>
+
 
     </div>
 
 </section>
 
 
-<!-- ======================================================
+<!-- =========================================================
      MENU
-====================================================== -->
+========================================================= -->
 
-<section class="menu-section" id="menu">
+<section
+    class="menu"
+    id="menu"
+>
 
-    <div class="menu-heading">
+    <div class="menu-header">
 
         <h2 class="menu-title reveal">
-            From<br>
+
+            From
+            <br>
             the kitchen.
+
         </h2>
 
-        <p class="menu-intro reveal">
-            Our menu changes with the seasons and the
-            mood of the kitchen. The selection below is
-            a signature direction for Hotel Bostan.
+
+        <p class="menu-description reveal">
+
+            A signature selection for Hotel Bostan.
+            Our kitchen changes with the seasons,
+            local produce and the mood of the day.
+
         </p>
 
     </div>
 
 
+    <!-- TO BEGIN -->
+
     <div class="menu-category">
 
-        <div class="category-name">
+        <div class="menu-category-name">
             To begin
         </div>
 
+
         <div class="menu-item">
-            <div class="menu-item-main">
+
+            <div class="menu-item-info">
+
                 <span class="menu-item-name">
                     Warm sourdough
                 </span>
@@ -1371,14 +2566,20 @@ button{
                 <span class="menu-item-description">
                     Cultured butter · sea salt · olive oil
                 </span>
+
             </div>
 
-            <span class="menu-price">₹240</span>
+            <span class="menu-price">
+                ₹240
+            </span>
+
         </div>
 
 
         <div class="menu-item">
-            <div class="menu-item-main">
+
+            <div class="menu-item-info">
+
                 <span class="menu-item-name">
                     Burrata
                 </span>
@@ -1386,14 +2587,20 @@ button{
                 <span class="menu-item-description">
                     Heirloom tomato · basil oil · toasted bread
                 </span>
+
             </div>
 
-            <span class="menu-price">₹520</span>
+            <span class="menu-price">
+                ₹520
+            </span>
+
         </div>
 
 
         <div class="menu-item">
-            <div class="menu-item-main">
+
+            <div class="menu-item-info">
+
                 <span class="menu-item-name">
                     Roasted mushrooms
                 </span>
@@ -1401,22 +2608,31 @@ button{
                 <span class="menu-item-description">
                     Garlic · herbs · parmesan cream
                 </span>
+
             </div>
 
-            <span class="menu-price">₹440</span>
+            <span class="menu-price">
+                ₹440
+            </span>
+
         </div>
 
     </div>
 
 
+    <!-- KITCHEN -->
+
     <div class="menu-category">
 
-        <div class="category-name">
+        <div class="menu-category-name">
             From the kitchen
         </div>
 
+
         <div class="menu-item">
-            <div class="menu-item-main">
+
+            <div class="menu-item-info">
+
                 <span class="menu-item-name">
                     Bostan pasta
                 </span>
@@ -1424,14 +2640,20 @@ button{
                 <span class="menu-item-description">
                     Handmade pasta · slow tomato · basil · aged cheese
                 </span>
+
             </div>
 
-            <span class="menu-price">₹690</span>
+            <span class="menu-price">
+                ₹690
+            </span>
+
         </div>
 
 
         <div class="menu-item">
-            <div class="menu-item-main">
+
+            <div class="menu-item-info">
+
                 <span class="menu-item-name">
                     Charred chicken
                 </span>
@@ -1439,14 +2661,20 @@ button{
                 <span class="menu-item-description">
                     Lemon · rosemary · roasted vegetables
                 </span>
+
             </div>
 
-            <span class="menu-price">₹820</span>
+            <span class="menu-price">
+                ₹820
+            </span>
+
         </div>
 
 
         <div class="menu-item">
-            <div class="menu-item-main">
+
+            <div class="menu-item-info">
+
                 <span class="menu-item-name">
                     Market fish
                 </span>
@@ -1454,22 +2682,31 @@ button{
                 <span class="menu-item-description">
                     Seasonal vegetables · brown butter · herbs
                 </span>
+
             </div>
 
-            <span class="menu-price">₹980</span>
+            <span class="menu-price">
+                ₹980
+            </span>
+
         </div>
 
     </div>
 
 
+    <!-- COFFEE -->
+
     <div class="menu-category">
 
-        <div class="category-name">
+        <div class="menu-category-name">
             Coffee & sweet
         </div>
 
+
         <div class="menu-item">
-            <div class="menu-item-main">
+
+            <div class="menu-item-info">
+
                 <span class="menu-item-name">
                     Bostan espresso
                 </span>
@@ -1477,14 +2714,20 @@ button{
                 <span class="menu-item-description">
                     House roast · single origin
                 </span>
+
             </div>
 
-            <span class="menu-price">₹180</span>
+            <span class="menu-price">
+                ₹180
+            </span>
+
         </div>
 
 
         <div class="menu-item">
-            <div class="menu-item-main">
+
+            <div class="menu-item-info">
+
                 <span class="menu-item-name">
                     Affogato
                 </span>
@@ -1492,9 +2735,13 @@ button{
                 <span class="menu-item-description">
                     Vanilla gelato · espresso
                 </span>
+
             </div>
 
-            <span class="menu-price">₹320</span>
+            <span class="menu-price">
+                ₹320
+            </span>
+
         </div>
 
     </div>
@@ -1502,24 +2749,34 @@ button{
 </section>
 
 
-<!-- ======================================================
+<!-- =========================================================
      QUOTE
-====================================================== -->
+========================================================= -->
 
 <section class="quote">
 
     <div class="quote-inner">
 
-        <div class="quote-mark">“</div>
+        <div class="quote-mark">
+            “
+        </div>
 
-        <h2 class="quote-text reveal">
+
+        <h2 class="quote-text">
+
             Stay for the coffee.
             <br>
-            Stay for the <em>evening.</em>
+
+            Stay for the
+            <em>evening.</em>
+
         </h2>
 
-        <div class="quote-small">
+
+        <div class="quote-caption">
+
             Hotel Bostan · food worth lingering over
+
         </div>
 
     </div>
@@ -1527,60 +2784,107 @@ button{
 </section>
 
 
-<!-- ======================================================
+<!-- =========================================================
      RESERVATION
-====================================================== -->
+========================================================= -->
 
-<section class="reservation" id="reservation">
+<section
+    class="reservation"
+    id="reservation"
+>
+
 
     <div class="reservation-grid">
 
+
         <div>
 
-            <div class="section-kicker reveal">
+            <div class="kicker reveal">
                 Reservations
             </div>
 
+
             <h2 class="reservation-title reveal">
+
                 Your table
                 <br>
                 is waiting.
+
             </h2>
 
+
             <p class="reservation-copy reveal">
+
                 For lunch, dinner or simply a coffee,
                 reserve your table and let us take care
                 of the rest.
+
             </p>
 
         </div>
 
 
-        <form class="reservation-form" id="reservationForm">
+        <form
+            class="reservation-form"
+            id="reservationForm"
+        >
+
 
             <div class="form-row">
 
                 <div class="field">
-                    <label>Name</label>
+
+                    <label>
+                        Name
+                    </label>
+
                     <input
                         type="text"
                         placeholder="Your name"
                         required
                     >
+
                 </div>
 
+
                 <div class="field">
-                    <label>Guests</label>
+
+                    <label>
+                        Guests
+                    </label>
 
                     <select required>
-                        <option value="">Guests</option>
-                        <option>1 guest</option>
-                        <option>2 guests</option>
-                        <option>3 guests</option>
-                        <option>4 guests</option>
-                        <option>5 guests</option>
-                        <option>6+ guests</option>
+
+                        <option value="">
+                            Guests
+                        </option>
+
+                        <option>
+                            1 guest
+                        </option>
+
+                        <option>
+                            2 guests
+                        </option>
+
+                        <option>
+                            3 guests
+                        </option>
+
+                        <option>
+                            4 guests
+                        </option>
+
+                        <option>
+                            5 guests
+                        </option>
+
+                        <option>
+                            6+ guests
+                        </option>
+
                     </select>
+
                 </div>
 
             </div>
@@ -1589,23 +2893,61 @@ button{
             <div class="form-row">
 
                 <div class="field">
-                    <label>Date</label>
-                    <input type="date" required>
+
+                    <label>
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        required
+                    >
+
                 </div>
 
+
                 <div class="field">
-                    <label>Time</label>
+
+                    <label>
+                        Time
+                    </label>
 
                     <select required>
-                        <option value="">Select time</option>
-                        <option>12:00 PM</option>
-                        <option>1:00 PM</option>
-                        <option>2:00 PM</option>
-                        <option>7:00 PM</option>
-                        <option>8:00 PM</option>
-                        <option>9:00 PM</option>
-                        <option>10:00 PM</option>
+
+                        <option value="">
+                            Select time
+                        </option>
+
+                        <option>
+                            12:00 PM
+                        </option>
+
+                        <option>
+                            1:00 PM
+                        </option>
+
+                        <option>
+                            2:00 PM
+                        </option>
+
+                        <option>
+                            7:00 PM
+                        </option>
+
+                        <option>
+                            8:00 PM
+                        </option>
+
+                        <option>
+                            9:00 PM
+                        </option>
+
+                        <option>
+                            10:00 PM
+                        </option>
+
                     </select>
+
                 </div>
 
             </div>
@@ -1613,7 +2955,9 @@ button{
 
             <div class="field">
 
-                <label>Phone / Email</label>
+                <label>
+                    Phone / Email
+                </label>
 
                 <input
                     type="text"
@@ -1624,36 +2968,47 @@ button{
             </div>
 
 
-            <button class="reserve-button" type="submit">
+            <button
+                class="reserve-button"
+                type="submit"
+            >
                 Request reservation
             </button>
 
+
         </form>
+
 
     </div>
 
 </section>
 
+
 </main>
 
 
-<!-- ======================================================
+<!-- =========================================================
      FOOTER
-====================================================== -->
+========================================================= -->
 
 <footer class="footer">
 
-    <div class="footer-top">
 
-        <div class="footer-brand">
-            Hotel<br>
+    <div class="footer-grid">
+
+
+        <div class="footer-logo">
+
+            Hotel
+            <br>
             Bostan
+
         </div>
 
 
         <div class="footer-column">
 
-            <div class="footer-column-title">
+            <div class="footer-heading">
                 Visit
             </div>
 
@@ -1674,20 +3029,28 @@ button{
 
         <div class="footer-column">
 
-            <div class="footer-column-title">
+            <div class="footer-heading">
                 Hours
             </div>
 
-            <p>Mon — Thu · 8am — 11pm</p>
-            <p>Fri — Sat · 8am — 12am</p>
-            <p>Sunday · 9am — 10pm</p>
+            <p>
+                Mon — Thu · 8am — 11pm
+            </p>
+
+            <p>
+                Fri — Sat · 8am — 12am
+            </p>
+
+            <p>
+                Sunday · 9am — 10pm
+            </p>
 
         </div>
 
 
         <div class="footer-column">
 
-            <div class="footer-column-title">
+            <div class="footer-heading">
                 Contact
             </div>
 
@@ -1705,404 +3068,915 @@ button{
 
         </div>
 
+
     </div>
 
 
     <div class="footer-bottom">
 
-        <span>
+        <div>
             © 2026 Hotel Bostan
-        </span>
+        </div>
 
-        <span>
+        <div>
             Restaurant · Café · Hospitality
-        </span>
+        </div>
 
-        <span>
+        <div>
             Made for long evenings
-        </span>
+        </div>
 
     </div>
+
 
 </footer>
 
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
 
+
 /* =========================================================
-   GSAP SETUP
+   GSAP
 ========================================================= */
 
 gsap.registerPlugin(ScrollTrigger);
 
 
 /* =========================================================
-   LOADER
+   ELEMENTS
 ========================================================= */
 
-window.addEventListener("load", () => {
+const video =
+    document.getElementById("heroVideo");
 
-    const loader = document.querySelector(".loader");
-    const loaderWords = document.querySelectorAll(".loader-title span");
+const hero =
+    document.getElementById("hero");
 
-    const loaderTL = gsap.timeline();
+const progress =
+    document.getElementById("heroProgress");
 
-    loaderTL
-        .to(loaderWords,{
-            y:"0%",
-            duration:1.1,
-            stagger:.12,
-            ease:"power4.out"
-        })
-        .to(loader,{
-            yPercent:-100,
-            duration:1.15,
-            delay:.35,
-            ease:"power4.inOut"
-        })
-        .set(loader,{
-            display:"none"
-        });
+const nav =
+    document.getElementById("nav");
 
-});
+const loader =
+    document.getElementById("loader");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+const menuToggle =
+    document.getElementById("menuToggle");
 
 
 /* =========================================================
-   NAVIGATION
+   GLOBAL VIDEO STATE
 ========================================================= */
 
-const nav = document.querySelector("#nav");
+let videoDuration = 0;
+
+let videoReady = false;
+
+let videoPlayhead = {
+    time:0
+};
+
+let videoTimeline = null;
+
+
+/* =========================================================
+   VIDEO SETTINGS
+========================================================= */
+
+video.muted = true;
+
+video.defaultMuted = true;
+
+video.playsInline = true;
+
+
+/*
+   We intentionally NEVER call:
+
+       video.play()
+
+   The browser therefore doesn't autoplay.
+
+   GSAP controls the time.
+*/
+
+
+/* =========================================================
+   VIDEO INITIALISATION
+========================================================= */
+
+function initialiseVideo(){
+
+    if(videoReady){
+        return;
+    }
+
+
+    if(
+        !Number.isFinite(video.duration) ||
+        video.duration <= 0
+    ){
+
+        return;
+
+    }
+
+
+    videoDuration =
+        video.duration;
+
+
+    videoReady =
+        true;
+
+
+    /*
+       Force first frame.
+    */
+
+    try{
+
+        video.currentTime = 0;
+
+    }catch(error){
+
+        console.warn(
+            "Unable to seek initial video frame.",
+            error
+        );
+
+    }
+
+
+    createVideoTimeline();
+
+
+    /*
+       Give the browser one frame to establish
+       dimensions before ScrollTrigger measures
+       the document.
+    */
+
+    requestAnimationFrame(()=>{
+
+        ScrollTrigger.refresh();
+
+    });
+
+}
+
+
+/* =========================================================
+   VIDEO EVENTS
+========================================================= */
+
+video.addEventListener(
+    "loadedmetadata",
+    initialiseVideo
+);
+
+video.addEventListener(
+    "durationchange",
+    initialiseVideo
+);
+
+video.addEventListener(
+    "loadeddata",
+    initialiseVideo
+);
+
+video.addEventListener(
+    "canplay",
+    initialiseVideo
+);
+
+
+/*
+   Some browsers may already have metadata
+   before the listener is registered.
+*/
+
+if(video.readyState >= 1){
+
+    initialiseVideo();
+
+}
+
+
+/* =========================================================
+   THE ACTUAL GSAP VIDEO ENGINE
+========================================================= */
+
+function createVideoTimeline(){
+
+
+    /*
+       Kill previous timeline if one exists.
+    */
+
+    if(videoTimeline){
+
+        videoTimeline.kill();
+
+    }
+
+
+    /*
+       GSAP animates a normal JavaScript object.
+
+       This is more robust than asking GSAP to repeatedly
+       tween a media element property directly.
+
+       The object becomes the cinematic playhead.
+    */
+
+    videoPlayhead.time = 0;
+
+
+    videoTimeline = gsap.to(
+        videoPlayhead,
+        {
+
+            time:
+                Math.max(
+                    0,
+                    videoDuration - 0.03
+                ),
+
+            ease:"none",
+
+            scrollTrigger:{
+
+                trigger:hero,
+
+                start:"top top",
+
+                end:"bottom bottom",
+
+                scrub:0.35,
+
+                invalidateOnRefresh:true,
+
+                fastScrollEnd:false,
+
+                onUpdate:self=>{
+
+                    /*
+                       Convert GSAP's animated playhead
+                       into an actual video frame.
+                    */
+
+                    const time =
+                        Math.max(
+                            0,
+                            Math.min(
+                                videoDuration - 0.01,
+                                videoPlayhead.time
+                            )
+                        );
+
+
+                    if(
+                        Number.isFinite(time) &&
+                        Math.abs(
+                            video.currentTime - time
+                        ) > 0.008
+                    ){
+
+                        try{
+
+                            video.currentTime =
+                                time;
+
+                        }catch(error){
+
+                            /*
+                               Safari can occasionally reject
+                               a seek during a decode transition.
+                               The next GSAP update will retry.
+                            */
+
+                        }
+
+                    }
+
+
+                    /*
+                       Progress indicator.
+                    */
+
+                    if(progress){
+
+                        progress.style.height =
+                            `${self.progress * 100}%`;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   NAVIGATION COLOR CHANGE
+========================================================= */
 
 ScrollTrigger.create({
+
+    trigger:hero,
 
     start:"top -80",
 
     onEnter:()=>{
+
         nav.classList.add("scrolled");
+
     },
 
     onLeaveBack:()=>{
+
         nav.classList.remove("scrolled");
+
     }
 
 });
 
 
 /* =========================================================
-   HERO VIDEO SCROLL ENGINE
+   HERO TYPOGRAPHY TIMELINE
 ========================================================= */
 
-const video = document.querySelector("#heroVideo");
-const heroProgress = document.querySelector("#heroProgress");
+const heroTypography =
+    gsap.timeline({
 
-let targetVideoTime = 0;
-let currentVideoTime = 0;
-let videoDuration = 0;
+        scrollTrigger:{
 
-video.addEventListener("loadedmetadata", () => {
+            trigger:hero,
 
-    videoDuration = video.duration;
+            start:"top top",
+
+            end:"bottom top",
+
+            scrub:1.2,
+
+            invalidateOnRefresh:true
+
+        }
+
+    });
+
+
+heroTypography
 
     /*
-        We deliberately pause the video.
-
-        ScrollTrigger becomes the playback controller.
+       Eyebrow enters.
     */
 
-    video.pause();
-
-});
-
-
-/*
-    Smooth interpolation loop.
-
-    This is more stable than repeatedly creating GSAP
-    tweens on currentTime during fast scrolling.
-*/
-
-function videoRenderLoop(){
-
-    currentVideoTime +=
-        (targetVideoTime - currentVideoTime) * 0.13;
-
-    if(
-        videoDuration &&
-        Math.abs(video.currentTime - currentVideoTime) > 0.015
-    ){
-
-        try{
-            video.currentTime = currentVideoTime;
-        }catch(e){}
-
-    }
-
-    requestAnimationFrame(videoRenderLoop);
-
-}
-
-videoRenderLoop();
-
-
-/* =========================================================
-   CINEMATIC HERO SCROLLTRIGGER
-========================================================= */
-
-ScrollTrigger.create({
-
-    trigger:"#hero",
-
-    start:"top top",
-
-    end:"bottom bottom",
-
-    scrub:0.15,
-
-    onUpdate:self=>{
-
-        const progress = self.progress;
-
-        targetVideoTime =
-            progress * Math.max(0,videoDuration - 0.04);
-
-        heroProgress.style.height =
-            `${progress * 100}%`;
-
-    }
-
-});
-
-
-/* =========================================================
-   HERO TYPOGRAPHY
-========================================================= */
-
-const heroTL = gsap.timeline({
-
-    scrollTrigger:{
-        trigger:"#hero",
-        start:"top top",
-        end:"bottom top",
-        scrub:1
-    }
-
-});
-
-
-heroTL
-
     .fromTo(
-        ".hero-eyebrow",
+
+        "#heroEyebrow",
+
         {
             y:50,
             opacity:0
         },
+
         {
             y:0,
             opacity:1,
-            duration:.18,
-            ease:"none"
+            duration:.15,
+            ease:"power3.out"
         }
+
     )
 
+
+    /*
+       First word.
+    */
+
     .fromTo(
-        ".hero-title .word",
+
+        "#heroWordOne",
+
         {
-            y:"115%",
+            y:"110%",
             opacity:0
         },
+
         {
             y:"0%",
             opacity:1,
-            duration:.28,
-            stagger:.08,
-            ease:"power3.out"
+            duration:.22,
+            ease:"power4.out"
         },
+
         "<"
+
     )
 
+
+    /*
+       Second word.
+    */
+
     .fromTo(
-        ".hero-description",
+
+        "#heroWordTwo",
+
         {
-            y:35,
+            y:"110%",
             opacity:0
         },
+
+        {
+            y:"0%",
+            opacity:1,
+            duration:.22,
+            ease:"power4.out"
+        },
+
+        "-=.08"
+
+    )
+
+
+    /*
+       Description.
+    */
+
+    .fromTo(
+
+        "#heroDescription",
+
+        {
+            y:30,
+            opacity:0
+        },
+
         {
             y:0,
             opacity:1,
-            duration:.16
+            duration:.14,
+            ease:"power3.out"
         },
+
         "-=.08"
+
     )
 
+
+    /*
+       Buttons.
+    */
+
     .fromTo(
-        ".hero-actions",
+
+        "#heroActions",
+
         {
             y:25,
             opacity:0
         },
+
         {
             y:0,
             opacity:1,
-            duration:.14
+            duration:.12
         },
-        "-=.08"
+
+        "-=.06"
+
     )
 
+
     /*
-       As the viewer continues through the hero,
-       typography retreats, allowing the underlying
-       video to become the dominant cinematic element.
+       Final section of hero:
+       typography exits so the video becomes
+       the dominant cinematic element.
     */
 
     .to(
-        ".hero-copy",
+
+        "#heroCopy",
+
         {
-            y:-90,
+            y:-100,
             opacity:0,
-            duration:.35,
-            ease:"power2.in"
+            duration:.32,
+            ease:"power2.inOut"
         },
-        ".72"
+
+        ".62"
+
     );
 
 
 /* =========================================================
-   GENERIC REVEAL SYSTEM
+   HERO VIDEO ZOOM
 ========================================================= */
 
-gsap.utils.toArray(".reveal").forEach((element)=>{
+gsap.fromTo(
 
-    gsap.fromTo(
-        element,
-        {
-            y:55,
-            opacity:0
-        },
-        {
-            y:0,
-            opacity:1,
-            duration:1.1,
-            ease:"power3.out",
+    video,
 
-            scrollTrigger:{
-                trigger:element,
-                start:"top 85%",
-                toggleActions:"play none none reverse"
-            }
+    {
+        scale:1.035
+    },
+
+    {
+        scale:1.09,
+
+        ease:"none",
+
+        scrollTrigger:{
+
+            trigger:hero,
+
+            start:"top top",
+
+            end:"bottom bottom",
+
+            scrub:1.2
 
         }
-    );
 
-});
+    }
+
+);
+
+
+/* =========================================================
+   STORY REVEALS
+========================================================= */
+
+gsap.utils
+    .toArray(".reveal")
+    .forEach(element=>{
+
+        gsap.fromTo(
+
+            element,
+
+            {
+                y:60,
+                opacity:0
+            },
+
+            {
+                y:0,
+                opacity:1,
+                duration:1.05,
+                ease:"power3.out",
+
+                scrollTrigger:{
+
+                    trigger:element,
+
+                    start:"top 84%",
+
+                    toggleActions:
+                        "play none none reverse"
+
+                }
+
+            }
+
+        );
+
+    });
+
+
+/* =========================================================
+   STORY CARD PARALLAX
+========================================================= */
+
+gsap.to(
+
+    ".story-frame",
+
+    {
+
+        y:-50,
+
+        ease:"none",
+
+        scrollTrigger:{
+
+            trigger:".story-visual",
+
+            start:"top bottom",
+
+            end:"bottom top",
+
+            scrub:1
+
+        }
+
+    }
+
+);
 
 
 /* =========================================================
    EXPERIENCE ITEMS
 ========================================================= */
 
-gsap.from(".experience-item",{
+gsap.from(
 
-    y:70,
-    opacity:0,
-    duration:1,
-    stagger:.16,
-    ease:"power3.out",
+    ".experience-item",
 
-    scrollTrigger:{
-        trigger:".experience-grid",
-        start:"top 78%"
+    {
+
+        y:70,
+
+        opacity:0,
+
+        duration:1,
+
+        stagger:.16,
+
+        ease:"power3.out",
+
+        scrollTrigger:{
+
+            trigger:".experience-grid",
+
+            start:"top 78%"
+
+        }
+
     }
 
-});
+);
 
 
 /* =========================================================
    MENU ITEMS
 ========================================================= */
 
-gsap.from(".menu-item",{
+gsap.from(
 
-    x:-35,
-    opacity:0,
-    duration:.8,
-    stagger:.06,
-    ease:"power3.out",
+    ".menu-item",
 
-    scrollTrigger:{
-        trigger:".menu-section",
-        start:"top 70%"
+    {
+
+        x:-35,
+
+        opacity:0,
+
+        duration:.8,
+
+        stagger:.06,
+
+        ease:"power3.out",
+
+        scrollTrigger:{
+
+            trigger:".menu",
+
+            start:"top 70%"
+
+        }
+
     }
 
-});
+);
 
 
 /* =========================================================
    QUOTE
 ========================================================= */
 
-gsap.from(".quote-text",{
+gsap.from(
 
-    y:80,
-    opacity:0,
-    duration:1.3,
-    ease:"power4.out",
+    ".quote-text",
 
-    scrollTrigger:{
-        trigger:".quote",
-        start:"top 70%"
+    {
+
+        y:80,
+
+        opacity:0,
+
+        duration:1.25,
+
+        ease:"power4.out",
+
+        scrollTrigger:{
+
+            trigger:".quote",
+
+            start:"top 72%"
+
+        }
+
     }
 
-});
+);
 
 
 /* =========================================================
-   PARALLAX INTRO CARD
+   RESERVATION
 ========================================================= */
 
-gsap.to(".intro-card",{
+gsap.from(
 
-    y:-45,
-    ease:"none",
+    ".reservation-form",
 
-    scrollTrigger:{
-        trigger:".intro-right",
-        start:"top bottom",
-        end:"bottom top",
-        scrub:1
+    {
+
+        x:50,
+
+        opacity:0,
+
+        duration:1,
+
+        ease:"power3.out",
+
+        scrollTrigger:{
+
+            trigger:".reservation",
+
+            start:"top 70%"
+
+        }
+
     }
 
-});
+);
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+let mobileOpen = false;
+
+
+menuToggle.addEventListener(
+    "click",
+    ()=>{
+
+        mobileOpen =
+            !mobileOpen;
+
+
+        if(mobileOpen){
+
+            mobileMenu.style.display =
+                "flex";
+
+            document.body.classList.add(
+                "no-scroll"
+            );
+
+
+            gsap.fromTo(
+
+                mobileMenu,
+
+                {
+                    opacity:0
+                },
+
+                {
+                    opacity:1,
+                    duration:.3
+                }
+
+            );
+
+
+            gsap.fromTo(
+
+                mobileMenu.querySelectorAll("a"),
+
+                {
+                    y:35,
+                    opacity:0
+                },
+
+                {
+                    y:0,
+                    opacity:1,
+                    duration:.55,
+                    stagger:.07,
+                    ease:"power3.out"
+                }
+
+            );
+
+        }else{
+
+            closeMobileMenu();
+
+        }
+
+    }
+);
+
+
+function closeMobileMenu(){
+
+    mobileOpen = false;
+
+    document.body.classList.remove(
+        "no-scroll"
+    );
+
+    gsap.to(
+
+        mobileMenu,
+
+        {
+
+            opacity:0,
+
+            duration:.25,
+
+            onComplete:()=>{
+
+                mobileMenu.style.display =
+                    "none";
+
+            }
+
+        }
+
+    );
+
+}
+
+
+mobileMenu
+    .querySelectorAll("a")
+    .forEach(link=>{
+
+        link.addEventListener(
+            "click",
+            closeMobileMenu
+        );
+
+    });
 
 
 /* =========================================================
    RESERVATION FORM
 ========================================================= */
 
-document
-    .querySelector("#reservationForm")
-    .addEventListener("submit",(event)=>{
+const reservationForm =
+    document.getElementById(
+        "reservationForm"
+    );
+
+
+reservationForm.addEventListener(
+    "submit",
+    event=>{
 
         event.preventDefault();
 
+
         const button =
-            event.currentTarget.querySelector(
+            reservationForm.querySelector(
                 ".reserve-button"
             );
 
+
+        const originalText =
+            button.textContent;
+
+
         button.textContent =
-            "Reservation request received";
+            "Request received";
+
 
         button.style.background =
             "#b79a68";
 
+
         button.style.borderColor =
             "#b79a68";
+
 
         setTimeout(()=>{
 
             button.textContent =
-                "Request reservation";
+                originalText;
 
             button.style.background =
                 "";
@@ -2110,58 +3984,151 @@ document
             button.style.borderColor =
                 "";
 
-        },3500);
+        },3000);
 
-    });
+    }
+);
 
 
 /* =========================================================
-   MOBILE MENU
+   VIDEO ERROR REPORTING
 ========================================================= */
 
-const menuToggle =
-    document.querySelector(".menu-toggle");
+video.addEventListener(
+    "error",
+    ()=>{
 
-const navLinks =
-    document.querySelector(".nav-links");
-
-menuToggle.addEventListener("click",()=>{
-
-    const open =
-        navLinks.style.display === "flex";
-
-    if(open){
-
-        navLinks.style.display = "";
-
-    }else{
-
-        navLinks.style.display = "flex";
-        navLinks.style.position = "absolute";
-        navLinks.style.top = "70px";
-        navLinks.style.left = "5vw";
-        navLinks.style.right = "5vw";
-        navLinks.style.padding = "25px";
-        navLinks.style.flexDirection = "column";
-        navLinks.style.alignItems = "flex-start";
-        navLinks.style.background = "rgba(243,238,229,.97)";
-        navLinks.style.color = "#151513";
-        navLinks.style.backdropFilter = "blur(20px)";
+        console.error(
+            "Hotel Bostan hero video could not be loaded.",
+            video.error
+        );
 
     }
-
-});
+);
 
 
 /* =========================================================
    RESIZE
 ========================================================= */
 
-window.addEventListener("resize",()=>{
+let resizeTimer;
 
-    ScrollTrigger.refresh();
 
-});
+window.addEventListener(
+    "resize",
+    ()=>{
+
+        clearTimeout(resizeTimer);
+
+
+        resizeTimer = setTimeout(()=>{
+
+            ScrollTrigger.refresh();
+
+        },200);
+
+    }
+);
+
+
+/* =========================================================
+   VISIBILITY
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    ()=>{
+
+        /*
+           We NEVER let the browser autoplay the film.
+        */
+
+        if(document.hidden){
+
+            video.pause();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+function startLoader(){
+
+    const words =
+        document.querySelectorAll(
+            ".loader-title span"
+        );
+
+
+    const loaderTimeline =
+        gsap.timeline();
+
+
+    loaderTimeline
+
+        .to(
+
+            words,
+
+            {
+                y:"0%",
+                duration:1.1,
+                stagger:.12,
+                ease:"power4.out"
+            }
+
+        )
+
+        .to(
+
+            loader,
+
+            {
+                yPercent:-100,
+                duration:1.1,
+                delay:.35,
+                ease:"power4.inOut",
+
+                onComplete:()=>{
+
+                    loader.style.display =
+                        "none";
+
+                }
+
+            }
+
+        );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+if(
+    document.readyState === "complete"
+){
+
+    startLoader();
+
+}else{
+
+    window.addEventListener(
+        "load",
+        startLoader,
+        {
+            once:true
+        }
+    );
+
+}
 
 
 /* =========================================================
@@ -2174,11 +4141,16 @@ if(
     ).matches
 ){
 
-    ScrollTrigger.getAll().forEach(
-        trigger=>trigger.disable()
-    );
+    /*
+       Accessibility mode:
+       remove cinematic scrubbing.
+    */
 
-    video.removeAttribute("autoplay");
+    ScrollTrigger.getAll().forEach(
+        trigger=>{
+            trigger.disable();
+        }
+    );
 
 }
 
