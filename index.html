@@ -2,15 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hotel Bostan — Eat Slow</title>
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>HOTEL BOSTAN — Eat Slow</title>
+
+<meta
+  name="description"
+  content="Hotel Bostan — rooms, dining, nights, experiences and long afternoons."
+>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-  href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+  href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
   rel="stylesheet"
 >
 
@@ -18,24 +27,76 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 
 <style>
-* {
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+
+  --crimson: #C8102E;
+
+  --crimson-dark: #97091F;
+
+  --crimson-deep: #780817;
+
+  --electric: #D7FF00;
+
+  --white: #FFFDF7;
+
+  --black: #080808;
+
+  --black-soft: #111111;
+
+  --line: rgba(255,253,247,.2);
+
+  --ease: cubic-bezier(.76,0,.24,1);
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   margin: 0;
   padding: 0;
-  background: #11100e;
+
+  background:
+    var(--crimson);
+
+  scroll-behavior: auto;
 }
 
 body {
+
   margin: 0;
   padding: 0;
-  background: #11100e;
-  color: #f3efe7;
-  font-family: "DM Sans", sans-serif;
+
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+
+  background:
+    var(--crimson);
+
+  color:
+    var(--white);
+
+  font-family:
+    "DM Sans",
+    sans-serif;
+
+  -webkit-font-smoothing:
+    antialiased;
+
+  text-rendering:
+    optimizeLegibility;
 }
 
 body.loading {
@@ -54,952 +115,1975 @@ textarea {
   font: inherit;
 }
 
-img,
+button {
+  cursor: pointer;
+}
+
 video {
   display: block;
 }
+
 
 /* =========================================================
    LOADER
 ========================================================= */
 
 .loader {
+
   position: fixed;
+
   inset: 0;
+
   z-index: 99999;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  background: #11100e;
+  background:
+    var(--crimson);
+
+  color:
+    var(--white);
 }
 
-.loader-content {
+.loader-inner {
   text-align: center;
 }
 
-.loader-title {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(2rem, 5vw, 4rem);
+.loader-logo {
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(2.2rem,5vw,5rem);
+
+  line-height:
+    .85;
+
+  letter-spacing:
+    -.05em;
+}
+
+.loader-sub {
+
+  margin-top:
+    18px;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    .3em;
+
+  text-transform:
+    uppercase;
 }
 
 .loader-line {
-  width: 0;
-  height: 1px;
-  margin: 18px auto 0;
-  background: #fff;
+
+  width:
+    0;
+
+  height:
+    2px;
+
+  margin:
+    20px auto 0;
+
+  background:
+    var(--electric);
 }
 
+
 /* =========================================================
-   NAV
+   NAVIGATION
 ========================================================= */
 
 .nav {
+
   position: fixed;
+
   top: 0;
   left: 0;
 
-  z-index: 5000;
+  z-index: 9000;
 
   width: 100%;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display:
+    flex;
 
-  padding: 28px 42px;
+  align-items:
+    center;
 
-  color: #fff;
+  justify-content:
+    space-between;
+
+  padding:
+    27px 42px;
+
+  color:
+    var(--white);
 
   transition:
-    padding .4s ease,
-    background .4s ease,
-    backdrop-filter .4s ease;
+    padding .45s ease,
+    background .45s ease,
+    color .45s ease;
+
 }
 
 .nav.scrolled {
-  padding: 17px 42px;
 
-  background: rgba(17,16,14,.78);
+  padding-top:
+    16px;
 
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  padding-bottom:
+    16px;
+
+  background:
+    rgba(8,8,8,.84);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
 }
 
 .nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
 
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: .18em;
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    11px;
+
+  font-size:
+    12px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .19em;
 }
 
-.logo-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
+.logo-symbol {
+
+  width:
+    9px;
+
+  height:
+    9px;
+
+  background:
+    var(--electric);
+
+  border-radius:
+    50%;
 }
 
 .nav-links {
-  display: flex;
-  gap: 34px;
 
-  font-size: 10px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    29px;
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    .18em;
+
+  text-transform:
+    uppercase;
 }
 
 .nav-links a {
-  opacity: .8;
-  transition: opacity .25s ease;
+
+  position:
+    relative;
+
+  opacity:
+    .75;
+
+  transition:
+    opacity .25s ease;
 }
 
 .nav-links a:hover {
   opacity: 1;
 }
 
-.nav-button {
-  padding: 11px 17px;
+.nav-links a::after {
 
-  border: 1px solid rgba(255,255,255,.55);
+  content:
+    "";
 
-  font-size: 10px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
+  position:
+    absolute;
+
+  left:
+    0;
+
+  bottom:
+    -7px;
+
+  width:
+    0;
+
+  height:
+    1px;
+
+  background:
+    var(--electric);
 
   transition:
-    background .3s ease,
-    color .3s ease;
+    width .3s ease;
 }
 
-.nav-button:hover {
-  background: #fff;
-  color: #11100e;
+.nav-links a:hover::after {
+  width: 100%;
 }
+
+.nav-book {
+
+  padding:
+    11px 17px;
+
+  background:
+    var(--electric);
+
+  color:
+    var(--black);
+
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .16em;
+
+  text-transform:
+    uppercase;
+
+  transition:
+    transform .3s ease;
+}
+
+.nav-book:hover {
+  transform:
+    translateY(-2px);
+}
+
 
 /* =========================================================
    HERO
 ========================================================= */
 
 .hero {
-  position: relative;
 
-  /*
-    THIS IS THE SCROLL LENGTH.
+  position:
+    relative;
 
-    The longer this is, the slower the video travels
-    through its timeline.
-  */
-  height: 550vh;
+  height:
+    550vh;
 
-  background: #11100e;
+  background:
+    var(--crimson);
 }
 
 .hero-pin {
-  position: sticky;
-  top: 0;
 
-  width: 100%;
-  height: 100vh;
+  position:
+    sticky;
 
-  overflow: hidden;
+  top:
+    0;
 
-  background: #11100e;
+  width:
+    100%;
+
+  height:
+    100vh;
+
+  overflow:
+    hidden;
+
+  background:
+    var(--crimson);
 }
 
-/* =========================================================
-   VIDEO
-========================================================= */
-
 .video-container {
-  position: absolute;
-  inset: 0;
 
-  overflow: hidden;
+  position:
+    absolute;
 
-  background: #11100e;
+  inset:
+    0;
+
+  overflow:
+    hidden;
+
+  background:
+    var(--black);
 }
 
 #heroVideo {
-  position: absolute;
 
-  top: 50%;
-  left: 50%;
+  position:
+    absolute;
 
-  width: 100%;
-  height: 100%;
+  top:
+    50%;
 
-  object-fit: cover;
-  object-position: center center;
+  left:
+    50%;
+
+  width:
+    100%;
+
+  height:
+    100%;
+
+  object-fit:
+    cover;
+
+  object-position:
+    center center;
 
   transform:
-    translate3d(-50%, -50%, 0)
+    translate3d(-50%,-50%,0)
     scale(1.02);
 
-  transform-origin: center center;
+  transform-origin:
+    center center;
 
-  will-change: transform;
+  will-change:
+    transform;
 
-  /*
-    IMPORTANT:
-    The video is NOT autoplaying.
-    GSAP controls its currentTime.
-  */
-
-  pointer-events: none;
+  pointer-events:
+    none;
 }
 
-.video-dark {
-  position: absolute;
-  inset: 0;
+.video-red {
+
+  position:
+    absolute;
+
+  inset:
+    0;
 
   background:
     linear-gradient(
-      to bottom,
-      rgba(0,0,0,.46),
-      rgba(0,0,0,.05) 42%,
-      rgba(0,0,0,.2) 62%,
-      rgba(0,0,0,.7)
+      180deg,
+      rgba(200,16,46,.15),
+      rgba(0,0,0,.02) 40%,
+      rgba(200,16,46,.2) 100%
     );
 
-  pointer-events: none;
+  mix-blend-mode:
+    multiply;
+
+  pointer-events:
+    none;
 }
 
-.video-vignette {
-  position: absolute;
-  inset: 0;
+.video-dark {
+
+  position:
+    absolute;
+
+  inset:
+    0;
 
   background:
-    radial-gradient(
-      ellipse at center,
-      transparent 35%,
-      rgba(0,0,0,.3) 100%
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.45),
+      transparent 42%,
+      rgba(0,0,0,.65)
     );
 
-  pointer-events: none;
+  pointer-events:
+    none;
 }
 
+.video-error {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    100;
+
+  display:
+    none;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  background:
+    var(--crimson);
+
+  text-align:
+    center;
+}
+
+.video-error.active {
+  display:
+    flex;
+}
+
+.video-error h2 {
+
+  margin:
+    0 0 15px;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    50px;
+
+  font-weight:
+    400;
+}
+
+.video-error p {
+
+  margin:
+    0;
+
+  font-size:
+    12px;
+
+  opacity:
+    .7;
+}
+
+
 /* =========================================================
-   HERO TEXT
+   HERO TYPOGRAPHY
 ========================================================= */
 
 .hero-copy {
-  position: absolute;
 
-  left: 7vw;
-  bottom: 10vh;
+  position:
+    absolute;
 
-  z-index: 20;
+  left:
+    7vw;
 
-  width: min(800px, 85vw);
+  bottom:
+    10vh;
 
-  pointer-events: none;
+  z-index:
+    30;
+
+  width:
+    min(900px,85vw);
+
+  pointer-events:
+    none;
 }
 
-.hero-small {
-  margin-bottom: 18px;
+.hero-kicker {
 
-  font-size: 10px;
-  letter-spacing: .25em;
-  text-transform: uppercase;
+  margin-bottom:
+    18px;
 
-  opacity: 0;
+  color:
+    var(--electric);
 
-  transform: translateX(-100px);
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .27em;
+
+  text-transform:
+    uppercase;
+
+  opacity:
+    0;
+
+  transform:
+    translateX(-100px);
 }
 
 .hero-title {
-  margin: 0;
 
-  font-family: "Playfair Display", serif;
+  margin:
+    0;
 
-  font-size: clamp(4.5rem, 12vw, 12rem);
+  font-family:
+    "Playfair Display",
+    serif;
 
-  font-weight: 400;
+  font-size:
+    clamp(5rem,13vw,13rem);
 
-  line-height: .8;
+  font-weight:
+    400;
 
-  letter-spacing: -.065em;
+  line-height:
+    .76;
 
-  opacity: 0;
+  letter-spacing:
+    -.075em;
 
-  transform: translateX(-120px);
+  color:
+    var(--white);
+
+  opacity:
+    0;
+
+  transform:
+    translateX(-130px);
 }
 
 .hero-title em {
-  font-style: italic;
+  color:
+    var(--electric);
+
+  font-style:
+    italic;
 }
 
 .hero-description {
-  width: min(420px, 85vw);
 
-  margin-top: 32px;
+  width:
+    min(440px,90vw);
 
-  font-size: 14px;
+  margin-top:
+    35px;
 
-  line-height: 1.7;
+  color:
+    var(--white);
 
-  opacity: 0;
+  font-size:
+    13px;
 
-  transform: translateX(-80px);
+  line-height:
+    1.8;
+
+  opacity:
+    0;
+
+  transform:
+    translateX(-80px);
 }
+
 
 /* =========================================================
    HERO SCROLL
 ========================================================= */
 
-.scroll-indicator {
-  position: absolute;
+.hero-scroll {
 
-  left: 50%;
-  bottom: 28px;
+  position:
+    absolute;
 
-  z-index: 30;
+  bottom:
+    28px;
 
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  left:
+    50%;
 
-  transform: translateX(-50%);
+  z-index:
+    40;
 
-  font-size: 8px;
-  letter-spacing: .25em;
-  text-transform: uppercase;
+  display:
+    flex;
 
-  opacity: .85;
+  align-items:
+    center;
+
+  gap:
+    14px;
+
+  transform:
+    translateX(-50%);
+
+  color:
+    var(--white);
+
+  font-size:
+    8px;
+
+  letter-spacing:
+    .25em;
+
+  text-transform:
+    uppercase;
 }
 
 .scroll-line {
-  position: relative;
 
-  width: 70px;
-  height: 1px;
+  width:
+    75px;
 
-  overflow: hidden;
+  height:
+    2px;
 
-  background: rgba(255,255,255,.35);
+  overflow:
+    hidden;
+
+  background:
+    rgba(255,255,255,.3);
 }
 
 .scroll-line::after {
-  content: "";
 
-  position: absolute;
+  content:
+    "";
 
-  top: 0;
-  left: -100%;
+  display:
+    block;
 
-  width: 100%;
-  height: 100%;
+  width:
+    100%;
 
-  background: #fff;
+  height:
+    100%;
 
-  animation: lineMove 1.8s ease-in-out infinite;
+  background:
+    var(--electric);
+
+  animation:
+    scrollLine 1.7s ease-in-out infinite;
 }
 
-@keyframes lineMove {
+@keyframes scrollLine {
+
   0% {
-    left: -100%;
+    transform: translateX(-100%);
   }
 
   50% {
-    left: 0;
+    transform: translateX(0);
   }
 
   100% {
-    left: 100%;
+    transform: translateX(100%);
   }
 }
 
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress {
-  position: absolute;
-
-  right: 28px;
-  top: 50%;
-
-  width: 1px;
-  height: 100px;
-
-  transform: translateY(-50%);
-
-  background: rgba(255,255,255,.25);
-
-  z-index: 50;
-}
-
-.progress-bar {
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 0;
-
-  background: #fff;
-}
 
 /* =========================================================
-   VIDEO ERROR
+   HERO PROGRESS
 ========================================================= */
 
-.video-error {
-  position: absolute;
-  inset: 0;
+.hero-progress {
 
-  z-index: 100;
+  position:
+    absolute;
 
-  display: none;
+  top:
+    50%;
 
-  align-items: center;
-  justify-content: center;
+  right:
+    28px;
 
-  padding: 30px;
+  z-index:
+    40;
 
-  text-align: center;
+  width:
+    2px;
 
-  background: #11100e;
+  height:
+    110px;
+
+  transform:
+    translateY(-50%);
+
+  background:
+    rgba(255,255,255,.2);
 }
 
-.video-error.active {
-  display: flex;
+.hero-progress-fill {
+
+  width:
+    100%;
+
+  height:
+    0;
+
+  background:
+    var(--electric);
 }
 
-.video-error h2 {
-  margin: 0 0 15px;
-
-  font-family: "Playfair Display", serif;
-
-  font-size: 44px;
-  font-weight: 400;
-}
-
-.video-error p {
-  max-width: 500px;
-
-  margin: 0 auto;
-
-  color: rgba(255,255,255,.65);
-
-  font-size: 13px;
-  line-height: 1.7;
-}
 
 /* =========================================================
-   GENERAL SECTIONS
+   COMMON
 ========================================================= */
 
-.section {
-  padding: 150px 7vw;
+.page {
+
+  position:
+    relative;
+
+  min-height:
+    100vh;
+
+  overflow:
+    hidden;
 }
 
-.light {
-  background: #e9e4d9;
-  color: #171512;
+.page-red {
+
+  background:
+    var(--crimson);
+
+  color:
+    var(--white);
 }
 
-.dark {
-  background: #11100e;
-  color: #f3efe7;
+.page-black {
+
+  background:
+    var(--black);
+
+  color:
+    var(--white);
+}
+
+.page-red-dark {
+
+  background:
+    var(--crimson-dark);
+
+  color:
+    var(--white);
+}
+
+.page-white {
+
+  background:
+    var(--white);
+
+  color:
+    var(--black);
+}
+
+.page-electric {
+
+  background:
+    var(--electric);
+
+  color:
+    var(--black);
+}
+
+.page-padding {
+
+  padding:
+    140px 7vw;
 }
 
 .eyebrow {
-  margin-bottom: 25px;
 
-  font-size: 9px;
-  letter-spacing: .23em;
-  text-transform: uppercase;
+  margin-bottom:
+    24px;
 
-  opacity: .55;
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .24em;
+
+  text-transform:
+    uppercase;
+
+  opacity:
+    .55;
 }
 
-.section-title {
-  margin: 0;
+.red-eyebrow {
+  color:
+    var(--electric);
 
-  font-family: "Playfair Display", serif;
-
-  font-size: clamp(3.5rem, 7vw, 8rem);
-
-  font-weight: 400;
-
-  line-height: .9;
-
-  letter-spacing: -.055em;
+  opacity:
+    1;
 }
 
-.section-title em {
-  font-style: italic;
+.page-title {
+
+  margin:
+    0;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(4rem,9vw,10rem);
+
+  font-weight:
+    400;
+
+  line-height:
+    .83;
+
+  letter-spacing:
+    -.065em;
 }
+
+.page-title em {
+  font-style:
+    italic;
+}
+
+.page-copy {
+
+  font-size:
+    14px;
+
+  line-height:
+    1.9;
+
+  opacity:
+    .7;
+}
+
+.electric {
+  color:
+    var(--electric);
+}
+
 
 /* =========================================================
-   STORY
+   PAGE 02 — PHILOSOPHY
 ========================================================= */
 
-.story {
-  min-height: 100vh;
+.philosophy {
 
-  display: grid;
+  min-height:
+    110vh;
 
-  grid-template-columns: 1fr 1fr;
+  display:
+    grid;
 
-  align-items: center;
+  grid-template-columns:
+    1.2fr .8fr;
 
-  gap: 10vw;
+  align-items:
+    center;
+
+  gap:
+    10vw;
 }
 
-.story-heading {
-  opacity: 0;
-  transform: translateX(-100px);
+.philosophy-title {
+
+  opacity:
+    0;
+
+  transform:
+    translateX(-120px);
 }
 
-.story-copy {
-  max-width: 450px;
+.philosophy-right {
 
-  opacity: 0;
-  transform: translateY(50px);
+  max-width:
+    470px;
+
+  opacity:
+    0;
+
+  transform:
+    translateY(70px);
 }
 
-.story-copy p {
-  margin: 0 0 25px;
+.philosophy-statement {
 
-  font-size: 15px;
-  line-height: 1.8;
+  margin-top:
+    55px;
 
-  opacity: .7;
+  padding-top:
+    25px;
+
+  border-top:
+    1px solid rgba(255,255,255,.25);
 }
 
-.story-number {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
+.philosophy-statement strong {
 
-  margin-top: 60px;
+  display:
+    block;
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    3rem;
+
+  font-weight:
+    400;
+
+  line-height:
+    .95;
 }
 
-.story-number strong {
-  font-family: "Playfair Display", serif;
-
-  font-size: 70px;
-
-  font-weight: 400;
-}
-
-.story-number span {
-  font-size: 9px;
-
-  letter-spacing: .18em;
-
-  text-transform: uppercase;
-
-  opacity: .5;
-}
 
 /* =========================================================
-   EXPERIENCE
+   PAGE 03 — ROOMS
 ========================================================= */
+
+.rooms {
+
+  min-height:
+    120vh;
+
+  padding:
+    130px 7vw;
+}
+
+.rooms-head {
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-end;
+
+  gap:
+    50px;
+
+  margin-bottom:
+    90px;
+}
+
+.rooms-intro {
+
+  max-width:
+    380px;
+}
+
+.rooms-grid {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    2px;
+}
+
+.room-card {
+
+  position:
+    relative;
+
+  min-height:
+    620px;
+
+  padding:
+    35px;
+
+  overflow:
+    hidden;
+
+  background:
+    var(--black);
+}
+
+.room-card.large {
+  min-height:
+    720px;
+}
+
+.room-card::before {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 25%,
+      rgba(0,0,0,.8)
+    );
+
+  z-index:
+    2;
+}
+
+.room-card::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  background:
+    var(--crimson);
+
+  opacity:
+    0;
+
+  mix-blend-mode:
+    multiply;
+
+  transition:
+    opacity .5s ease;
+}
+
+.room-card:hover::after {
+  opacity:
+    .55;
+}
+
+.room-content {
+
+  position:
+    absolute;
+
+  left:
+    35px;
+
+  right:
+    35px;
+
+  bottom:
+    35px;
+
+  z-index:
+    4;
+}
+
+.room-number {
+
+  margin-bottom:
+    12px;
+
+  color:
+    var(--electric);
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    .2em;
+}
+
+.room-name {
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(2.5rem,5vw,5rem);
+
+  line-height:
+    .85;
+}
+
+.room-meta {
+
+  margin-top:
+    18px;
+
+  font-size:
+    10px;
+
+  letter-spacing:
+    .12em;
+
+  text-transform:
+    uppercase;
+
+  opacity:
+    .65;
+}
+
+.room-graphic {
+
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--crimson),
+      var(--crimson-dark)
+    );
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(6rem,15vw,16rem);
+
+  color:
+    rgba(255,255,255,.08);
+
+  transform:
+    scale(1);
+
+  transition:
+    transform .8s var(--ease);
+}
+
+.room-card:hover .room-graphic {
+  transform:
+    scale(1.1);
+}
+
+
+/* =========================================================
+   PAGE 04 — DINING
+========================================================= */
+
+.dining {
+
+  min-height:
+    120vh;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    .8fr 1.2fr;
+
+  gap:
+    10vw;
+
+  align-items:
+    center;
+}
+
+.dining-left {
+  position:
+    relative;
+}
+
+.dining-circle {
+
+  width:
+    min(32vw,420px);
+
+  aspect-ratio:
+    1;
+
+  border-radius:
+    50%;
+
+  background:
+    var(--electric);
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  color:
+    var(--black);
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    clamp(3rem,7vw,7rem);
+
+  line-height:
+    .8;
+
+  text-align:
+    center;
+
+  transform:
+    rotate(-8deg);
+}
+
+.dining-right {
+  max-width:
+    750px;
+}
+
+.dining-menu {
+
+  margin-top:
+    60px;
+
+  border-top:
+    1px solid rgba(255,255,255,.25);
+}
+
+.dining-row {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    80px 1fr 100px;
+
+  gap:
+    20px;
+
+  padding:
+    27px 0;
+
+  border-bottom:
+    1px solid rgba(255,255,255,.2);
+}
+
+.dining-index {
+
+  color:
+    var(--electric);
+
+  font-size:
+    9px;
+}
+
+.dining-name {
+
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    1.7rem;
+}
+
+.dining-detail {
+
+  margin-top:
+    5px;
+
+  font-size:
+    10px;
+
+  opacity:
+    .5;
+}
+
+.dining-price {
+
+  text-align:
+    right;
+
+  font-size:
+    10px;
+
+  opacity:
+    .6;
+}
+
+
+/* =========================================================
+   PAGE 05 — BAR
+========================================================= */
+
+.bar {
+
+  min-height:
+    110vh;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  text-align:
+    center;
+}
+
+.bar-inner {
+  width:
+    min(1100px,90vw);
+}
+
+.bar-title {
+
+  font-size:
+    clamp(5rem,13vw,14rem);
+}
+
+.bar-sub {
+
+  max-width:
+    500px;
+
+  margin:
+    40px auto 0;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.8;
+
+  opacity:
+    .65;
+}
+
+.bar-pills {
+
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    10px;
+
+  margin-top:
+    50px;
+}
+
+.bar-pill {
+
+  padding:
+    12px 18px;
+
+  border:
+    1px solid rgba(255,255,255,.3);
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    .15em;
+
+  text-transform:
+    uppercase;
+}
+
+.bar-pill.active {
+
+  background:
+    var(--electric);
+
+  border-color:
+    var(--electric);
+
+  color:
+    var(--black);
+}
+
+
+/* =========================================================
+   PAGE 06 — EXPERIENCES
+========================================================= */
+
+.experiences {
+
+  min-height:
+    120vh;
+}
 
 .experience-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
 
-  gap: 50px;
+  max-width:
+    900px;
 
-  margin-bottom: 90px;
-}
-
-.experience-intro {
-  max-width: 390px;
-
-  font-size: 14px;
-  line-height: 1.8;
-
-  opacity: .65;
+  margin-bottom:
+    90px;
 }
 
 .experience-grid {
-  display: grid;
 
-  grid-template-columns: repeat(3,1fr);
+  display:
+    grid;
 
-  gap: 1px;
+  grid-template-columns:
+    repeat(3,1fr);
 
-  background: rgba(0,0,0,.15);
+  gap:
+    2px;
 }
 
-.experience-card {
-  position: relative;
+.experience {
 
-  min-height: 470px;
+  position:
+    relative;
 
-  padding: 35px;
+  min-height:
+    500px;
 
-  overflow: hidden;
+  padding:
+    32px;
 
-  background: #e9e4d9;
+  background:
+    var(--crimson-dark);
 
-  transition: color .5s ease;
-}
-
-.experience-card::before {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  background: #171512;
-
-  transform: translateY(101%);
+  overflow:
+    hidden;
 
   transition:
-    transform .75s cubic-bezier(.76,0,.24,1);
+    background .5s ease;
 }
 
-.experience-card:hover {
-  color: #fff;
+.experience:nth-child(2) {
+  background:
+    var(--crimson);
 }
 
-.experience-card:hover::before {
-  transform: translateY(0);
+.experience:nth-child(3) {
+  background:
+    var(--black);
 }
 
-.experience-card > * {
-  position: relative;
-  z-index: 2;
+.experience:hover {
+  background:
+    var(--electric);
+
+  color:
+    var(--black);
 }
 
-.card-number {
-  font-size: 9px;
-  letter-spacing: .2em;
-  opacity: .5;
+.experience-number {
+
+  font-size:
+    9px;
+
+  opacity:
+    .5;
 }
 
-.card-title {
-  margin-top: 180px;
+.experience-name {
 
-  font-family: "Playfair Display", serif;
+  position:
+    absolute;
 
-  font-size: 44px;
+  left:
+    32px;
 
-  line-height: .95;
+  bottom:
+    100px;
 
-  letter-spacing: -.04em;
+  font-family:
+    "Playfair Display",
+    serif;
+
+  font-size:
+    3rem;
+
+  line-height:
+    .9;
 }
 
-.card-description {
-  max-width: 280px;
+.experience-text {
 
-  margin-top: 20px;
+  position:
+    absolute;
 
-  font-size: 12px;
+  left:
+    32px;
 
-  line-height: 1.7;
+  right:
+    32px;
 
-  opacity: .55;
+  bottom:
+    32px;
+
+  font-size:
+    11px;
+
+  line-height:
+    1.6;
+
+  opacity:
+    .6;
 }
+
 
 /* =========================================================
-   MENU
+   PAGE 07 — JOURNAL / EVENTS
 ========================================================= */
 
-.menu-header {
-  margin-bottom: 90px;
+.journal {
+
+  min-height:
+    120vh;
+
+  display:
+    grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    2px;
+
+  padding:
+    2px;
+
+  background:
+    var(--black);
 }
 
-.menu-list {
-  border-top: 1px solid rgba(255,255,255,.2);
+.journal-column {
+
+  padding:
+    120px 7vw;
+
+  background:
+    var(--white);
+
+  color:
+    var(--black);
 }
 
-.menu-item {
-  display: grid;
+.journal-column.dark-column {
 
-  grid-template-columns: 80px 1fr 100px;
+  background:
+    var(--crimson);
 
-  align-items: center;
-
-  padding: 32px 0;
-
-  border-bottom: 1px solid rgba(255,255,255,.2);
-
-  transition:
-    padding .4s ease;
+  color:
+    var(--white);
 }
 
-.menu-item:hover {
-  padding-left: 20px;
-  padding-right: 20px;
+.journal-list {
+  margin-top:
+    65px;
 }
 
-.menu-number {
-  font-size: 9px;
-  letter-spacing: .15em;
-  opacity: .4;
+.journal-item {
+
+  padding:
+    25px 0;
+
+  border-top:
+    1px solid rgba(0,0,0,.2);
 }
 
-.menu-name {
-  font-family: "Playfair Display", serif;
-
-  font-size: clamp(1.5rem,3vw,2.7rem);
+.dark-column .journal-item {
+  border-color:
+    rgba(255,255,255,.2);
 }
 
-.menu-description {
-  margin-top: 7px;
+.journal-date {
 
-  font-size: 10px;
+  margin-bottom:
+    9px;
 
-  opacity: .45;
+  font-size:
+    8px;
+
+  letter-spacing:
+    .18em;
+
+  text-transform:
+    uppercase;
+
+  opacity:
+    .5;
 }
 
-.menu-price {
-  text-align: right;
+.journal-title {
 
-  font-size: 11px;
+  font-family:
+    "Playfair Display",
+    serif;
 
-  opacity: .7;
+  font-size:
+    2rem;
+
+  line-height:
+    1;
 }
+
 
 /* =========================================================
-   QUOTE
-========================================================= */
-
-.quote {
-  min-height: 90vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  background: #e9e4d9;
-  color: #171512;
-}
-
-.quote-inner {
-  width: min(1000px,90vw);
-}
-
-.quote-symbol {
-  font-family: "Playfair Display", serif;
-
-  font-size: 80px;
-
-  opacity: .2;
-}
-
-.quote-text {
-  margin: 20px 0 35px;
-
-  font-family: "Playfair Display", serif;
-
-  font-size: clamp(3rem,7vw,7rem);
-
-  font-weight: 400;
-
-  line-height: .92;
-
-  letter-spacing: -.06em;
-}
-
-.quote-text em {
-  font-style: italic;
-}
-
-.quote-small {
-  font-size: 9px;
-
-  letter-spacing: .2em;
-
-  text-transform: uppercase;
-
-  opacity: .45;
-}
-
-/* =========================================================
-   RESERVATION
+   PAGE 08 — RESERVATION
 ========================================================= */
 
 .reservation {
-  min-height: 100vh;
 
-  display: grid;
+  min-height:
+    110vh;
 
-  grid-template-columns: 1fr 1fr;
+  display:
+    grid;
 
-  align-items: center;
+  grid-template-columns:
+    1fr 1fr;
 
-  gap: 10vw;
+  align-items:
+    center;
+
+  gap:
+    10vw;
 }
 
-.reservation-copy {
-  opacity: 0;
-  transform: translateX(-80px);
+.reservation-title {
+  font-size:
+    clamp(4rem,8vw,9rem);
+}
+
+.reservation-note {
+
+  max-width:
+    430px;
+
+  margin-top:
+    35px;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.8;
+
+  opacity:
+    .65;
 }
 
 .reservation-form {
-  max-width: 520px;
 
-  opacity: 0;
-  transform: translateX(80px);
+  max-width:
+    520px;
 }
 
 .form-row {
-  display: grid;
 
-  grid-template-columns: 1fr 1fr;
+  display:
+    grid;
 
-  gap: 20px;
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:
+    20px;
 }
 
 .field {
-  margin-bottom: 24px;
+  margin-bottom:
+    25px;
 }
 
 .field label {
-  display: block;
 
-  margin-bottom: 8px;
+  display:
+    block;
 
-  font-size: 8px;
+  margin-bottom:
+    9px;
 
-  letter-spacing: .18em;
+  font-size:
+    8px;
 
-  text-transform: uppercase;
+  letter-spacing:
+    .18em;
 
-  opacity: .45;
+  text-transform:
+    uppercase;
+
+  opacity:
+    .5;
 }
 
 .field input,
 .field select,
 .field textarea {
-  width: 100%;
 
-  padding: 14px 0;
+  width:
+    100%;
 
-  color: #f3efe7;
+  padding:
+    14px 0;
 
-  background: transparent;
+  background:
+    transparent;
 
-  border: none;
+  color:
+    var(--white);
 
-  border-bottom: 1px solid rgba(255,255,255,.25);
+  border:
+    0;
 
-  border-radius: 0;
+  border-bottom:
+    1px solid rgba(255,255,255,.3);
 
-  outline: none;
+  outline:
+    none;
+
+  border-radius:
+    0;
 }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  border-color: #fff;
+  border-color:
+    var(--electric);
+}
+
+.field select option {
+  color:
+    var(--black);
 }
 
 .submit {
-  margin-top: 10px;
 
-  padding: 15px 28px;
+  margin-top:
+    10px;
 
-  background: #f3efe7;
-  color: #11100e;
+  padding:
+    16px 28px;
 
-  border: 1px solid #f3efe7;
+  background:
+    var(--electric);
 
-  font-size: 9px;
+  color:
+    var(--black);
 
-  letter-spacing: .18em;
+  border:
+    0;
 
-  text-transform: uppercase;
+  font-size:
+    9px;
+
+  font-weight:
+    700;
+
+  letter-spacing:
+    .18em;
+
+  text-transform:
+    uppercase;
 
   transition:
-    background .3s ease,
-    color .3s ease;
+    transform .3s ease;
 }
 
 .submit:hover {
-  background: transparent;
-  color: #fff;
+  transform:
+    translateY(-3px);
 }
+
 
 /* =========================================================
    FOOTER
 ========================================================= */
 
 .footer {
-  padding: 80px 7vw 30px;
 
-  background: #0b0b0a;
+  padding:
+    90px 7vw 30px;
+
+  background:
+    var(--black);
+
+  color:
+    var(--white);
 }
 
 .footer-grid {
-  display: grid;
 
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  display:
+    grid;
 
-  gap: 50px;
+  grid-template-columns:
+    1.6fr 1fr 1fr 1fr;
 
-  padding-bottom: 80px;
+  gap:
+    50px;
+
+  padding-bottom:
+    80px;
 }
 
 .footer-logo {
-  font-family: "Playfair Display", serif;
 
-  font-size: clamp(3rem,6vw,6rem);
+  font-family:
+    "Playfair Display",
+    serif;
 
-  line-height: .8;
+  font-size:
+    clamp(4rem,8vw,9rem);
 
-  letter-spacing: -.06em;
+  line-height:
+    .76;
+
+  letter-spacing:
+    -.07em;
 }
 
 .footer-heading {
-  margin-bottom: 20px;
 
-  font-size: 8px;
+  margin-bottom:
+    20px;
 
-  letter-spacing: .2em;
+  color:
+    var(--electric);
 
-  text-transform: uppercase;
+  font-size:
+    8px;
 
-  opacity: .4;
+  font-weight:
+    700;
+
+  letter-spacing:
+    .2em;
+
+  text-transform:
+    uppercase;
 }
 
 .footer-column p,
 .footer-column a {
-  display: block;
 
-  margin: 0 0 10px;
+  display:
+    block;
 
-  font-size: 11px;
+  margin:
+    0 0 10px;
 
-  line-height: 1.6;
+  font-size:
+    11px;
 
-  opacity: .65;
+  line-height:
+    1.6;
+
+  opacity:
+    .65;
+}
+
+.footer-column a:hover {
+  color:
+    var(--electric);
+
+  opacity:
+    1;
 }
 
 .footer-bottom {
-  display: flex;
 
-  justify-content: space-between;
+  display:
+    flex;
 
-  padding-top: 25px;
+  justify-content:
+    space-between;
 
-  border-top: 1px solid rgba(255,255,255,.12);
+  gap:
+    20px;
 
-  font-size: 8px;
+  padding-top:
+    25px;
 
-  letter-spacing: .12em;
+  border-top:
+    1px solid rgba(255,255,255,.15);
 
-  text-transform: uppercase;
+  font-size:
+    8px;
 
-  opacity: .35;
+  letter-spacing:
+    .14em;
+
+  text-transform:
+    uppercase;
+
+  opacity:
+    .4;
 }
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal-left {
+
+  opacity:
+    0;
+
+  transform:
+    translateX(-100px);
+}
+
+.reveal-up {
+
+  opacity:
+    0;
+
+  transform:
+    translateY(80px);
+}
+
+.reveal-right {
+
+  opacity:
+    0;
+
+  transform:
+    translateX(100px);
+}
+
 
 /* =========================================================
    MOBILE
@@ -1008,161 +2092,232 @@ video {
 @media (max-width: 900px) {
 
   .nav {
-    padding: 20px 22px;
+    padding:
+      20px 22px;
   }
 
   .nav.scrolled {
-    padding: 15px 22px;
+    padding:
+      14px 22px;
   }
 
   .nav-links {
-    display: none;
+    display:
+      none;
   }
 
   .hero {
-    height: 480vh;
+    height:
+      470vh;
   }
 
   .hero-copy {
-    left: 22px;
-    bottom: 11vh;
-    width: calc(100% - 44px);
+
+    left:
+      22px;
+
+    bottom:
+      11vh;
+
+    width:
+      calc(100% - 44px);
   }
 
   .hero-title {
-    font-size: clamp(4rem,20vw,8rem);
+
+    font-size:
+      clamp(4.5rem,22vw,8rem);
   }
 
-  .hero-description {
-    font-size: 12px;
+  .hero-progress {
+    right:
+      12px;
   }
 
-  .progress {
-    right: 13px;
+  .page-padding {
+    padding:
+      105px 22px;
   }
 
-  .section {
-    padding: 105px 22px;
+  .philosophy {
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      70px;
   }
 
-  .story,
-  .reservation {
-    grid-template-columns: 1fr;
-    gap: 60px;
+  .rooms {
+    padding:
+      105px 22px;
   }
 
-  .experience-header {
-    display: block;
-    margin-bottom: 55px;
+  .rooms-head {
+
+    display:
+      block;
+
+    margin-bottom:
+      55px;
   }
 
-  .experience-intro {
-    margin-top: 30px;
+  .rooms-intro {
+    margin-top:
+      30px;
+  }
+
+  .rooms-grid {
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .room-card,
+  .room-card.large {
+    min-height:
+      500px;
+  }
+
+  .dining {
+
+    grid-template-columns:
+      1fr;
+
+    gap:
+      70px;
+  }
+
+  .dining-circle {
+
+    width:
+      min(65vw,360px);
   }
 
   .experience-grid {
-    grid-template-columns: 1fr;
+
+    grid-template-columns:
+      1fr;
   }
 
-  .experience-card {
-    min-height: 390px;
+  .experience {
+
+    min-height:
+      400px;
   }
 
-  .card-title {
-    margin-top: 120px;
+  .journal {
+
+    grid-template-columns:
+      1fr;
   }
 
-  .menu-item {
-    grid-template-columns: 40px 1fr 65px;
-  }
+  .reservation {
 
-  .menu-name {
-    font-size: 1.5rem;
+    grid-template-columns:
+      1fr;
+
+    gap:
+      70px;
   }
 
   .footer {
-    padding-left: 22px;
-    padding-right: 22px;
+    padding:
+      70px 22px 25px;
   }
 
   .footer-grid {
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+      1fr 1fr;
   }
 
   .footer-logo {
-    grid-column: 1 / -1;
+    grid-column:
+      1 / -1;
   }
 }
+
 
 @media (max-width: 600px) {
 
   .hero {
-    height: 440vh;
+    height:
+      440vh;
   }
 
-  /*
-    Keep the portrait video centred on mobile.
-  */
-
   #heroVideo {
-    object-position: center center;
+    object-position:
+      center center;
+  }
+
+  .hero-kicker {
+    font-size:
+      8px;
   }
 
   .hero-title {
-    font-size: clamp(4.2rem,22vw,7rem);
-  }
-
-  .hero-small {
-    font-size: 8px;
+    font-size:
+      clamp(4.3rem,23vw,7rem);
   }
 
   .hero-description {
-    max-width: 330px;
+    font-size:
+      12px;
   }
 
-  .progress {
-    display: none;
+  .hero-progress {
+    display:
+      none;
   }
 
-  .section-title {
-    font-size: clamp(3.2rem,16vw,6rem);
+  .page-title {
+    font-size:
+      clamp(3.5rem,17vw,6rem);
   }
 
-  .experience-card {
-    min-height: 350px;
+  .dining-row {
+
+    grid-template-columns:
+      35px 1fr 55px;
+
+    gap:
+      10px;
   }
 
-  .menu-item {
-    grid-template-columns: 30px 1fr 55px;
-    gap: 8px;
-  }
-
-  .menu-price {
-    font-size: 9px;
+  .dining-name {
+    font-size:
+      1.35rem;
   }
 
   .form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
+    grid-template-columns:
+      1fr;
   }
 
   .footer-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
   }
 
   .footer-logo {
-    grid-column: auto;
+    grid-column:
+      auto;
   }
 
   .footer-bottom {
-    flex-direction: column;
-    gap: 12px;
+
+    flex-direction:
+      column;
   }
 }
+
 </style>
 </head>
 
+
 <body class="loading">
+
 
 <!-- =========================================================
      LOADER
@@ -1170,10 +2325,14 @@ video {
 
 <div class="loader" id="loader">
 
-  <div class="loader-content">
+  <div class="loader-inner">
 
-    <div class="loader-title">
-      Hotel Bostan
+    <div class="loader-logo">
+      Hotel Bostan.
+    </div>
+
+    <div class="loader-sub">
+      Eat slow.
     </div>
 
     <div
@@ -1192,50 +2351,67 @@ video {
 
 <header class="nav" id="nav">
 
-  <a href="#top" class="nav-logo">
-    <span class="logo-dot"></span>
+  <a
+    href="#home"
+    class="nav-logo"
+  >
+
+    <span class="logo-symbol"></span>
+
     HOTEL BOSTAN
+
   </a>
+
 
   <nav class="nav-links">
 
-    <a href="#story">
-      Story
+    <a href="#philosophy">
+      Philosophy
     </a>
 
-    <a href="#experience">
-      Experience
+    <a href="#rooms">
+      Rooms
     </a>
 
-    <a href="#menu">
-      Menu
+    <a href="#dining">
+      Dining
     </a>
 
-    <a href="#reservation">
-      Visit
+    <a href="#bar">
+      Bar
+    </a>
+
+    <a href="#experiences">
+      Experiences
+    </a>
+
+    <a href="#journal">
+      Journal
     </a>
 
   </nav>
 
+
   <a
     href="#reservation"
-    class="nav-button"
+    class="nav-book"
   >
-    Reserve
+    Book
   </a>
 
 </header>
 
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+<main>
 
-<main id="top">
+
+<!-- =========================================================
+     PAGE 01 — HOME
+========================================================= -->
 
 <section
   class="hero"
-  id="hero"
+  id="home"
 >
 
   <div class="hero-pin">
@@ -1243,8 +2419,8 @@ video {
     <div class="video-container">
 
       <!-- ===================================================
-           THIS IS THE ONLY VIDEO FILE USED
-           EXACT FILENAME: hero.mp4
+           EXACT VIDEO FILE
+           hero.mp4
       ==================================================== -->
 
       <video
@@ -1253,17 +2429,20 @@ video {
         playsinline
         webkit-playsinline
         preload="auto"
-        crossorigin="anonymous"
       >
+
         <source
           src="./hero.mp4"
           type="video/mp4"
         >
+
       </video>
+
+
+      <div class="video-red"></div>
 
       <div class="video-dark"></div>
 
-      <div class="video-vignette"></div>
 
       <div
         class="video-error"
@@ -1277,8 +2456,7 @@ video {
           </h2>
 
           <p>
-            The browser could not load
-            <strong>hero.mp4</strong>.
+            The cinematic video could not be loaded.
           </p>
 
         </div>
@@ -1288,16 +2466,15 @@ video {
     </div>
 
 
-    <!-- HERO TYPOGRAPHY -->
-
     <div class="hero-copy">
 
       <div
-        class="hero-small"
-        id="heroSmall"
+        class="hero-kicker"
+        id="heroKicker"
       >
         Restaurant · Café · Hotel Bostan
       </div>
+
 
       <h1
         class="hero-title"
@@ -1307,21 +2484,22 @@ video {
         <em>slow.</em>
       </h1>
 
+
       <p
         class="hero-description"
         id="heroDescription"
       >
-        A place for long lunches, late coffees,
-        quiet mornings and evenings that don't
-        need an ending.
+        A hotel for long lunches,
+        late coffees, slow mornings
+        and nights that refuse to hurry.
       </p>
 
     </div>
 
 
     <div
-      class="scroll-indicator"
-      id="scrollIndicator"
+      class="hero-scroll"
+      id="heroScroll"
     >
 
       <span>
@@ -1333,11 +2511,11 @@ video {
     </div>
 
 
-    <div class="progress">
+    <div class="hero-progress">
 
       <div
-        class="progress-bar"
-        id="progressBar"
+        class="hero-progress-fill"
+        id="heroProgress"
       ></div>
 
     </div>
@@ -1348,22 +2526,24 @@ video {
 
 
 <!-- =========================================================
-     STORY
+     PAGE 02 — PHILOSOPHY
 ========================================================= -->
 
 <section
-  class="section light story"
-  id="story"
+  class="page page-red page-padding philosophy"
+  id="philosophy"
 >
 
   <div>
 
-    <div class="eyebrow">
-      01 — The Story
+    <div class="eyebrow red-eyebrow">
+      02 — Philosophy
     </div>
 
+
     <h2
-      class="section-title story-heading"
+      class="page-title philosophy-title"
+      id="philosophyTitle"
     >
       Good food.<br>
       Good company.<br>
@@ -1372,25 +2552,410 @@ video {
 
   </div>
 
-  <div class="story-copy">
 
-    <p>
-      Hotel Bostan is built around a simple idea:
-      the best parts of a day shouldn't be rushed.
+  <div
+    class="philosophy-right"
+    id="philosophyRight"
+  >
+
+    <p class="page-copy">
+
+      Hotel Bostan was created around a
+      deliberately simple philosophy:
+
+      <br><br>
+
+      Don't rush breakfast.
+      Don't shorten lunch.
+      Don't leave after one drink.
+
+      <br><br>
+
+      Stay.
+
     </p>
 
-    <p>
-      Come in for breakfast. Stay for lunch.
-      Order another coffee. Meet someone for dinner.
-      Or simply take a seat and let the room do the rest.
+
+    <div class="philosophy-statement">
+
+      <strong>
+        The best memories
+        take their time.
+      </strong>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PAGE 03 — ROOMS
+========================================================= -->
+
+<section
+  class="page page-black rooms"
+  id="rooms"
+>
+
+  <div class="rooms-head">
+
+    <div>
+
+      <div class="eyebrow electric">
+        03 — Stay
+      </div>
+
+      <h2 class="page-title">
+        Rooms<br>
+        with <em>character.</em>
+      </h2>
+
+    </div>
+
+
+    <p class="page-copy rooms-intro">
+
+      Quiet spaces, deep beds,
+      considered details and mornings
+      with nowhere to be.
+
     </p>
 
-    <div class="story-number">
+  </div>
 
-      <strong>01</strong>
 
-      <span>
-        Place to pause
+  <div class="rooms-grid">
+
+
+    <article class="room-card large">
+
+      <div class="room-graphic">
+        I
+      </div>
+
+      <div class="room-content">
+
+        <div class="room-number">
+          01 — SIGNATURE
+        </div>
+
+        <div class="room-name">
+          The Bostan
+        </div>
+
+        <div class="room-meta">
+          King · City View · 48 m²
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="room-card">
+
+      <div class="room-graphic">
+        II
+      </div>
+
+      <div class="room-content">
+
+        <div class="room-number">
+          02 — DELUXE
+        </div>
+
+        <div class="room-name">
+          Crimson
+        </div>
+
+        <div class="room-meta">
+          King · Garden View · 39 m²
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="room-card">
+
+      <div class="room-graphic">
+        III
+      </div>
+
+      <div class="room-content">
+
+        <div class="room-number">
+          03 — STUDIO
+        </div>
+
+        <div class="room-name">
+          Afterglow
+        </div>
+
+        <div class="room-meta">
+          Queen · Courtyard · 32 m²
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <article class="room-card large">
+
+      <div class="room-graphic">
+        IV
+      </div>
+
+      <div class="room-content">
+
+        <div class="room-number">
+          04 — PENTHOUSE
+        </div>
+
+        <div class="room-name">
+          Bostan No. 4
+        </div>
+
+        <div class="room-meta">
+          Suite · Terrace · 78 m²
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PAGE 04 — DINING
+========================================================= -->
+
+<section
+  class="page page-red-dark page-padding dining"
+  id="dining"
+>
+
+  <div class="dining-left">
+
+    <div class="dining-circle">
+      Eat.<br>
+      Drink.<br>
+      Repeat.
+    </div>
+
+  </div>
+
+
+  <div class="dining-right">
+
+    <div class="eyebrow electric">
+      04 — Dining
+    </div>
+
+    <h2 class="page-title">
+      The kitchen<br>
+      never <em>hurries.</em>
+    </h2>
+
+
+    <p class="page-copy">
+
+      Seasonal ingredients,
+      generous plates and food
+      designed for the middle
+      of the table.
+
+    </p>
+
+
+    <div class="dining-menu">
+
+
+      <div class="dining-row">
+
+        <div class="dining-index">
+          01
+        </div>
+
+        <div>
+
+          <div class="dining-name">
+            Bostan Breakfast
+          </div>
+
+          <div class="dining-detail">
+            Eggs · Sourdough · Seasonal produce
+          </div>
+
+        </div>
+
+        <div class="dining-price">
+          ₹480
+        </div>
+
+      </div>
+
+
+      <div class="dining-row">
+
+        <div class="dining-index">
+          02
+        </div>
+
+        <div>
+
+          <div class="dining-name">
+            Burrata & Tomatoes
+          </div>
+
+          <div class="dining-detail">
+            Burrata · Basil · Olive oil
+          </div>
+
+        </div>
+
+        <div class="dining-price">
+          ₹620
+        </div>
+
+      </div>
+
+
+      <div class="dining-row">
+
+        <div class="dining-index">
+          03
+        </div>
+
+        <div>
+
+          <div class="dining-name">
+            Truffle Pasta
+          </div>
+
+          <div class="dining-detail">
+            Fresh pasta · Parmesan · Truffle
+          </div>
+
+        </div>
+
+        <div class="dining-price">
+          ₹790
+        </div>
+
+      </div>
+
+
+      <div class="dining-row">
+
+        <div class="dining-index">
+          04
+        </div>
+
+        <div>
+
+          <div class="dining-name">
+            Bostan Burger
+          </div>
+
+          <div class="dining-detail">
+            Charred beef · Aged cheese
+          </div>
+
+        </div>
+
+        <div class="dining-price">
+          ₹680
+        </div>
+
+      </div>
+
+
+      <div class="dining-row">
+
+        <div class="dining-index">
+          05
+        </div>
+
+        <div>
+
+          <div class="dining-name">
+            Burnt Cheesecake
+          </div>
+
+          <div class="dining-detail">
+            Vanilla · Sea salt · Fruit
+          </div>
+
+        </div>
+
+        <div class="dining-price">
+          ₹420
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PAGE 05 — BAR
+========================================================= -->
+
+<section
+  class="page page-black bar"
+  id="bar"
+>
+
+  <div class="bar-inner">
+
+    <div class="eyebrow electric">
+      05 — After Dark
+    </div>
+
+    <h2 class="page-title bar-title">
+      Stay<br>
+      <em>late.</em>
+    </h2>
+
+    <p class="bar-sub">
+
+      The lights go down.
+      The music comes up.
+      The second drink somehow becomes
+      the fourth.
+
+    </p>
+
+
+    <div class="bar-pills">
+
+      <span class="bar-pill active">
+        Cocktails
+      </span>
+
+      <span class="bar-pill">
+        Natural Wine
+      </span>
+
+      <span class="bar-pill">
+        Vinyl
+      </span>
+
+      <span class="bar-pill">
+        Late Kitchen
       </span>
 
     </div>
@@ -1401,247 +2966,86 @@ video {
 
 
 <!-- =========================================================
-     EXPERIENCE
+     PAGE 06 — EXPERIENCES
 ========================================================= -->
 
 <section
-  class="section light"
-  id="experience"
+  class="page page-red experiences page-padding"
+  id="experiences"
 >
 
   <div class="experience-header">
 
-    <div>
-
-      <div class="eyebrow">
-        02 — The Experience
-      </div>
-
-      <h2 class="section-title">
-        Every hour<br>
-        has its <em>moment.</em>
-      </h2>
-
+    <div class="eyebrow red-eyebrow">
+      06 — Experiences
     </div>
 
-    <div class="experience-intro">
-
-      From the first coffee of the morning
-      to the final glass of the evening,
-      Hotel Bostan changes with the day.
-
-    </div>
+    <h2 class="page-title">
+      More than<br>
+      a <em>stay.</em>
+    </h2>
 
   </div>
 
 
   <div class="experience-grid">
 
-    <article class="experience-card">
 
-      <div class="card-number">
-        01 / 03
-      </div>
+    <article class="experience">
 
-      <div class="card-title">
-        Morning
-      </div>
-
-      <div class="card-description">
-        Fresh coffee, slow breakfasts
-        and sunlight finding its way
-        across the table.
-      </div>
-
-    </article>
-
-
-    <article class="experience-card">
-
-      <div class="card-number">
-        02 / 03
-      </div>
-
-      <div class="card-title">
-        Afternoon
-      </div>
-
-      <div class="card-description">
-        Long lunches, good conversations
-        and nowhere else you need to be.
-      </div>
-
-    </article>
-
-
-    <article class="experience-card">
-
-      <div class="card-number">
-        03 / 03
-      </div>
-
-      <div class="card-title">
-        Evening
-      </div>
-
-      <div class="card-description">
-        Plates for sharing, low light
-        and another reason to stay
-        a little longer.
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     MENU
-========================================================= -->
-
-<section
-  class="section dark"
-  id="menu"
->
-
-  <div class="menu-header">
-
-    <div class="eyebrow">
-      03 — From The Kitchen
-    </div>
-
-    <h2 class="section-title">
-      Simple things,<br>
-      <em>done properly.</em>
-    </h2>
-
-  </div>
-
-
-  <div class="menu-list">
-
-    <article class="menu-item">
-
-      <div class="menu-number">
+      <div class="experience-number">
         01
       </div>
 
-      <div>
-
-        <div class="menu-name">
-          Bostan Breakfast
-        </div>
-
-        <div class="menu-description">
-          Eggs · Sourdough · Seasonal produce
-        </div>
-
+      <div class="experience-name">
+        Slow<br>
+        Mornings
       </div>
 
-      <div class="menu-price">
-        ₹480
+      <div class="experience-text">
+        Breakfast in bed.
+        Fresh coffee.
+        No alarms.
       </div>
 
     </article>
 
 
-    <article class="menu-item">
+    <article class="experience">
 
-      <div class="menu-number">
+      <div class="experience-number">
         02
       </div>
 
-      <div>
-
-        <div class="menu-name">
-          Burrata & Tomatoes
-        </div>
-
-        <div class="menu-description">
-          Burrata · Heirloom tomatoes · Basil
-        </div>
-
+      <div class="experience-name">
+        Long<br>
+        Lunch
       </div>
 
-      <div class="menu-price">
-        ₹620
+      <div class="experience-text">
+        Three courses.
+        Two bottles.
+        One afternoon.
       </div>
 
     </article>
 
 
-    <article class="menu-item">
+    <article class="experience">
 
-      <div class="menu-number">
+      <div class="experience-number">
         03
       </div>
 
-      <div>
-
-        <div class="menu-name">
-          Truffle Pasta
-        </div>
-
-        <div class="menu-description">
-          Fresh pasta · Parmesan · Black truffle
-        </div>
-
+      <div class="experience-name">
+        Late<br>
+        Nights
       </div>
 
-      <div class="menu-price">
-        ₹790
-      </div>
-
-    </article>
-
-
-    <article class="menu-item">
-
-      <div class="menu-number">
-        04
-      </div>
-
-      <div>
-
-        <div class="menu-name">
-          Bostan Burger
-        </div>
-
-        <div class="menu-description">
-          Charred beef · Aged cheese · House sauce
-        </div>
-
-      </div>
-
-      <div class="menu-price">
-        ₹680
-      </div>
-
-    </article>
-
-
-    <article class="menu-item">
-
-      <div class="menu-number">
-        05
-      </div>
-
-      <div>
-
-        <div class="menu-name">
-          Burnt Cheesecake
-        </div>
-
-        <div class="menu-description">
-          Vanilla · Sea salt · Seasonal fruit
-        </div>
-
-      </div>
-
-      <div class="menu-price">
-        ₹420
+      <div class="experience-text">
+        Music.
+        Cocktails.
+        One more song.
       </div>
 
     </article>
@@ -1652,63 +3056,199 @@ video {
 
 
 <!-- =========================================================
-     QUOTE
-========================================================= -->
-
-<section class="quote">
-
-  <div class="quote-inner">
-
-    <div class="quote-symbol">
-      “
-    </div>
-
-    <div class="quote-text">
-      Stay for the coffee.<br>
-      Stay for the <em>evening.</em>
-    </div>
-
-    <div class="quote-small">
-      Hotel Bostan
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     RESERVATION
+     PAGE 07 — JOURNAL + EVENTS
 ========================================================= -->
 
 <section
-  class="section dark reservation"
+  class="journal"
+  id="journal"
+>
+
+
+  <div class="journal-column">
+
+    <div class="eyebrow">
+      07 — Journal
+    </div>
+
+    <h2 class="page-title">
+      Notes<br>
+      from <em>Bostan.</em>
+    </h2>
+
+
+    <div class="journal-list">
+
+
+      <article class="journal-item">
+
+        <div class="journal-date">
+          06.10.26
+        </div>
+
+        <div class="journal-title">
+          Why slow mornings
+          matter.
+        </div>
+
+      </article>
+
+
+      <article class="journal-item">
+
+        <div class="journal-date">
+          29.09.26
+        </div>
+
+        <div class="journal-title">
+          The ingredients
+          behind our kitchen.
+        </div>
+
+      </article>
+
+
+      <article class="journal-item">
+
+        <div class="journal-date">
+          17.09.26
+        </div>
+
+        <div class="journal-title">
+          Four cocktails
+          for four moods.
+        </div>
+
+      </article>
+
+
+      <article class="journal-item">
+
+        <div class="journal-date">
+          04.09.26
+        </div>
+
+        <div class="journal-title">
+          Inside the
+          Bostan room.
+        </div>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="journal-column dark-column">
+
+    <div class="eyebrow">
+      Private Events
+    </div>
+
+    <h2 class="page-title">
+      Make it<br>
+      <em>yours.</em>
+    </h2>
+
+
+    <p
+      class="page-copy"
+      style="margin-top:40px;"
+    >
+
+      Intimate dinners.
+      Private celebrations.
+      Brand gatherings.
+      Long-table occasions.
+
+      <br><br>
+
+      Hotel Bostan can become
+      whatever the evening needs.
+
+    </p>
+
+
+    <div
+      class="journal-list"
+      style="margin-top:60px;"
+    >
+
+      <article class="journal-item">
+
+        <div class="journal-date">
+          EVENT 01
+        </div>
+
+        <div class="journal-title">
+          Long Table
+        </div>
+
+      </article>
+
+
+      <article class="journal-item">
+
+        <div class="journal-date">
+          EVENT 02
+        </div>
+
+        <div class="journal-title">
+          Private Dining
+        </div>
+
+      </article>
+
+
+      <article class="journal-item">
+
+        <div class="journal-date">
+          EVENT 03
+        </div>
+
+        <div class="journal-title">
+          Full Buyout
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     PAGE 08 — RESERVATION
+========================================================= -->
+
+<section
+  class="page page-black page-padding reservation"
   id="reservation"
 >
 
-  <div class="reservation-copy">
+  <div>
 
-    <div class="eyebrow">
-      04 — Come In
+    <div class="eyebrow electric">
+      08 — Reservation
     </div>
 
-    <h2 class="section-title">
-      Make a<br>
-      <em>reservation.</em>
+    <h2 class="page-title reservation-title">
+      Come<br>
+      <em>stay.</em>
     </h2>
 
-    <p
-      style="
-        max-width:420px;
-        margin-top:35px;
-        font-size:14px;
-        line-height:1.8;
-        opacity:.65;
-      "
-    >
-      Whether it's breakfast for two,
-      a long lunch or dinner with friends,
-      we'll keep a table ready.
+    <p class="reservation-note">
+
+      Whether it is breakfast for two,
+      a long lunch, a weekend away,
+      or a night that runs much later
+      than expected — we'll keep a table
+      and a room ready.
+
     </p>
 
   </div>
@@ -1718,6 +3258,7 @@ video {
     class="reservation-form"
     id="reservationForm"
   >
+
 
     <div class="form-row">
 
@@ -1729,8 +3270,8 @@ video {
 
         <input
           type="text"
-          required
           placeholder="Your name"
+          required
         >
 
       </div>
@@ -1814,12 +3355,27 @@ video {
     <div class="field">
 
       <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        placeholder="you@example.com"
+        required
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
         Message
       </label>
 
       <textarea
-        rows="2"
-        placeholder="Anything we should know?"
+        rows="3"
+        placeholder="Tell us anything we should know."
       ></textarea>
 
     </div>
@@ -1829,8 +3385,9 @@ video {
       class="submit"
       type="submit"
     >
-      Request a table
+      Request a reservation
     </button>
+
 
   </form>
 
@@ -1847,29 +3404,11 @@ video {
 
   <div class="footer-grid">
 
+
     <div class="footer-logo">
+
       Hotel<br>
       Bostan.
-    </div>
-
-
-    <div class="footer-column">
-
-      <div class="footer-heading">
-        Visit
-      </div>
-
-      <p>
-        Hotel Bostan
-      </p>
-
-      <p>
-        Restaurant & Café
-      </p>
-
-      <p>
-        India
-      </p>
 
     </div>
 
@@ -1877,23 +3416,48 @@ video {
     <div class="footer-column">
 
       <div class="footer-heading">
-        Hours
+        Hotel
       </div>
 
       <p>
-        Mon — Thu
+        Rooms
       </p>
 
       <p>
-        08:00 — 23:00
+        Suites
       </p>
 
       <p>
-        Fri — Sun
+        Experiences
       </p>
 
       <p>
-        08:00 — 00:00
+        Private Events
+      </p>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <div class="footer-heading">
+        Dining
+      </div>
+
+      <p>
+        Restaurant
+      </p>
+
+      <p>
+        Bar
+      </p>
+
+      <p>
+        Late Kitchen
+      </p>
+
+      <p>
+        Reservations
       </p>
 
     </div>
@@ -1905,19 +3469,24 @@ video {
         Contact
       </div>
 
-      <a href="tel:+910000000000">
-        +91 00000 00000
-      </a>
+      <p>
+        Hotel Bostan
+      </p>
+
+      <p>
+        India
+      </p>
 
       <a href="mailto:hello@hotelbostan.com">
         hello@hotelbostan.com
       </a>
 
-      <a href="#reservation">
-        Reservations
+      <a href="tel:+910000000000">
+        +91 00000 00000
       </a>
 
     </div>
+
 
   </div>
 
@@ -1929,11 +3498,11 @@ video {
     </span>
 
     <span>
-      Restaurant · Café · Hotel
+      Eat slow.
     </span>
 
     <span>
-      Eat slow.
+      Restaurant · Café · Hotel
     </span>
 
   </div>
@@ -1942,9 +3511,9 @@ video {
 
 
 <script>
+
 /* =========================================================
-   HOTEL BOSTAN
-   GSAP SCROLL-CONTROLLED VIDEO ENGINE
+   GSAP
 ========================================================= */
 
 gsap.registerPlugin(ScrollTrigger);
@@ -1958,7 +3527,7 @@ const video =
   document.getElementById("heroVideo");
 
 const hero =
-  document.getElementById("hero");
+  document.getElementById("home");
 
 const nav =
   document.getElementById("nav");
@@ -1972,14 +3541,14 @@ const loaderLine =
 const videoError =
   document.getElementById("videoError");
 
-const progressBar =
-  document.getElementById("progressBar");
+const heroProgress =
+  document.getElementById("heroProgress");
 
-const scrollIndicator =
-  document.getElementById("scrollIndicator");
+const heroScroll =
+  document.getElementById("heroScroll");
 
-const heroSmall =
-  document.getElementById("heroSmall");
+const heroKicker =
+  document.getElementById("heroKicker");
 
 const heroTitle =
   document.getElementById("heroTitle");
@@ -1998,39 +3567,14 @@ let videoReady = false;
 
 let videoUnlocked = false;
 
-let seeking = false;
-
 let requestedTime = 0;
 
-let rafSeek = 0;
+let seekFrame = 0;
 
 
 /* =========================================================
-   VIDEO SEEK ENGINE
+   VIDEO SEEK
 ========================================================= */
-
-/*
-   This is the important part.
-
-   GSAP does NOT tween video.currentTime directly.
-
-   Instead:
-
-       SCROLL
-          ↓
-       ScrollTrigger
-          ↓
-       GSAP progress value
-          ↓
-       requestedTime
-          ↓
-       requestAnimationFrame
-          ↓
-       video.currentTime
-          ↓
-       VIDEO FRAME
-*/
-
 
 function requestVideoTime(time) {
 
@@ -2038,17 +3582,19 @@ function requestVideoTime(time) {
     return;
   }
 
-  requestedTime = Math.max(
-    0,
-    Math.min(
-      videoDuration - 0.001,
-      time
-    )
-  );
+  requestedTime =
+    Math.max(
+      0,
+      Math.min(
+        videoDuration - .02,
+        time
+      )
+    );
 
-  if (!rafSeek) {
 
-    rafSeek =
+  if (!seekFrame) {
+
+    seekFrame =
       requestAnimationFrame(
         applyVideoTime
       );
@@ -2060,16 +3606,11 @@ function requestVideoTime(time) {
 
 function applyVideoTime() {
 
-  rafSeek = 0;
+  seekFrame = 0;
 
   if (!videoReady) {
     return;
   }
-
-  /*
-     Only perform the seek when the browser
-     has enough data to decode a frame.
-  */
 
   if (video.readyState >= 2) {
 
@@ -2079,11 +3620,7 @@ function applyVideoTime() {
         requestedTime
       );
 
-    /*
-       Prevent thousands of identical seeks.
-    */
-
-    if (difference > 0.008) {
+    if (difference > .006) {
 
       try {
 
@@ -2093,7 +3630,7 @@ function applyVideoTime() {
       } catch (error) {
 
         console.warn(
-          "Video seek delayed:",
+          "Video seeking delayed.",
           error
         );
 
@@ -2110,18 +3647,6 @@ function applyVideoTime() {
    VIDEO UNLOCK
 ========================================================= */
 
-/*
-   Some browsers are reluctant to allow repeated
-   programmatic seeking until media playback has
-   been activated once.
-
-   We therefore briefly start the muted video,
-   immediately pause it, and reset it to frame zero.
-
-   It is NOT autoplay for the user.
-   It is simply a media-decoding unlock.
-*/
-
 async function unlockVideo() {
 
   if (videoUnlocked) {
@@ -2130,33 +3655,32 @@ async function unlockVideo() {
 
   try {
 
-    video.muted = true;
+    video.muted =
+      true;
 
-    const promise =
+    const playback =
       video.play();
 
-    if (promise) {
-      await promise;
+    if (playback) {
+      await playback;
     }
 
     video.pause();
 
-    video.currentTime = 0;
+    video.currentTime =
+      0;
 
-    videoUnlocked = true;
+    videoUnlocked =
+      true;
 
   } catch (error) {
 
-    /*
-       Some browsers may reject play().
-       That does not mean seeking itself
-       is impossible, so we continue.
-    */
-
-    videoUnlocked = true;
+    videoUnlocked =
+      true;
 
     try {
-      video.currentTime = 0;
+      video.currentTime =
+        0;
     } catch (e) {}
 
   }
@@ -2165,80 +3689,96 @@ async function unlockVideo() {
 
 
 /* =========================================================
-   CREATE SCROLL CONTROLLER
+   VIDEO SCROLL ENGINE
 ========================================================= */
 
-function createVideoScrollController() {
+function buildHeroScroll() {
 
-  if (videoReady === false) {
+  if (!videoReady) {
     return;
   }
 
-  /*
-     Make absolutely sure the video starts at
-     the beginning.
-  */
 
   requestVideoTime(0);
 
 
-  /*
-     GSAP animates this plain JavaScript object.
-
-     ScrollTrigger scrubs it between 0 and 1.
-  */
-
-  const videoProgress = {
-    value: 0
+  const timeline = {
+    progress: 0
   };
 
 
   gsap.to(
-    videoProgress,
+    timeline,
     {
 
-      value: 1,
+      progress:
+        1,
 
-      ease: "none",
+      ease:
+        "none",
 
       scrollTrigger: {
 
-        trigger: hero,
+        trigger:
+          hero,
 
-        start: "top top",
+        start:
+          "top top",
 
-        end: "bottom bottom",
+        end:
+          "bottom bottom",
 
-        scrub: 0.12,
+        scrub:
+          .12,
 
-        invalidateOnRefresh: true,
+        invalidateOnRefresh:
+          true,
 
-        onUpdate: function(self) {
+        onUpdate:
+          function(self) {
 
-          /*
-             Use ScrollTrigger's actual progress
-             rather than relying on browser playback.
-          */
+            const p =
+              Math.max(
+                0,
+                Math.min(
+                  1,
+                  self.progress
+                )
+              );
 
-          const p =
-            Math.max(
-              0,
-              Math.min(
-                1,
-                self.progress
-              )
+
+            const targetTime =
+              p *
+              Math.max(
+                videoDuration - .03,
+                0
+              );
+
+
+            requestVideoTime(
+              targetTime
             );
 
 
-          /*
-             Explicitly map scroll percentage
-             to video timeline.
-          */
+            heroProgress.style.height =
+              (p * 100) + "%";
+
+          }
+
+      },
+
+
+      onUpdate:
+        function() {
+
+          const p =
+            timeline.progress;
+
 
           const targetTime =
             p *
             Math.max(
-              videoDuration - 0.04,
+              videoDuration - .03,
               0
             );
 
@@ -2247,75 +3787,39 @@ function createVideoScrollController() {
             targetTime
           );
 
-
-          /*
-             Visual progress indicator.
-          */
-
-          progressBar.style.height =
-            (p * 100) + "%";
-
         }
-
-      },
-
-
-      /*
-         This runs continuously while GSAP
-         scrubs the numeric timeline.
-      */
-
-      onUpdate: function() {
-
-        const p =
-          Math.max(
-            0,
-            Math.min(
-              1,
-              videoProgress.value
-            )
-          );
-
-
-        const targetTime =
-          p *
-          Math.max(
-            videoDuration - 0.04,
-            0
-          );
-
-
-        requestVideoTime(
-          targetTime
-        );
-
-      }
 
     }
   );
 
 
   /* =======================================================
-     CINEMATIC CAMERA PUSH
+     CINEMATIC ZOOM
   ======================================================= */
 
   gsap.to(
     video,
     {
 
-      scale: 1.09,
+      scale:
+        1.10,
 
-      ease: "none",
+      ease:
+        "none",
 
       scrollTrigger: {
 
-        trigger: hero,
+        trigger:
+          hero,
 
-        start: "top top",
+        start:
+          "top top",
 
-        end: "bottom bottom",
+        end:
+          "bottom bottom",
 
-        scrub: 0.3
+        scrub:
+          .35
 
       }
 
@@ -2327,28 +3831,32 @@ function createVideoScrollController() {
      HERO TEXT
   ======================================================= */
 
-  const textTimeline =
+  const heroText =
     gsap.timeline({
 
       scrollTrigger: {
 
-        trigger: hero,
+        trigger:
+          hero,
 
-        start: "top top",
+        start:
+          "top top",
 
-        end: "bottom bottom",
+        end:
+          "bottom bottom",
 
-        scrub: 1
+        scrub:
+          1
 
       }
 
     });
 
 
-  textTimeline
+  heroText
 
     .to(
-      heroSmall,
+      heroKicker,
       {
         x: 0,
         opacity: 1,
@@ -2374,16 +3882,16 @@ function createVideoScrollController() {
       {
         x: 0,
         opacity: 1,
-        duration: .16,
+        duration: .15,
         ease: "power3.out"
       },
       .18
     )
 
     .to(
-      heroSmall,
+      heroKicker,
       {
-        x: -70,
+        x: -80,
         opacity: 0,
         duration: .10
       },
@@ -2393,9 +3901,9 @@ function createVideoScrollController() {
     .to(
       heroTitle,
       {
-        x: -110,
+        x: -120,
         opacity: 0,
-        duration: .13
+        duration: .12
       },
       .72
     )
@@ -2403,7 +3911,7 @@ function createVideoScrollController() {
     .to(
       heroDescription,
       {
-        x: -80,
+        x: -90,
         opacity: 0,
         duration: .10
       },
@@ -2412,35 +3920,35 @@ function createVideoScrollController() {
 
 
   /* =======================================================
-     SCROLL LABEL
+     SCROLL INDICATOR
   ======================================================= */
 
   gsap.to(
-    scrollIndicator,
+    heroScroll,
     {
 
-      opacity: 0,
+      opacity:
+        0,
 
       scrollTrigger: {
 
-        trigger: hero,
+        trigger:
+          hero,
 
-        start: "top top",
+        start:
+          "top top",
 
-        end: "18% top",
+        end:
+          "18% top",
 
-        scrub: true
+        scrub:
+          true
 
       }
 
     }
   );
 
-
-  /*
-     Important:
-     refresh AFTER the controller exists.
-  */
 
   ScrollTrigger.refresh();
 
@@ -2451,15 +3959,13 @@ function createVideoScrollController() {
    VIDEO READY
 ========================================================= */
 
-function videoLoaded() {
+function videoReadyHandler() {
 
   if (
     !Number.isFinite(video.duration) ||
     video.duration <= 0
   ) {
-
     return;
-
   }
 
   if (videoReady) {
@@ -2469,54 +3975,45 @@ function videoLoaded() {
   videoDuration =
     video.duration;
 
-  videoReady = true;
+  videoReady =
+    true;
 
 
-  /*
-     Unlock the browser's media pipeline first.
-  */
-
-  unlockVideo().then(() => {
-
-    createVideoScrollController();
-
-  });
+  unlockVideo().then(
+    buildHeroScroll
+  );
 
 }
 
 
-/* =========================================================
-   VIDEO EVENTS
-========================================================= */
-
 video.addEventListener(
   "loadedmetadata",
-  videoLoaded
+  videoReadyHandler
 );
 
 video.addEventListener(
   "durationchange",
-  videoLoaded
+  videoReadyHandler
 );
 
 video.addEventListener(
   "loadeddata",
-  videoLoaded
+  videoReadyHandler
 );
 
 video.addEventListener(
   "canplay",
-  videoLoaded
+  videoReadyHandler
 );
 
 video.addEventListener(
   "canplaythrough",
-  videoLoaded
+  videoReadyHandler
 );
 
 
 /* =========================================================
-   ERROR
+   VIDEO ERROR
 ========================================================= */
 
 video.addEventListener(
@@ -2524,7 +4021,7 @@ video.addEventListener(
   function() {
 
     console.error(
-      "Could not load ./hero.mp4",
+      "Unable to load ./hero.mp4",
       video.error
     );
 
@@ -2537,23 +4034,24 @@ video.addEventListener(
 
 
 /* =========================================================
-   START VIDEO LOAD
+   LOAD VIDEO
 ========================================================= */
 
 video.load();
 
 
 /* =========================================================
-   FALLBACK METADATA CHECK
+   METADATA FALLBACK
 ========================================================= */
 
-let checks = 0;
+let metadataChecks =
+  0;
 
-const metadataChecker =
+const metadataTimer =
   setInterval(
     function() {
 
-      checks++;
+      metadataChecks++;
 
       if (
         !videoReady &&
@@ -2561,17 +4059,17 @@ const metadataChecker =
         video.duration > 0
       ) {
 
-        videoLoaded();
+        videoReadyHandler();
 
       }
 
       if (
         videoReady ||
-        checks > 120
+        metadataChecks > 120
       ) {
 
         clearInterval(
-          metadataChecker
+          metadataTimer
         );
 
       }
@@ -2588,9 +4086,16 @@ const metadataChecker =
 gsap.to(
   loaderLine,
   {
-    width: "100%",
-    duration: 1.4,
-    ease: "power2.inOut"
+
+    width:
+      "100%",
+
+    duration:
+      1.4,
+
+    ease:
+      "power2.inOut"
+
   }
 );
 
@@ -2601,24 +4106,28 @@ function removeLoader() {
     loader,
     {
 
-      opacity: 0,
+      opacity:
+        0,
 
-      duration: .7,
+      duration:
+        .7,
 
-      ease: "power2.out",
+      ease:
+        "power2.out",
 
-      onComplete: function() {
+      onComplete:
+        function() {
 
-        loader.style.display =
-          "none";
+          loader.style.display =
+            "none";
 
-        document.body.classList.remove(
-          "loading"
-        );
+          document.body.classList.remove(
+            "loading"
+          );
 
-        ScrollTrigger.refresh();
+          ScrollTrigger.refresh();
 
-      }
+        }
 
     }
   );
@@ -2640,7 +4149,7 @@ setTimeout(
 
 
 /* =========================================================
-   NAVIGATION
+   NAV
 ========================================================= */
 
 window.addEventListener(
@@ -2662,30 +4171,40 @@ window.addEventListener(
     }
 
   },
-  { passive: true }
+  {
+    passive:
+      true
+  }
 );
 
 
 /* =========================================================
-   STORY ANIMATION
+   PHILOSOPHY
 ========================================================= */
 
 gsap.to(
-  ".story-heading",
+  "#philosophyTitle",
   {
 
-    x: 0,
-    opacity: 1,
+    x:
+      0,
 
-    duration: 1.2,
+    opacity:
+      1,
 
-    ease: "power3.out",
+    duration:
+      1.2,
+
+    ease:
+      "power3.out",
 
     scrollTrigger: {
 
-      trigger: ".story",
+      trigger:
+        "#philosophy",
 
-      start: "top 72%",
+      start:
+        "top 70%",
 
       toggleActions:
         "play none none reverse"
@@ -2697,23 +4216,31 @@ gsap.to(
 
 
 gsap.to(
-  ".story-copy",
+  "#philosophyRight",
   {
 
-    y: 0,
-    opacity: 1,
+    y:
+      0,
 
-    duration: 1.1,
+    opacity:
+      1,
 
-    delay: .1,
+    duration:
+      1.1,
 
-    ease: "power3.out",
+    delay:
+      .12,
+
+    ease:
+      "power3.out",
 
     scrollTrigger: {
 
-      trigger: ".story",
+      trigger:
+        "#philosophy",
 
-      start: "top 68%",
+      start:
+        "top 65%",
 
       toggleActions:
         "play none none reverse"
@@ -2725,27 +4252,35 @@ gsap.to(
 
 
 /* =========================================================
-   EXPERIENCE CARDS
+   ROOMS
 ========================================================= */
 
 gsap.from(
-  ".experience-card",
+  ".room-card",
   {
 
-    y: 80,
-    opacity: 0,
+    y:
+      100,
 
-    duration: 1,
+    opacity:
+      0,
 
-    stagger: .12,
+    duration:
+      1,
 
-    ease: "power3.out",
+    stagger:
+      .12,
+
+    ease:
+      "power3.out",
 
     scrollTrigger: {
 
-      trigger: ".experience-grid",
+      trigger:
+        ".rooms-grid",
 
-      start: "top 78%",
+      start:
+        "top 80%",
 
       toggleActions:
         "play none none reverse"
@@ -2757,27 +4292,71 @@ gsap.from(
 
 
 /* =========================================================
-   MENU ITEMS
+   DINING
 ========================================================= */
 
 gsap.from(
-  ".menu-item",
+  ".dining-circle",
   {
 
-    x: -70,
-    opacity: 0,
+    rotation:
+      -35,
 
-    duration: .8,
+    scale:
+      .65,
 
-    stagger: .1,
+    opacity:
+      0,
 
-    ease: "power3.out",
+    duration:
+      1.3,
+
+    ease:
+      "power3.out",
 
     scrollTrigger: {
 
-      trigger: ".menu-list",
+      trigger:
+        "#dining",
 
-      start: "top 80%",
+      start:
+        "top 70%",
+
+      toggleActions:
+        "play none none reverse"
+
+    }
+
+  }
+);
+
+
+gsap.from(
+  ".dining-row",
+  {
+
+    x:
+      80,
+
+    opacity:
+      0,
+
+    duration:
+      .75,
+
+    stagger:
+      .09,
+
+    ease:
+      "power3.out",
+
+    scrollTrigger: {
+
+      trigger:
+        ".dining-menu",
+
+      start:
+        "top 80%",
 
       toggleActions:
         "play none none reverse"
@@ -2789,25 +4368,112 @@ gsap.from(
 
 
 /* =========================================================
-   QUOTE
+   BAR
 ========================================================= */
 
 gsap.from(
-  ".quote-text",
+  ".bar-title",
   {
 
-    y: 70,
-    opacity: 0,
+    y:
+      100,
 
-    duration: 1.2,
+    opacity:
+      0,
 
-    ease: "power3.out",
+    duration:
+      1.2,
+
+    ease:
+      "power3.out",
 
     scrollTrigger: {
 
-      trigger: ".quote",
+      trigger:
+        "#bar",
 
-      start: "top 65%",
+      start:
+        "top 70%",
+
+      toggleActions:
+        "play none none reverse"
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   EXPERIENCES
+========================================================= */
+
+gsap.from(
+  ".experience",
+  {
+
+    y:
+      100,
+
+    opacity:
+      0,
+
+    duration:
+      1,
+
+    stagger:
+      .12,
+
+    ease:
+      "power3.out",
+
+    scrollTrigger: {
+
+      trigger:
+        ".experience-grid",
+
+      start:
+        "top 78%",
+
+      toggleActions:
+        "play none none reverse"
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   JOURNAL
+========================================================= */
+
+gsap.from(
+  ".journal-column",
+  {
+
+    y:
+      80,
+
+    opacity:
+      0,
+
+    duration:
+      1,
+
+    stagger:
+      .15,
+
+    ease:
+      "power3.out",
+
+    scrollTrigger: {
+
+      trigger:
+        "#journal",
+
+      start:
+        "top 75%",
 
       toggleActions:
         "play none none reverse"
@@ -2822,22 +4488,29 @@ gsap.from(
    RESERVATION
 ========================================================= */
 
-gsap.to(
-  ".reservation-copy",
+gsap.from(
+  ".reservation > div:first-child",
   {
 
-    x: 0,
-    opacity: 1,
+    x:
+      -100,
 
-    duration: 1.1,
+    opacity:
+      0,
 
-    ease: "power3.out",
+    duration:
+      1.1,
+
+    ease:
+      "power3.out",
 
     scrollTrigger: {
 
-      trigger: ".reservation",
+      trigger:
+        "#reservation",
 
-      start: "top 70%",
+      start:
+        "top 70%",
 
       toggleActions:
         "play none none reverse"
@@ -2848,24 +4521,32 @@ gsap.to(
 );
 
 
-gsap.to(
+gsap.from(
   ".reservation-form",
   {
 
-    x: 0,
-    opacity: 1,
+    x:
+      100,
 
-    duration: 1.1,
+    opacity:
+      0,
 
-    delay: .15,
+    duration:
+      1.1,
 
-    ease: "power3.out",
+    delay:
+      .12,
+
+    ease:
+      "power3.out",
 
     scrollTrigger: {
 
-      trigger: ".reservation",
+      trigger:
+        "#reservation",
 
-      start: "top 70%",
+      start:
+        "top 70%",
 
       toggleActions:
         "play none none reverse"
@@ -2877,7 +4558,7 @@ gsap.to(
 
 
 /* =========================================================
-   FORM
+   RESERVATION FORM
 ========================================================= */
 
 document
@@ -2897,9 +4578,10 @@ document
         button.textContent;
 
       button.textContent =
-        "Request received";
+        "Reservation requested";
 
-      button.disabled = true;
+      button.disabled =
+        true;
 
       setTimeout(
         function() {
@@ -2907,10 +4589,11 @@ document
           button.textContent =
             original;
 
-          button.disabled = false;
+          button.disabled =
+            false;
 
         },
-        2200
+        2400
       );
 
     }
@@ -2918,7 +4601,7 @@ document
 
 
 /* =========================================================
-   ANCHOR LINKS
+   SMOOTH ANCHORS
 ========================================================= */
 
 document
@@ -2932,21 +4615,14 @@ document
         "click",
         function(event) {
 
-          const selector =
+          const targetID =
             this.getAttribute(
               "href"
             );
 
-          if (
-            !selector ||
-            selector === "#"
-          ) {
-            return;
-          }
-
           const target =
             document.querySelector(
-              selector
+              targetID
             );
 
           if (!target) {
@@ -2956,8 +4632,11 @@ document
           event.preventDefault();
 
           target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+            behavior:
+              "smooth",
+
+            block:
+              "start"
           });
 
         }
@@ -2992,7 +4671,10 @@ window.addEventListener(
       );
 
   },
-  { passive: true }
+  {
+    passive:
+      true
+  }
 );
 
 
@@ -3010,11 +4692,14 @@ window.addEventListener(
         ScrollTrigger.refresh();
 
       },
-      500
+      600
     );
 
   },
-  { once: true }
+  {
+    once:
+      true
+  }
 );
 
 </script>
