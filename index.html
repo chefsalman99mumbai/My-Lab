@@ -1,6 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -12,12 +15,8 @@
 
 <meta
     name="description"
-    content="Hotel Bostan — restaurant, café and hospitality."
+    content="Hotel Bostan — Restaurant, Café & Hospitality."
 >
-
-<!-- =========================================================
-     FONTS
-========================================================= -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,40 +26,16 @@
     rel="stylesheet"
 >
 
-<!-- =========================================================
-     GSAP
-========================================================= -->
-
+<!-- GSAP -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 
 
 <style>
 
 /* =========================================================
-   ROOT
+   RESET
 ========================================================= */
-
-:root{
-
-    --cream:#f3eee5;
-    --cream-light:#faf7f0;
-
-    --ink:#151513;
-    --espresso:#211812;
-
-    --brown:#4d3829;
-    --muted:#746d63;
-
-    --gold:#b79a68;
-
-    --line:rgba(21,21,19,.15);
-
-    --white:#fffdf8;
-
-}
-
 
 *{
     margin:0;
@@ -68,46 +43,55 @@
     box-sizing:border-box;
 }
 
-
 html{
-    background:var(--cream);
     scroll-behavior:auto;
+    background:#eee8de;
 }
-
 
 body{
-
     margin:0;
-
-    background:var(--cream);
-
-    color:var(--ink);
-
-    font-family:"DM Sans",sans-serif;
-
     overflow-x:hidden;
-
+    background:#eee8de;
+    color:#181714;
+    font-family:"DM Sans",sans-serif;
     -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
-
 }
-
-
-body.no-scroll{
-    overflow:hidden;
-}
-
 
 a{
     color:inherit;
     text-decoration:none;
 }
 
-
 button,
 input,
 select{
     font:inherit;
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+
+    --cream:#eee8de;
+    --cream2:#f7f3eb;
+
+    --ink:#181714;
+
+    --espresso:#211812;
+
+    --brown:#50382a;
+
+    --muted:#756e64;
+
+    --gold:#b89a65;
+
+    --white:#fffdf8;
+
+    --line:rgba(24,23,20,.15);
+
 }
 
 
@@ -126,18 +110,16 @@ select{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
-    background:var(--espresso);
+    background:#211812;
 
-    color:var(--cream);
+    color:#eee8de;
 
 }
 
-
 .loader-inner{
-
-    width:100%;
 
     text-align:center;
 
@@ -145,10 +127,9 @@ select{
 
 }
 
-
 .loader-small{
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 
     font-size:9px;
 
@@ -156,27 +137,25 @@ select{
 
     text-transform:uppercase;
 
-    opacity:.55;
+    opacity:.5;
 
 }
 
-
 .loader-title{
+
+    overflow:hidden;
 
     font-family:"Cormorant Garamond",serif;
 
-    font-size:clamp(65px,10vw,145px);
+    font-size:clamp(70px,10vw,150px);
 
-    line-height:.7;
+    line-height:.68;
 
     font-weight:400;
 
     letter-spacing:-.05em;
 
-    overflow:hidden;
-
 }
-
 
 .loader-title span{
 
@@ -202,40 +181,37 @@ select{
 
     z-index:500;
 
-    padding:25px 4vw;
-
     display:flex;
 
     align-items:center;
 
     justify-content:space-between;
 
-    color:white;
+    padding:25px 4vw;
+
+    color:#fff;
 
     transition:
-        background .5s ease,
-        color .5s ease,
-        padding .5s ease,
-        backdrop-filter .5s ease;
+        background .45s ease,
+        color .45s ease,
+        padding .45s ease;
 
 }
-
 
 .nav.scrolled{
 
     padding-top:17px;
     padding-bottom:17px;
 
-    background:rgba(243,238,229,.93);
-
     color:var(--ink);
+
+    background:rgba(238,232,222,.94);
 
     backdrop-filter:blur(18px);
 
     -webkit-backdrop-filter:blur(18px);
 
 }
-
 
 .brand{
 
@@ -247,19 +223,18 @@ select{
 
 }
 
-
 .brand-mark{
 
     width:32px;
     height:32px;
 
-    border:1px solid currentColor;
-
-    border-radius:50%;
-
     display:grid;
 
     place-items:center;
+
+    border:1px solid currentColor;
+
+    border-radius:50%;
 
     font-family:"Cormorant Garamond",serif;
 
@@ -267,19 +242,15 @@ select{
 
 }
 
-
 .brand-name{
 
-    font-size:11px;
+    font-size:10px;
 
-    font-weight:500;
-
-    letter-spacing:.24em;
+    letter-spacing:.25em;
 
     text-transform:uppercase;
 
 }
-
 
 .nav-links{
 
@@ -290,7 +261,6 @@ select{
     gap:34px;
 
 }
-
 
 .nav-links a{
 
@@ -304,7 +274,6 @@ select{
 
 }
 
-
 .nav-links a::after{
 
     content:"";
@@ -315,15 +284,13 @@ select{
     bottom:-7px;
 
     width:0;
-
     height:1px;
 
     background:currentColor;
 
-    transition:width .35s ease;
+    transition:.35s ease;
 
 }
-
 
 .nav-links a:hover::after{
 
@@ -331,21 +298,19 @@ select{
 
 }
 
-
 .nav-book{
 
     padding:11px 18px;
 
     border:1px solid currentColor;
 
-    font-size:9px;
+    font-size:8px;
 
-    letter-spacing:.18em;
+    letter-spacing:.2em;
 
     text-transform:uppercase;
 
 }
-
 
 .menu-toggle{
 
@@ -360,7 +325,6 @@ select{
     cursor:pointer;
 
 }
-
 
 .menu-toggle span{
 
@@ -378,19 +342,66 @@ select{
 
 
 /* =========================================================
-   HERO SCROLL AREA
+   MOBILE MENU
 ========================================================= */
 
-.hero-scroll{
+.mobile-menu{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:450;
+
+    display:none;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:10vw;
+
+    background:#eee8de;
+
+    color:#181714;
+
+}
+
+.mobile-menu a{
+
+    margin-bottom:15px;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:70px;
+
+    font-weight:400;
+
+    line-height:.82;
+
+    letter-spacing:-.04em;
+
+}
+
+
+/* =========================================================
+   HERO SCROLL LENGTH
+========================================================= */
+
+.hero{
 
     position:relative;
 
     height:550vh;
 
-    background:#171411;
+    background:#151311;
 
 }
 
+
+/* =========================================================
+   STICKY HERO
+========================================================= */
 
 .hero-sticky{
 
@@ -406,7 +417,7 @@ select{
 
     overflow:hidden;
 
-    background:#171411;
+    background:#151311;
 
 }
 
@@ -422,6 +433,7 @@ select{
     inset:0;
 
     width:100%;
+
     height:100%;
 
     display:block;
@@ -430,29 +442,79 @@ select{
 
     object-position:center center;
 
-    background:#171411;
+    background:#151311;
 
     transform:scale(1.015);
 
     filter:
-        saturate(.82)
-        contrast(1.06)
-        brightness(.91);
+        brightness(.88)
+        contrast(1.05)
+        saturate(.84);
 
 }
 
 
 /*
-    Important:
+===========================================================
+IMPORTANT
 
-    The video is NOT autoplayed.
+The video does NOT have autoplay.
 
-    GSAP controls currentTime.
+GSAP controls currentTime.
+
+The browser therefore doesn't need to continuously
+play the MP4.
+===========================================================
 */
 
 
 /* =========================================================
-   HERO OVERLAYS
+   VIDEO LOADING STATUS
+========================================================= */
+
+.video-status{
+
+    position:absolute;
+
+    left:50%;
+
+    top:50%;
+
+    z-index:8;
+
+    transform:translate(-50%,-50%);
+
+    padding:10px 16px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    color:white;
+
+    background:rgba(0,0,0,.25);
+
+    backdrop-filter:blur(8px);
+
+    font-size:8px;
+
+    letter-spacing:.25em;
+
+    text-transform:uppercase;
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+.video-status.show{
+
+    opacity:1;
+
+}
+
+
+/* =========================================================
+   HERO OVERLAY
 ========================================================= */
 
 .hero-overlay{
@@ -469,14 +531,13 @@ select{
 
         linear-gradient(
             90deg,
-            rgba(0,0,0,.68) 0%,
-            rgba(0,0,0,.42) 32%,
-            rgba(0,0,0,.12) 70%,
-            rgba(0,0,0,.27) 100%
+            rgba(0,0,0,.7) 0%,
+            rgba(0,0,0,.4) 32%,
+            rgba(0,0,0,.1) 72%,
+            rgba(0,0,0,.28) 100%
         );
 
 }
-
 
 .hero-vignette{
 
@@ -523,13 +584,11 @@ select{
 
 }
 
-
 .hero-copy{
 
     max-width:850px;
 
 }
-
 
 .hero-eyebrow{
 
@@ -539,18 +598,17 @@ select{
 
     gap:14px;
 
-    margin-bottom:27px;
+    margin-bottom:28px;
 
     font-size:9px;
 
-    letter-spacing:.32em;
+    letter-spacing:.3em;
 
     text-transform:uppercase;
 
-    opacity:.82;
+    opacity:.8;
 
 }
-
 
 .hero-eyebrow::before{
 
@@ -564,7 +622,6 @@ select{
 
 }
 
-
 .hero-title{
 
     font-family:"Cormorant Garamond",serif;
@@ -573,12 +630,11 @@ select{
 
     font-weight:400;
 
-    line-height:.68;
+    line-height:.67;
 
     letter-spacing:-.055em;
 
 }
-
 
 .hero-title-line{
 
@@ -588,8 +644,7 @@ select{
 
 }
 
-
-.hero-title-word{
+.hero-word{
 
     display:inline-block;
 
@@ -597,17 +652,15 @@ select{
 
 }
 
-
 .hero-title em{
 
     font-style:italic;
 
 }
 
-
 .hero-description{
 
-    max-width:410px;
+    max-width:420px;
 
     margin-top:40px;
 
@@ -615,12 +668,9 @@ select{
 
     line-height:1.9;
 
-    letter-spacing:.025em;
-
     color:rgba(255,255,255,.78);
 
 }
-
 
 .hero-actions{
 
@@ -631,7 +681,6 @@ select{
     margin-top:30px;
 
 }
-
 
 .hero-button{
 
@@ -645,42 +694,39 @@ select{
 
     padding:14px 20px;
 
-    border:1px solid rgba(255,255,255,.75);
+    border:1px solid rgba(255,255,255,.7);
+
+    color:white;
 
     font-size:8px;
 
-    letter-spacing:.23em;
+    letter-spacing:.22em;
 
     text-transform:uppercase;
 
     pointer-events:auto;
 
-    transition:
-        background .3s ease,
-        color .3s ease,
-        border-color .3s ease;
+    transition:.3s ease;
 
 }
-
 
 .hero-button.primary{
 
-    background:var(--cream);
+    border-color:#eee8de;
 
-    border-color:var(--cream);
+    background:#eee8de;
 
-    color:var(--ink);
+    color:#181714;
 
 }
-
 
 .hero-button:hover{
 
     background:white;
 
-    color:var(--ink);
-
     border-color:white;
+
+    color:#181714;
 
 }
 
@@ -713,7 +759,6 @@ select{
 
 }
 
-
 .hero-progress-label{
 
     font-size:7px;
@@ -728,7 +773,6 @@ select{
 
 }
 
-
 .hero-progress-line{
 
     position:relative;
@@ -737,17 +781,16 @@ select{
 
     height:105px;
 
-    background:rgba(255,255,255,.28);
+    background:rgba(255,255,255,.3);
 
 }
-
 
 .hero-progress-fill{
 
     position:absolute;
 
-    left:0;
     top:0;
+    left:0;
 
     width:1px;
 
@@ -759,16 +802,16 @@ select{
 
 
 /* =========================================================
-   SCROLL HINT
+   SCROLL INDICATOR
 ========================================================= */
 
-.scroll-hint{
+.scroll-indicator{
 
     position:absolute;
 
-    bottom:30px;
-
     left:50%;
+
+    bottom:30px;
 
     z-index:20;
 
@@ -786,8 +829,7 @@ select{
 
 }
 
-
-.scroll-hint span{
+.scroll-indicator span{
 
     font-size:7px;
 
@@ -795,12 +837,11 @@ select{
 
     text-transform:uppercase;
 
-    opacity:.72;
+    opacity:.7;
 
 }
 
-
-.scroll-arrow{
+.scroll-line{
 
     width:1px;
 
@@ -817,21 +858,39 @@ select{
 
 
 /* =========================================================
+   COMMON
+========================================================= */
+
+.kicker{
+
+    margin-bottom:25px;
+
+    font-size:8px;
+
+    letter-spacing:.3em;
+
+    text-transform:uppercase;
+
+    color:#746e64;
+
+}
+
+
+/* =========================================================
    STORY
 ========================================================= */
 
 .story{
 
+    min-height:100vh;
+
     display:grid;
 
     grid-template-columns:1fr 1fr;
 
-    min-height:100vh;
-
     background:var(--cream);
 
 }
-
 
 .story-copy{
 
@@ -841,29 +900,13 @@ select{
 
     justify-content:center;
 
-    padding:12vw 7vw;
+    padding:13vw 7vw;
 
 }
-
-
-.kicker{
-
-    margin-bottom:26px;
-
-    font-size:8px;
-
-    letter-spacing:.3em;
-
-    text-transform:uppercase;
-
-    color:var(--muted);
-
-}
-
 
 .story-title{
 
-    max-width:700px;
+    max-width:680px;
 
     font-family:"Cormorant Garamond",serif;
 
@@ -877,15 +920,13 @@ select{
 
 }
 
-
 .story-title em{
 
     font-style:italic;
 
 }
 
-
-.story-text{
+.story-description{
 
     max-width:430px;
 
@@ -895,10 +936,9 @@ select{
 
     line-height:1.95;
 
-    color:#696259;
+    color:#69635a;
 
 }
-
 
 .story-visual{
 
@@ -911,28 +951,25 @@ select{
     background:
 
         radial-gradient(
-            circle at 35% 30%,
-            rgba(183,154,104,.3),
+            circle at 35% 25%,
+            rgba(184,154,101,.28),
             transparent 35%
         ),
 
         linear-gradient(
             135deg,
-            #d1c0a9,
-            #f6f0e7 55%,
-            #b9a58c
+            #cfbda5,
+            #f6f1e8 55%,
+            #bca68b
         );
 
 }
 
-
-.story-frame{
+.story-card{
 
     position:absolute;
 
     inset:16% 14%;
-
-    border:1px solid rgba(21,21,19,.25);
 
     display:flex;
 
@@ -940,15 +977,18 @@ select{
 
     justify-content:space-between;
 
-    padding:30px;
+    padding:32px;
+
+    border:1px solid rgba(24,23,20,.25);
 
 }
 
-
-.story-frame-top,
-.story-frame-bottom{
+.story-card-top,
+.story-card-bottom{
 
     display:flex;
+
+    align-items:center;
 
     justify-content:space-between;
 
@@ -960,30 +1000,27 @@ select{
 
 }
 
-
-.story-frame-center{
+.story-card-center{
 
     text-align:center;
 
 }
 
-
-.story-frame-center strong{
+.story-card-center strong{
 
     display:block;
 
     font-family:"Cormorant Garamond",serif;
 
-    font-size:clamp(100px,12vw,190px);
+    font-size:clamp(110px,13vw,190px);
 
-    line-height:.7;
+    line-height:.65;
 
     font-weight:400;
 
 }
 
-
-.story-frame-center span{
+.story-card-center span{
 
     display:block;
 
@@ -1012,7 +1049,6 @@ select{
 
 }
 
-
 .experience-header{
 
     display:flex;
@@ -1026,7 +1062,6 @@ select{
     margin-bottom:100px;
 
 }
-
 
 .experience-title{
 
@@ -1042,8 +1077,7 @@ select{
 
 }
 
-
-.experience-intro{
+.experience-description{
 
     max-width:330px;
 
@@ -1051,10 +1085,9 @@ select{
 
     line-height:1.9;
 
-    color:rgba(243,238,229,.57);
+    color:rgba(243,238,229,.55);
 
 }
-
 
 .experience-grid{
 
@@ -1066,7 +1099,6 @@ select{
 
 }
 
-
 .experience-item{
 
     min-height:350px;
@@ -1077,20 +1109,17 @@ select{
 
 }
 
-
 .experience-item + .experience-item{
 
     padding-left:35px;
 
 }
 
-
 .experience-item:last-child{
 
     border-right:0;
 
 }
-
 
 .experience-number{
 
@@ -1101,7 +1130,6 @@ select{
     color:var(--gold);
 
 }
-
 
 .experience-item h3{
 
@@ -1114,7 +1142,6 @@ select{
     font-weight:400;
 
 }
-
 
 .experience-item p{
 
@@ -1143,7 +1170,6 @@ select{
 
 }
 
-
 .menu-header{
 
     display:grid;
@@ -1155,7 +1181,6 @@ select{
     margin-bottom:90px;
 
 }
-
 
 .menu-title{
 
@@ -1171,7 +1196,6 @@ select{
 
 }
 
-
 .menu-description{
 
     align-self:end;
@@ -1186,7 +1210,6 @@ select{
 
 }
 
-
 .menu-category{
 
     padding-top:22px;
@@ -1195,13 +1218,11 @@ select{
 
 }
 
-
 .menu-category + .menu-category{
 
     margin-top:65px;
 
 }
-
 
 .menu-category-name{
 
@@ -1217,7 +1238,6 @@ select{
 
 }
 
-
 .menu-item{
 
     display:grid;
@@ -1228,10 +1248,9 @@ select{
 
     padding:18px 0;
 
-    border-bottom:1px solid rgba(21,21,19,.1);
+    border-bottom:1px solid rgba(24,23,20,.1);
 
 }
-
 
 .menu-item-info{
 
@@ -1243,7 +1262,6 @@ select{
 
 }
 
-
 .menu-item-name{
 
     font-family:"Cormorant Garamond",serif;
@@ -1252,17 +1270,15 @@ select{
 
 }
 
-
 .menu-item-description{
 
     font-size:9px;
 
     line-height:1.7;
 
-    color:#777066;
+    color:#777067;
 
 }
-
 
 .menu-price{
 
@@ -1302,19 +1318,11 @@ select{
 
         radial-gradient(
             circle at center,
-            #745c47,
+            #765d47,
             #241913 65%
         );
 
 }
-
-
-.quote-inner{
-
-    max-width:1100px;
-
-}
-
 
 .quote-mark{
 
@@ -1327,7 +1335,6 @@ select{
     color:var(--gold);
 
 }
-
 
 .quote-text{
 
@@ -1343,13 +1350,11 @@ select{
 
 }
 
-
 .quote-text em{
 
     font-style:italic;
 
 }
-
 
 .quote-caption{
 
@@ -1378,7 +1383,6 @@ select{
 
 }
 
-
 .reservation-grid{
 
     display:grid;
@@ -1388,7 +1392,6 @@ select{
     gap:10vw;
 
 }
-
 
 .reservation-title{
 
@@ -1404,8 +1407,7 @@ select{
 
 }
 
-
-.reservation-copy{
+.reservation-description{
 
     max-width:400px;
 
@@ -1419,13 +1421,11 @@ select{
 
 }
 
-
 .reservation-form{
 
     border-top:1px solid var(--line);
 
 }
-
 
 .form-row{
 
@@ -1437,7 +1437,6 @@ select{
 
 }
 
-
 .field{
 
     padding:20px 0;
@@ -1445,7 +1444,6 @@ select{
     border-bottom:1px solid var(--line);
 
 }
-
 
 .field label{
 
@@ -1462,7 +1460,6 @@ select{
     color:#827a70;
 
 }
-
 
 .field input,
 .field select{
@@ -1482,14 +1479,6 @@ select{
     font-size:12px;
 
 }
-
-
-.field select{
-
-    cursor:pointer;
-
-}
-
 
 .reserve-button{
 
@@ -1517,7 +1506,6 @@ select{
 
 }
 
-
 .reserve-button:hover{
 
     background:transparent;
@@ -1541,7 +1529,6 @@ select{
 
 }
 
-
 .footer-grid{
 
     display:grid;
@@ -1553,7 +1540,6 @@ select{
     padding-bottom:80px;
 
 }
-
 
 .footer-logo{
 
@@ -1569,7 +1555,6 @@ select{
 
 }
 
-
 .footer-heading{
 
     margin-bottom:22px;
@@ -1584,7 +1569,6 @@ select{
 
 }
 
-
 .footer-column p,
 .footer-column a{
 
@@ -1598,13 +1582,11 @@ select{
 
 }
 
-
 .footer-column a:hover{
 
     color:white;
 
 }
-
 
 .footer-bottom{
 
@@ -1632,7 +1614,20 @@ select{
 
 
 /* =========================================================
-   RESPONSIVE
+   REVEALS
+========================================================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(55px);
+
+}
+
+
+/* =========================================================
+   MOBILE
 ========================================================= */
 
 @media(max-width:900px){
@@ -1643,7 +1638,6 @@ select{
 
     }
 
-
     .nav-links,
     .nav-book{
 
@@ -1651,33 +1645,28 @@ select{
 
     }
 
-
     .menu-toggle{
 
         display:block;
 
     }
 
-
-    .hero-scroll{
+    .hero{
 
         height:500vh;
 
     }
-
 
     .hero-content{
 
         align-items:flex-end;
 
         padding:
-
             0
             7vw
             14vh;
 
     }
-
 
     .hero-video{
 
@@ -1687,29 +1676,24 @@ select{
 
     }
 
-
     .hero-overlay{
 
         background:
 
             linear-gradient(
                 180deg,
-                rgba(0,0,0,.08) 0%,
+                rgba(0,0,0,.06) 0%,
                 rgba(0,0,0,.12) 35%,
-                rgba(0,0,0,.82) 100%
+                rgba(0,0,0,.83) 100%
             );
 
     }
-
 
     .hero-title{
 
         font-size:22vw;
 
-        line-height:.7;
-
     }
-
 
     .hero-description{
 
@@ -1721,13 +1705,11 @@ select{
 
     }
 
-
     .hero-actions{
 
         margin-top:22px;
 
     }
-
 
     .hero-button{
 
@@ -1737,20 +1719,17 @@ select{
 
     }
 
-
     .hero-progress{
 
         right:5vw;
 
     }
 
-
     .story{
 
         grid-template-columns:1fr;
 
     }
-
 
     .story-copy{
 
@@ -1760,27 +1739,23 @@ select{
 
     }
 
-
     .story-visual{
 
         min-height:75vh;
 
     }
 
-
-    .story-frame{
+    .story-card{
 
         inset:10% 9%;
 
     }
-
 
     .experience{
 
         padding:22vw 8vw;
 
     }
-
 
     .experience-header{
 
@@ -1790,20 +1765,17 @@ select{
 
     }
 
-
-    .experience-intro{
+    .experience-description{
 
         margin-top:35px;
 
     }
-
 
     .experience-grid{
 
         grid-template-columns:1fr;
 
     }
-
 
     .experience-item,
     .experience-item + .experience-item{
@@ -1818,20 +1790,17 @@ select{
 
     }
 
-
     .experience-item h3{
 
         margin-top:38px;
 
     }
 
-
     .menu{
 
         padding:22vw 8vw;
 
     }
-
 
     .menu-header{
 
@@ -1841,13 +1810,11 @@ select{
 
     }
 
-
     .reservation{
 
         padding:22vw 8vw;
 
     }
-
 
     .reservation-grid{
 
@@ -1857,13 +1824,11 @@ select{
 
     }
 
-
     .footer{
 
         padding:65px 8vw 25px;
 
     }
-
 
     .footer-grid{
 
@@ -1872,7 +1837,6 @@ select{
         gap:55px 30px;
 
     }
-
 
     .footer-logo{
 
@@ -1883,6 +1847,10 @@ select{
 }
 
 
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
 @media(max-width:520px){
 
     .hero-title{
@@ -1891,20 +1859,17 @@ select{
 
     }
 
-
     .hero-description{
 
         max-width:275px;
 
     }
 
-
     .hero-actions{
 
         gap:8px;
 
     }
-
 
     .hero-button{
 
@@ -1914,27 +1879,23 @@ select{
 
     }
 
-
-    .scroll-hint{
+    .scroll-indicator{
 
         bottom:19px;
 
     }
 
-
-    .story-frame{
+    .story-card{
 
         padding:20px;
 
     }
 
-
-    .story-frame-center strong{
+    .story-card-center strong{
 
         font-size:95px;
 
     }
-
 
     .form-row{
 
@@ -1944,29 +1905,23 @@ select{
 
     }
 
-
     .footer-grid{
 
         grid-template-columns:1fr;
 
     }
 
-
     .footer-logo{
 
         grid-column:auto;
 
-        margin-bottom:15px;
-
     }
-
 
     .footer-bottom{
 
         display:block;
 
     }
-
 
     .footer-bottom div{
 
@@ -2024,7 +1979,7 @@ select{
 
 
 <!-- =========================================================
-     NAVIGATION
+     NAV
 ========================================================= -->
 
 <header class="nav" id="nav">
@@ -2074,7 +2029,7 @@ select{
     <button
         class="menu-toggle"
         id="menuToggle"
-        aria-label="Open navigation"
+        aria-label="Open menu"
     >
 
         <span></span>
@@ -2086,65 +2041,27 @@ select{
 
 
 <!-- =========================================================
-     MOBILE NAV
+     MOBILE MENU
 ========================================================= -->
 
-<div id="mobileMenu" style="
-    position:fixed;
-    inset:0;
-    z-index:450;
-    display:none;
-    flex-direction:column;
-    justify-content:center;
-    padding:10vw;
-    background:#f3eee5;
-    color:#151513;
-">
+<div
+    class="mobile-menu"
+    id="mobileMenu"
+>
 
-    <a
-        href="#story"
-        style="
-            font-family:'Cormorant Garamond',serif;
-            font-size:65px;
-            line-height:.9;
-            margin-bottom:18px;
-        "
-    >
+    <a href="#story">
         Story
     </a>
 
-    <a
-        href="#experience"
-        style="
-            font-family:'Cormorant Garamond',serif;
-            font-size:65px;
-            line-height:.9;
-            margin-bottom:18px;
-        "
-    >
+    <a href="#experience">
         Experience
     </a>
 
-    <a
-        href="#menu"
-        style="
-            font-family:'Cormorant Garamond',serif;
-            font-size:65px;
-            line-height:.9;
-            margin-bottom:18px;
-        "
-    >
+    <a href="#menu">
         Menu
     </a>
 
-    <a
-        href="#reservation"
-        style="
-            font-family:'Cormorant Garamond',serif;
-            font-size:65px;
-            line-height:.9;
-        "
-    >
+    <a href="#reservation">
         Reserve
     </a>
 
@@ -2159,37 +2076,52 @@ select{
 
 
 <!-- =========================================================
-     CINEMATIC HERO
+     HERO
 ========================================================= -->
 
 <section
-    class="hero-scroll"
+    class="hero"
     id="hero"
 >
+
 
     <div class="hero-sticky">
 
 
         <!--
-            IMPORTANT:
+        =====================================================
+        YOUR ACTUAL VIDEO
 
-            Keep hero(2).mp4 in the same folder as this HTML.
-
-            GSAP controls currentTime.
-            The video itself never autoplayed.
+        Keep hero(2).mp4 beside index.html
+        =====================================================
         -->
 
         <video
             id="heroVideo"
             class="hero-video"
-            src="./hero(2).mp4"
             muted
             playsinline
             webkit-playsinline
             preload="auto"
+            poster=""
             disablepictureinpicture
             controlslist="nodownload noplaybackrate"
-        ></video>
+        >
+
+            <source
+                src="./hero(2).mp4"
+                type="video/mp4"
+            >
+
+        </video>
+
+
+        <div
+            class="video-status"
+            id="videoStatus"
+        >
+            Loading film
+        </div>
 
 
         <div class="hero-overlay"></div>
@@ -2206,6 +2138,7 @@ select{
                 id="heroCopy"
             >
 
+
                 <div
                     class="hero-eyebrow"
                     id="heroEyebrow"
@@ -2216,10 +2149,11 @@ select{
 
                 <h1 class="hero-title">
 
+
                     <span class="hero-title-line">
 
                         <span
-                            class="hero-title-word"
+                            class="hero-word"
                             id="heroWordOne"
                         >
                             Eat
@@ -2231,13 +2165,14 @@ select{
                     <span class="hero-title-line">
 
                         <span
-                            class="hero-title-word"
+                            class="hero-word"
                             id="heroWordTwo"
                         >
                             <em>slow.</em>
                         </span>
 
                     </span>
+
 
                 </h1>
 
@@ -2246,9 +2181,16 @@ select{
                     class="hero-description"
                     id="heroDescription"
                 >
-                    Long lunches. Warm coffee.
-                    Late dinners. A place where
-                    there is no reason to hurry.
+
+                    Long lunches.
+                    Warm coffee.
+                    Late dinners.
+
+                    <br>
+
+                    A place where there is
+                    no reason to hurry.
+
                 </p>
 
 
@@ -2273,6 +2215,7 @@ select{
                     </a>
 
                 </div>
+
 
             </div>
 
@@ -2303,15 +2246,15 @@ select{
         </div>
 
 
-        <!-- SCROLL HINT -->
+        <!-- SCROLL -->
 
-        <div class="scroll-hint">
+        <div class="scroll-indicator">
 
             <span>
                 Scroll to enter
             </span>
 
-            <div class="scroll-arrow"></div>
+            <div class="scroll-line"></div>
 
         </div>
 
@@ -2351,7 +2294,7 @@ select{
         </h2>
 
 
-        <p class="story-text reveal">
+        <p class="story-description reveal">
 
             Hotel Bostan is built around an uncomplicated
             idea: food tastes better when there is time
@@ -2371,9 +2314,9 @@ select{
 
     <div class="story-visual">
 
-        <div class="story-frame">
+        <div class="story-card">
 
-            <div class="story-frame-top">
+            <div class="story-card-top">
 
                 <span>
                     HB / 01
@@ -2386,7 +2329,7 @@ select{
             </div>
 
 
-            <div class="story-frame-center">
+            <div class="story-card-center">
 
                 <strong>
                     H
@@ -2399,7 +2342,7 @@ select{
             </div>
 
 
-            <div class="story-frame-bottom">
+            <div class="story-card-bottom">
 
                 <span>
                     Kitchen open daily
@@ -2427,6 +2370,7 @@ select{
     id="experience"
 >
 
+
     <div class="experience-header">
 
         <h2 class="experience-title reveal">
@@ -2438,7 +2382,7 @@ select{
         </h2>
 
 
-        <p class="experience-intro reveal">
+        <p class="experience-description reveal">
 
             Come for one thing.
             Stay for another.
@@ -2524,6 +2468,7 @@ select{
     id="menu"
 >
 
+
     <div class="menu-header">
 
         <h2 class="menu-title reveal">
@@ -2546,7 +2491,7 @@ select{
     </div>
 
 
-    <!-- TO BEGIN -->
+    <!-- STARTERS -->
 
     <div class="menu-category">
 
@@ -2620,7 +2565,7 @@ select{
     </div>
 
 
-    <!-- KITCHEN -->
+    <!-- MAIN -->
 
     <div class="menu-category">
 
@@ -2746,6 +2691,7 @@ select{
 
     </div>
 
+
 </section>
 
 
@@ -2755,7 +2701,7 @@ select{
 
 <section class="quote">
 
-    <div class="quote-inner">
+    <div>
 
         <div class="quote-mark">
             “
@@ -2813,7 +2759,7 @@ select{
             </h2>
 
 
-            <p class="reservation-copy reveal">
+            <p class="reservation-description reveal">
 
                 For lunch, dinner or simply a coffee,
                 reserve your table and let us take care
@@ -2969,8 +2915,8 @@ select{
 
 
             <button
-                class="reserve-button"
                 type="submit"
+                class="reserve-button"
             >
                 Request reservation
             </button>
@@ -3098,7 +3044,6 @@ select{
 
 <script>
 
-
 /* =========================================================
    GSAP
 ========================================================= */
@@ -3116,61 +3061,57 @@ const video =
 const hero =
     document.getElementById("hero");
 
-const progress =
-    document.getElementById("heroProgress");
-
 const nav =
     document.getElementById("nav");
+
+const progress =
+    document.getElementById("heroProgress");
 
 const loader =
     document.getElementById("loader");
 
-const mobileMenu =
-    document.getElementById("mobileMenu");
+const status =
+    document.getElementById("videoStatus");
 
 const menuToggle =
     document.getElementById("menuToggle");
 
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
 
 /* =========================================================
-   GLOBAL VIDEO STATE
+   VIDEO STATE
 ========================================================= */
-
-let videoDuration = 0;
 
 let videoReady = false;
 
-let videoPlayhead = {
-    time:0
-};
+let videoDuration = 0;
 
 let videoTimeline = null;
 
 
 /* =========================================================
-   VIDEO SETTINGS
+   VIDEO CONFIGURATION
 ========================================================= */
 
 video.muted = true;
 
 video.defaultMuted = true;
 
-video.playsInline = true;
+video.setAttribute(
+    "playsinline",
+    ""
+);
 
-
-/*
-   We intentionally NEVER call:
-
-       video.play()
-
-   The browser therefore doesn't autoplay.
-
-   GSAP controls the time.
-*/
+video.setAttribute(
+    "webkit-playsinline",
+    ""
+);
 
 
 /* =========================================================
-   VIDEO INITIALISATION
+   VIDEO LOADING
 ========================================================= */
 
 function initialiseVideo(){
@@ -3194,12 +3135,21 @@ function initialiseVideo(){
         video.duration;
 
 
-    videoReady =
-        true;
+    videoReady = true;
+
+
+    console.log(
+        "Hotel Bostan hero loaded:",
+        videoDuration.toFixed(2),
+        "seconds"
+    );
 
 
     /*
-       Force first frame.
+       FIRST FRAME.
+
+       This is deliberately done before
+       creating the ScrollTrigger.
     */
 
     try{
@@ -3209,20 +3159,26 @@ function initialiseVideo(){
     }catch(error){
 
         console.warn(
-            "Unable to seek initial video frame.",
+            "Could not seek to first frame:",
             error
         );
 
     }
 
 
-    createVideoTimeline();
+    if(status){
+
+        status.classList.remove("show");
+
+    }
+
+
+    createVideoGSAP();
 
 
     /*
-       Give the browser one frame to establish
-       dimensions before ScrollTrigger measures
-       the document.
+       Recalculate the page after video metadata
+       is available.
     */
 
     requestAnimationFrame(()=>{
@@ -3259,10 +3215,22 @@ video.addEventListener(
 );
 
 
-/*
-   Some browsers may already have metadata
-   before the listener is registered.
-*/
+/* =========================================================
+   LOAD VIDEO
+========================================================= */
+
+if(status){
+
+    status.classList.add("show");
+
+}
+
+video.load();
+
+
+/* =========================================================
+   IF METADATA IS ALREADY AVAILABLE
+========================================================= */
 
 if(video.readyState >= 1){
 
@@ -3272,14 +3240,14 @@ if(video.readyState >= 1){
 
 
 /* =========================================================
-   THE ACTUAL GSAP VIDEO ENGINE
+   GSAP VIDEO SCRUB
 ========================================================= */
 
-function createVideoTimeline(){
+function createVideoGSAP(){
 
 
     /*
-       Kill previous timeline if one exists.
+       Remove previous animation if any.
     */
 
     if(videoTimeline){
@@ -3290,25 +3258,25 @@ function createVideoTimeline(){
 
 
     /*
-       GSAP animates a normal JavaScript object.
+       IMPORTANT:
 
-       This is more robust than asking GSAP to repeatedly
-       tween a media element property directly.
+       GSAP itself controls video.currentTime.
 
-       The object becomes the cinematic playhead.
+       No requestAnimationFrame.
+       No second animation loop.
+       No autoplay.
     */
 
-    videoPlayhead.time = 0;
-
-
     videoTimeline = gsap.to(
-        videoPlayhead,
+
+        video,
+
         {
 
-            time:
+            currentTime:
                 Math.max(
-                    0,
-                    videoDuration - 0.03
+                    videoDuration - 0.03,
+                    0
                 ),
 
             ease:"none",
@@ -3321,62 +3289,18 @@ function createVideoTimeline(){
 
                 end:"bottom bottom",
 
-                scrub:0.35,
+                scrub:.3,
 
                 invalidateOnRefresh:true,
 
-                fastScrollEnd:false,
-
                 onUpdate:self=>{
-
-                    /*
-                       Convert GSAP's animated playhead
-                       into an actual video frame.
-                    */
-
-                    const time =
-                        Math.max(
-                            0,
-                            Math.min(
-                                videoDuration - 0.01,
-                                videoPlayhead.time
-                            )
-                        );
-
-
-                    if(
-                        Number.isFinite(time) &&
-                        Math.abs(
-                            video.currentTime - time
-                        ) > 0.008
-                    ){
-
-                        try{
-
-                            video.currentTime =
-                                time;
-
-                        }catch(error){
-
-                            /*
-                               Safari can occasionally reject
-                               a seek during a decode transition.
-                               The next GSAP update will retry.
-                            */
-
-                        }
-
-                    }
-
-
-                    /*
-                       Progress indicator.
-                    */
 
                     if(progress){
 
                         progress.style.height =
-                            `${self.progress * 100}%`;
+                            (
+                                self.progress * 100
+                            ) + "%";
 
                     }
 
@@ -3392,7 +3316,7 @@ function createVideoTimeline(){
 
 
 /* =========================================================
-   NAVIGATION COLOR CHANGE
+   NAV COLOR
 ========================================================= */
 
 ScrollTrigger.create({
@@ -3403,13 +3327,17 @@ ScrollTrigger.create({
 
     onEnter:()=>{
 
-        nav.classList.add("scrolled");
+        nav.classList.add(
+            "scrolled"
+        );
 
     },
 
     onLeaveBack:()=>{
 
-        nav.classList.remove("scrolled");
+        nav.classList.remove(
+            "scrolled"
+        );
 
     }
 
@@ -3417,10 +3345,10 @@ ScrollTrigger.create({
 
 
 /* =========================================================
-   HERO TYPOGRAPHY TIMELINE
+   HERO TEXT TIMELINE
 ========================================================= */
 
-const heroTypography =
+const heroText =
     gsap.timeline({
 
         scrollTrigger:{
@@ -3431,7 +3359,7 @@ const heroTypography =
 
             end:"bottom top",
 
-            scrub:1.2,
+            scrub:1.1,
 
             invalidateOnRefresh:true
 
@@ -3440,34 +3368,26 @@ const heroTypography =
     });
 
 
-heroTypography
-
-    /*
-       Eyebrow enters.
-    */
+heroText
 
     .fromTo(
 
         "#heroEyebrow",
 
         {
-            y:50,
+            y:45,
             opacity:0
         },
 
         {
             y:0,
             opacity:1,
-            duration:.15,
+            duration:.14,
             ease:"power3.out"
         }
 
     )
 
-
-    /*
-       First word.
-    */
 
     .fromTo(
 
@@ -3481,7 +3401,7 @@ heroTypography
         {
             y:"0%",
             opacity:1,
-            duration:.22,
+            duration:.2,
             ease:"power4.out"
         },
 
@@ -3489,10 +3409,6 @@ heroTypography
 
     )
 
-
-    /*
-       Second word.
-    */
 
     .fromTo(
 
@@ -3506,18 +3422,14 @@ heroTypography
         {
             y:"0%",
             opacity:1,
-            duration:.22,
+            duration:.2,
             ease:"power4.out"
         },
 
-        "-=.08"
+        "-=.07"
 
     )
 
-
-    /*
-       Description.
-    */
 
     .fromTo(
 
@@ -3531,18 +3443,13 @@ heroTypography
         {
             y:0,
             opacity:1,
-            duration:.14,
-            ease:"power3.out"
+            duration:.13
         },
 
-        "-=.08"
+        "-=.06"
 
     )
 
-
-    /*
-       Buttons.
-    */
 
     .fromTo(
 
@@ -3559,15 +3466,14 @@ heroTypography
             duration:.12
         },
 
-        "-=.06"
+        "-=.05"
 
     )
 
 
     /*
-       Final section of hero:
-       typography exits so the video becomes
-       the dominant cinematic element.
+       Text leaves during the latter part
+       of the film.
     */
 
     .to(
@@ -3577,7 +3483,7 @@ heroTypography
         {
             y:-100,
             opacity:0,
-            duration:.32,
+            duration:.3,
             ease:"power2.inOut"
         },
 
@@ -3587,7 +3493,7 @@ heroTypography
 
 
 /* =========================================================
-   HERO VIDEO ZOOM
+   HERO CAMERA-LIKE ZOOM
 ========================================================= */
 
 gsap.fromTo(
@@ -3595,11 +3501,11 @@ gsap.fromTo(
     video,
 
     {
-        scale:1.035
+        scale:1.015
     },
 
     {
-        scale:1.09,
+        scale:1.08,
 
         ease:"none",
 
@@ -3621,7 +3527,7 @@ gsap.fromTo(
 
 
 /* =========================================================
-   STORY REVEALS
+   GENERIC REVEALS
 ========================================================= */
 
 gsap.utils
@@ -3633,14 +3539,16 @@ gsap.utils
             element,
 
             {
-                y:60,
+                y:55,
                 opacity:0
             },
 
             {
                 y:0,
                 opacity:1,
+
                 duration:1.05,
+
                 ease:"power3.out",
 
                 scrollTrigger:{
@@ -3662,12 +3570,12 @@ gsap.utils
 
 
 /* =========================================================
-   STORY CARD PARALLAX
+   STORY CARD
 ========================================================= */
 
 gsap.to(
 
-    ".story-frame",
+    ".story-card",
 
     {
 
@@ -3693,7 +3601,7 @@ gsap.to(
 
 
 /* =========================================================
-   EXPERIENCE ITEMS
+   EXPERIENCE
 ========================================================= */
 
 gsap.from(
@@ -3708,7 +3616,7 @@ gsap.from(
 
         duration:1,
 
-        stagger:.16,
+        stagger:.15,
 
         ease:"power3.out",
 
@@ -3726,7 +3634,7 @@ gsap.from(
 
 
 /* =========================================================
-   MENU ITEMS
+   MENU
 ========================================================= */
 
 gsap.from(
@@ -3735,7 +3643,7 @@ gsap.from(
 
     {
 
-        x:-35,
+        x:-30,
 
         opacity:0,
 
@@ -3772,7 +3680,7 @@ gsap.from(
 
         opacity:0,
 
-        duration:1.25,
+        duration:1.2,
 
         ease:"power4.out",
 
@@ -3790,7 +3698,7 @@ gsap.from(
 
 
 /* =========================================================
-   RESERVATION
+   RESERVATION FORM
 ========================================================= */
 
 gsap.from(
@@ -3840,9 +3748,8 @@ menuToggle.addEventListener(
             mobileMenu.style.display =
                 "flex";
 
-            document.body.classList.add(
-                "no-scroll"
-            );
+            document.body.style.overflow =
+                "hidden";
 
 
             gsap.fromTo(
@@ -3873,7 +3780,7 @@ menuToggle.addEventListener(
                 {
                     y:0,
                     opacity:1,
-                    duration:.55,
+                    duration:.5,
                     stagger:.07,
                     ease:"power3.out"
                 }
@@ -3882,7 +3789,7 @@ menuToggle.addEventListener(
 
         }else{
 
-            closeMobileMenu();
+            closeMobile();
 
         }
 
@@ -3890,13 +3797,11 @@ menuToggle.addEventListener(
 );
 
 
-function closeMobileMenu(){
+function closeMobile(){
 
     mobileOpen = false;
 
-    document.body.classList.remove(
-        "no-scroll"
-    );
+    document.body.style.overflow = "";
 
     gsap.to(
 
@@ -3906,7 +3811,7 @@ function closeMobileMenu(){
 
             opacity:0,
 
-            duration:.25,
+            duration:.2,
 
             onComplete:()=>{
 
@@ -3928,70 +3833,66 @@ mobileMenu
 
         link.addEventListener(
             "click",
-            closeMobileMenu
+            closeMobile
         );
 
     });
 
 
 /* =========================================================
-   RESERVATION FORM
+   RESERVATION
 ========================================================= */
 
-const reservationForm =
-    document.getElementById(
-        "reservationForm"
+document
+    .getElementById("reservationForm")
+    .addEventListener(
+        "submit",
+        event=>{
+
+            event.preventDefault();
+
+
+            const button =
+                event.currentTarget
+                    .querySelector(
+                        ".reserve-button"
+                    );
+
+
+            const original =
+                button.textContent;
+
+
+            button.textContent =
+                "Request received";
+
+
+            button.style.background =
+                "#b89a65";
+
+            button.style.borderColor =
+                "#b89a65";
+
+
+            setTimeout(()=>{
+
+                button.textContent =
+                    original;
+
+                button.style.background =
+                    "";
+
+                button.style.borderColor =
+                    "";
+
+            },3000);
+
+        }
     );
 
 
-reservationForm.addEventListener(
-    "submit",
-    event=>{
-
-        event.preventDefault();
-
-
-        const button =
-            reservationForm.querySelector(
-                ".reserve-button"
-            );
-
-
-        const originalText =
-            button.textContent;
-
-
-        button.textContent =
-            "Request received";
-
-
-        button.style.background =
-            "#b79a68";
-
-
-        button.style.borderColor =
-            "#b79a68";
-
-
-        setTimeout(()=>{
-
-            button.textContent =
-                originalText;
-
-            button.style.background =
-                "";
-
-            button.style.borderColor =
-                "";
-
-        },3000);
-
-    }
-);
-
-
 /* =========================================================
-   VIDEO ERROR REPORTING
+   VIDEO ERROR
 ========================================================= */
 
 video.addEventListener(
@@ -3999,8 +3900,51 @@ video.addEventListener(
     ()=>{
 
         console.error(
-            "Hotel Bostan hero video could not be loaded.",
+            "===================================="
+        );
+
+        console.error(
+            "HOTEL BOSTAN VIDEO ERROR"
+        );
+
+        console.error(
+            "File expected: ./hero(2).mp4"
+        );
+
+        console.error(
             video.error
+        );
+
+        console.error(
+            "===================================="
+        );
+
+
+        if(status){
+
+            status.textContent =
+                "Video could not be loaded";
+
+            status.classList.add(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   VIDEO STALLED
+========================================================= */
+
+video.addEventListener(
+    "stalled",
+    ()=>{
+
+        console.warn(
+            "Hero video buffering..."
         );
 
     }
@@ -4018,14 +3962,17 @@ window.addEventListener(
     "resize",
     ()=>{
 
-        clearTimeout(resizeTimer);
+        clearTimeout(
+            resizeTimer
+        );
 
 
-        resizeTimer = setTimeout(()=>{
+        resizeTimer =
+            setTimeout(()=>{
 
-            ScrollTrigger.refresh();
+                ScrollTrigger.refresh();
 
-        },200);
+            },200);
 
     }
 );
@@ -4040,7 +3987,7 @@ document.addEventListener(
     ()=>{
 
         /*
-           We NEVER let the browser autoplay the film.
+           Do not allow background autoplay.
         */
 
         if(document.hidden){
@@ -4057,7 +4004,7 @@ document.addEventListener(
    LOADER
 ========================================================= */
 
-function startLoader(){
+function runLoader(){
 
     const words =
         document.querySelectorAll(
@@ -4065,11 +4012,11 @@ function startLoader(){
         );
 
 
-    const loaderTimeline =
+    const timeline =
         gsap.timeline();
 
 
-    loaderTimeline
+    timeline
 
         .to(
 
@@ -4108,21 +4055,18 @@ function startLoader(){
 }
 
 
-/* =========================================================
-   START
-========================================================= */
-
 if(
-    document.readyState === "complete"
+    document.readyState ===
+    "complete"
 ){
 
-    startLoader();
+    runLoader();
 
 }else{
 
     window.addEventListener(
         "load",
-        startLoader,
+        runLoader,
         {
             once:true
         }
@@ -4132,29 +4076,25 @@ if(
 
 
 /* =========================================================
-   REDUCED MOTION
+   FINAL SCROLLTRIGGER REFRESH
 ========================================================= */
 
-if(
-    window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches
-){
+window.addEventListener(
+    "load",
+    ()=>{
 
-    /*
-       Accessibility mode:
-       remove cinematic scrubbing.
-    */
+        setTimeout(()=>{
 
-    ScrollTrigger.getAll().forEach(
-        trigger=>{
-            trigger.disable();
-        }
-    );
+            ScrollTrigger.refresh();
 
-}
+        },300);
+
+    }
+);
 
 </script>
 
+
 </body>
 </html>
+```
